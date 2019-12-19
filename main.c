@@ -11,3 +11,13 @@
 /* Inclusion des entêtes de librairies */
 #include <stdlib.h>
 #include <stdio.h>
+#include "affichage.h"
+#include "combat.h"
+
+
+int main(int argc, char const *argv[]) {
+  int** ppint_grille;
+  init(&ppint_grille);
+  afficherGrille(ppint_grille);
+  return 0;
+}

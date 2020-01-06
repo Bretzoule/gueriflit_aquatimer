@@ -9,10 +9,20 @@
 */
 
 /* Inclusion des entêtes de librairies */
-#include <stdlib.h>
-#include <stdio.h>
-#define N 10
+#include "affichage.h"
 
+void demandeCoord(char *coord)
+{
+  int int_retour = 0;
+  printf("Entrez vos coordonnées de la forme \"A9\"\n");
+  fflush(stdin);
+  int_retour = scanf("%s", coord);
+  if (int_retour == 0)
+  {
+fprintf(stderr,"Erreur de coordonnées");
+    exit(ERREUR_SAISIE);
+  }
+}
 
 /*!
 \fn void init()

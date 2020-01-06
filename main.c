@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include "affichage.h"
 #include "combat.h"
+#include "bateau.h"
 
 
 int main(int argc, char const *argv[]) {

@@ -11,7 +11,7 @@
 /* Inclusion des entêtes de librairies */
 #include <stdlib.h>
 #include <stdio.h>
-
+#include "combat.h"
 /*!
 \fn void tir()
 \brief

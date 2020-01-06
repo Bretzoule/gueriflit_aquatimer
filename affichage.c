@@ -65,7 +65,7 @@ void afficherGrille(int** ppint_grille)
 printf(" %c ",i+65 );
     for (size_t j = 0; j < N; j++)
     {
-      printf("|   ");
+      printf("| %d ",ppint_grille[i][j]);
     }
     printf("|\n");
 

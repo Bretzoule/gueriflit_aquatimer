@@ -11,12 +11,8 @@
 /* Inclusion des entêtes de librairies */
 #include <stdlib.h>
 #include <stdio.h>
-<<<<<<< HEAD
 #include <ctype.h>
-
-=======
 #include "combat.h"
->>>>>>> 4e8a6e31d55858f0cdca926e5a88246fa2d0d428
 /*!
 \fn int tir()
 \brief

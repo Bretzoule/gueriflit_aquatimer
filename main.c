@@ -19,5 +19,9 @@ int main(int argc, char const *argv[]) {
   int** ppint_grille;
   init(&ppint_grille);
   afficherGrille(ppint_grille);
+  for (int i = 0; i < 4; i++) {
+    tir(ppint_grille);
+    afficherGrille(ppint_grille);
+  }
   return 0;
 }

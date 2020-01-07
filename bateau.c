@@ -165,3 +165,32 @@ int ajouteBateau(int **Grille, int int_tailleBateau, int int_tailleGrille)
   }
   return (int_okPosee); // répéter cette fonction tant que le placement n'est pas valide
 }
+
+/*!
+  \fn int initialisationJeuHumain(int** ttint_jeu, int tailleGrille)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Tue Jan  7 13:19:48 2020
+  \brief Permet d'initialiser la grille pour un joueur
+  \param int** ttint_jeu : plateau de jeu
+  \param int int_gamemode : mode de jeu, personnalisé (1) ou standard (0)
+  \return int_tailleGrille : taille de la grille de jeu
+  \remarks
+*/
+
+int initialisationJeuHumain(int** ttint_jeu,int int_gamemode) {
+  int int_tailleGrille = 10;
+  int int_nombreBateaux = 0;
+  batostruc batostrucMain; // faire la structure batostruc
+  if (int_gamemode == 1) {
+    demandeTaille(&int_tailleGrille);
+    batostrucMain = malloc(sizeof(batostruc)*int_nombreBateaux);
+    int int_i;
+    for (int_i = 0; int_i < int; int_i++)
+    {
+
+    }
+
+  }
+  return(int_tailleGrille);
+}

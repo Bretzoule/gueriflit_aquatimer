@@ -19,6 +19,18 @@
 
 #define EXIT_SUCCESS 0
 #define ERREUR_SAISIE -1
+/*!
+  \struct typedef struct batostruc
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Tue Jan  7 13:19:48 2020
+  \brief Structure comprenant les informations concernant les bateaux joués dans le jeu
+*/
+typedef struct batostruc {
+  char nom[20];
+  int taille;
+}batostruc;
+
 
 int voisinNord(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur);
 int voisinNordEst(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur);
@@ -55,4 +67,17 @@ int checkVideAutour(int **Grille, int int_PosX, int int_PosY, int int_tailleGril
   \remarks cette fonction doit s'éxécuter tant que le bateau n'est pas correctement positionné sur la grille, ainsi, tant que int_okPosee != 1, la fonction doit se réexécuter avec le code "Erreur de placement"
 */
 int ajouteBateau(int **Grille, int int_tailleBateau, int int_tailleGrille);
+
+/*!
+  \fn int constructionFlotteHumain(int** ttint_jeu, int tailleGrille)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Tue Jan  7 13:19:48 2020
+  \brief Permet de récupérer le nombre de bateaux à placer et leur taille/nom
+  \param int int_tailleGrille : permet de décider si le joueur joue en mode personnalisé ..x.. ou en mode standard : 10x10
+  \return &listedesbateaux : il s'agit de la liste des bateaux utilisés dans la partie
+  \remarks
+*/
+
+batostruc* constructionFlotteHumain(int int_modePerso);
 #endif

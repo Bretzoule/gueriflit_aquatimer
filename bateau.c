@@ -163,34 +163,43 @@ int ajouteBateau(int **Grille, int int_tailleBateau, int int_tailleGrille)
     printf("Erreur de placement !");
     int_okPosee = 0;
   }
+  free(coord);
   return (int_okPosee); // répéter cette fonction tant que le placement n'est pas valide
 }
 
 /*!
-  \fn int initialisationJeuHumain(int** ttint_jeu, int tailleGrille)
+  \fn int constructionFlotteHumain(int** ttint_jeu, int tailleGrille)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Tue Jan  7 13:19:48 2020
-  \brief Permet d'initialiser la grille pour un joueur
-  \param int** ttint_jeu : plateau de jeu
-  \param int int_gamemode : mode de jeu, personnalisé (1) ou standard (0)
-  \return int_tailleGrille : taille de la grille de jeu
+  \brief Permet de récupérer le nombre de bateaux à placer et leur taille/nom
+  \param int int_tailleGrille : permet de décider si le joueur joue en mode personnalisé ..x.. ou en mode standard : 10x10
+  \return &listedesbateaux : il s'agit de la liste des bateaux utilisés dans la partie
   \remarks
 */
 
-int initialisationJeuHumain(int** ttint_jeu,int int_gamemode) {
+batostruc* constructionFlotteHumain(int int_modePerso) {
   int int_tailleGrille = 10;
+  int int_i;
   int int_nombreBateaux = 0;
-  batostruc batostrucMain; // faire la structure batostruc
-  if (int_gamemode == 1) {
-    demandeTaille(&int_tailleGrille);
-    batostrucMain = malloc(sizeof(batostruc)*int_nombreBateaux);
-    int int_i;
-    for (int_i = 0; int_i < int; int_i++)
+  batostruc *listedesbateaux;
+  if (int_tailleGrille != 10) {
+    int_nombreBateaux = demandeNombreBateaux();
+    listedesbateaux = malloc(sizeof(batostruc)*int_nombreBateaux);
+
+    for (int_i = 0; int_i < int_nombreBateaux; int_i++)
     {
-
+      construitFlotte(listedesbateaux[int_i]);
     }
-
+  }else
+  {
+    listedesbateaux = malloc(sizeof(batostruc)*10);
+    (listedesbateaux[0]) = {"Porte-Avion", 6 } /* aide inès plz */
+     listedesbateaux[1] = ;
+      listedesbateaux[2] = ;
+      /* ..... à compléter ...... */
   }
-  return(int_tailleGrille);
+  
+  
+  return(listedesbateaux);
 }

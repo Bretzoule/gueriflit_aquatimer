@@ -23,7 +23,7 @@ int main(int argc, char const *argv[]) {
   int int_tailleGrille = 10;
   int int_modePerso = 0;
   batostruc* flotteUtilisee = NULL;
-  int int_nombreBato = 0;
+  int* ptrint_nombreBato = NULL;
   printf("Quelle est la taille de votre grille (veuillez entrer 10 pour une grille par défaut)\n");
   int_tailleGrille = demandeValeur(int_tailleGrille);
   while (int_tailleGrille < 7) {
@@ -37,22 +37,21 @@ int main(int argc, char const *argv[]) {
     int_modePerso = demandeValeur(int_modePerso);
   }
   flotteUtilisee = constructionFlotteHumain(flotteUtilisee,int_tailleGrille,int_modePerso);
-  int_nombreBato = sizeof(flotteUtilisee)/sizeof(batostruc);
+  printf("%d \n",ptrint_nombreBato); /* bug */
   init(&ppint_grille, int_tailleGrille);
   afficherGrille(ppint_grille,int_tailleGrille);
   int int_i;
-  for (int_i = 0; int_i < int_nombreBato; int_i++)
+  for (int_i = 0; int_i < ptrint_nombreBato; int_i++) /* bug */
   {
     printf("Vous placez un %s \n",flotteUtilisee[int_i].nom);
     do
     {
       int_okPosee = ajouteBateau(ppint_grille,flotteUtilisee[int_i].taille,int_tailleGrille);
     } while (int_okPosee != 1);
-
   }
-  for (int i = 0; i < 4; i++) {
+/*  for (int i = 0; i < 4; i++) {
     tir(ppint_grille,int_tailleGrille);
     afficherGrille(ppint_grille,int_tailleGrille);
-  }
+    } */
   return 0;
 }

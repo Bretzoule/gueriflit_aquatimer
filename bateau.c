@@ -195,7 +195,8 @@ batostruc* constructionFlotteHumain(batostruc* listedesbateaux,int int_tailleGri
   int int_i;
   int int_j;
   int int_k;
-  int int_nombreBateaux = 0;
+  int int_nombreBateaux = 10;
+  ptrint_nombreBato = &int_nombreBateaux;
   if (int_modePerso == 1) {
     int_nombreBateaux = demandeNombreBateau(int_tailleGrille);
     listedesbateaux = malloc(sizeof(batostruc)*int_nombreBateaux);
@@ -206,7 +207,7 @@ batostruc* constructionFlotteHumain(batostruc* listedesbateaux,int int_tailleGri
   } else
   {
     int_tailleGrille = 10;
-    listedesbateaux = malloc(sizeof(batostruc)*10);
+    listedesbateaux = malloc(sizeof(batostruc)*int_nombreBateaux);
     strcpy(listedesbateaux[0].nom,"Porte-Avion");
     listedesbateaux[0].taille = 6;
     strcpy(listedesbateaux[1].nom,"Croiseur");

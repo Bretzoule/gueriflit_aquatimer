@@ -15,11 +15,26 @@
 #include "combat.h"
 #include "bateau.h"
 
-
 int main(int argc, char const *argv[]) {
   int** ppint_grille;
-  init(&ppint_grille);
+  int int_tailleGrille = 10;
+  int int_modePerso = 0;
+  batostruc *flotteUtilisee = NULL;
+  printf("Quelle est la taille de votre grille (veuillez entrer 10 pour une grille par défaut)\n");
+  int_tailleGrille = demandeValeur(int_tailleGrille);
+  while (int_tailleGrille < 7) {
+    printf("Vous n'allez pas jouer sur une grille aussi petite quand même (la valeur minimale acceptable est 7) !\n");
+    int_tailleGrille = demandeValeur(int_tailleGrille);
+  }
+  printf("Souhaitez-vous jouer avec une flotte personnalisée ? (1 si oui, 0 si non)\n");
+  int_modePerso = demandeValeur(int_modePerso);
+  while ((int_modePerso != 0) || (int_modePerso != 1)) {
+    printf("J'avais dit 1 ou 0....\n");
+    int_modePerso = demandeValeur(int_modePerso);
+  }
+  init(&ppint_grille, int_tailleGrille);
   afficherGrille(ppint_grille);
+  flotteUtilisee = constructionFlotteHumain(int_tailleGrille,int_modePerso);
   for (int i = 0; i < 4; i++) {
     tir(ppint_grille);
     afficherGrille(ppint_grille);

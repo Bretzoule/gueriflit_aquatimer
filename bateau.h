@@ -31,6 +31,17 @@ typedef struct batostruc {
   int taille;
 }batostruc;
 
+/*!
+  \fn int demandeValeur(int int_valeur)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Mon Dec  9 16:21:57 2019
+  \brief permet de demander une valeur
+  \param int_valeur : valeur à renseigner
+  \return int_valeur : valeur renseignée
+  \remarks
+*/
+int demandeValeur(int int_valeur);
 
 int voisinNord(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur);
 int voisinNordEst(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur);

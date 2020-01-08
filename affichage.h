@@ -8,6 +8,6 @@
 #define ERREURALLOCATION -1
 #define N 10
 
-void init(int*** ppint_grille);
-void afficherGrille(int** ppint_grille);
+void init(int*** ppint_grille, int int_tailleGrille);
+void afficherGrille(int** ppint_grille, int int_tailleGrille);
 #endif

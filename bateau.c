@@ -115,6 +115,7 @@ int checkVideAutour(int **tint_jeu, int int_x, int int_y, int int_tailleGrille)
       }
     }
   }
+  printf("La valeur du voisin est : %d \n",int_res);
   return (int_res);
 }
 
@@ -135,22 +136,24 @@ int ajouteBateau(int **Grille, int int_tailleBateau, int int_tailleGrille)
     demandeCoord(coord); /* Récupération coordonnées */
     int_debutBateauY = atoi(&coord[1])-1;
     int_debutBateauX = (char)toupper(coord[0])-65;
-    int_placementValide = checkVideAutour(Grille, int_finBateauY, int_finBateauX, int_tailleGrille);
-  } while (((int_debutBateauX > 0) && (int_debutBateauX <= int_tailleGrille) && (int_debutBateauY > 0) && (int_debutBateauY <= int_tailleGrille)) && (int_placementValide != 0)); /* On redemande les coordonnées tant que l'emplacement n'est pas valide */
-  int_i = int_debutBateauY;
-  int_j = int_debutBateauX;
+    printf("int_debutBatoX = %d\n",int_debutBateauX);
+  } while ((int_debutBateauX > 0) && (int_debutBateauY > 0)  && (int_debutBateauX < int_tailleGrille) && (int_debutBateauY < int_tailleGrille) && (checkVideAutour(Grille, int_finBateauY, int_finBateauX, int_tailleGrille) != 0)); /* On redemande les coordonnées tant que l'emplacement n'est pas valide */
+  int_i = int_debutBateauX;
+  int_j = int_debutBateauY;
+  free(coord);
+  coord = malloc(sizeof(char) * 2);
   do
   {
-    printf("Dernière case du bateau :");
+    printf("Dernière case du bateau : \n");
     demandeCoord(coord);
     printf("\n");
     int_finBateauY = atoi(&coord[1])-1;
     int_finBateauX = (char)toupper(coord[0]) - 65;
-    int_placementValide = checkVideAutour(Grille, int_finBateauY, int_finBateauX, int_tailleGrille);
-  } while ((int_finBateauX >= 0) && (int_finBateauX < int_tailleGrille) && (int_finBateauY >= 0) && (int_finBateauY < int_tailleGrille) && (((abs(int_debutBateauX - int_finBateauX + 1) == int_tailleBateau) && (int_debutBateauY == int_finBateauY)) || ((abs(int_debutBateauY - int_finBateauY + 1) == int_tailleBateau) && (int_debutBateauX == int_finBateauX))) && (int_placementValide != 0));
-  while ((int_i <= int_finBateauY) && (int_placementValide != 0))
+  } while ((int_finBateauX > 0) && (int_finBateauX < int_tailleGrille) && (int_finBateauY > 0) && (int_finBateauY < int_tailleGrille) && (((abs(int_debutBateauX - int_finBateauX) == int_tailleBateau) && (int_debutBateauY == int_finBateauY)) || ((abs(int_debutBateauY - int_finBateauY+1) == int_tailleBateau) && (int_debutBateauX == int_finBateauX))) && (checkVideAutour(Grille, int_finBateauY, int_finBateauX, int_tailleGrille) != 0));
+  int_placementValide = checkVideAutour(Grille, int_finBateauY, int_finBateauX, int_tailleGrille);
+  while ((int_i <= int_finBateauX) && (int_placementValide != 0))
   {
-    while ((int_j <= int_finBateauX) && (int_placementValide != 0))
+    while ((int_j <= int_finBateauY) && (int_placementValide != 0))
     {
       if (checkVideAutour(Grille, int_i, int_j, int_tailleGrille) != 0)
       {
@@ -162,9 +165,9 @@ int ajouteBateau(int **Grille, int int_tailleBateau, int int_tailleGrille)
   }
   if (int_placementValide == 0)
   {
-    for (int_i = int_debutBateauY; int_i <= int_finBateauY; int_i++)
+    for (int_i = int_debutBateauX; int_i <= int_finBateauX; int_i++)
     {
-      for (int_j = int_debutBateauX; int_j <= int_finBateauX; int_j++)
+      for (int_j = int_debutBateauY; int_j <= int_finBateauY; int_j++)
       {
         {
           Grille[int_i][int_j] = BATEAU_VIVANT;
@@ -215,8 +218,8 @@ batostruc* constructionFlotteHumain(batostruc* listedesbateaux,int int_tailleGri
     listedesbateaux[2].taille = 4;
     for (int_k = 3; int_k < 6; int_k++)
     {
-      strcpy(listedesbateaux[2].nom,"Sous-Marin");
-      listedesbateaux[2].taille = 3;
+      strcpy(listedesbateaux[int_k].nom,"Sous-Marin");
+      listedesbateaux[int_k].taille = 3;
     }
     for (int_j = 6; int_j < 10; int_j++)
     {

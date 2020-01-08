@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include "combat.h"
+#include "affichage.h"
 /*!
 \fn int tir()
 \brief
@@ -63,7 +64,7 @@ void demandeCoord(char *coord)
   int_retour = scanf("%s", coord);
   if (int_retour == 0)
   {
-    exit(-1);
+    exit(ERREUR_SAISIE);
   }
 }
 /*!

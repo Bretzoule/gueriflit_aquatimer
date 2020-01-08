@@ -50,23 +50,31 @@ void afficherGrille(int** ppint_grille,int int_tailleGrille)
       printf("+---" ); // pour faire une belle matrice sur le terminal
     }
     printf("+\n");
-printf(" %c ",i+65 );
+    printf(" %c ",i+65 );
     for (int j = 0; j < int_tailleGrille; j++)
     {
       if (ppint_grille[i][j]==1) {
         printf("| O ");
       }
-      if (ppint_grille[i][j]==2) {
-        printf("| \033[31mX ");
-      }
-      if (ppint_grille[i][j]==-1) {
-        printf("| X ");
-      } else {
-        printf("|  ");
+      else
+      {
+        if (ppint_grille[i][j]==2) {
+          printf("| \033[31mX ");
+        }
+        else
+        {
+          if (ppint_grille[i][j]==-1) {
+            printf("| X ");
+          }
+          else
+          {
+            printf("| ~ ");
+
+          }
+        }
       }
     }
     printf("|\n");
-
   }
   printf("   ");
   for (int k = 0; k < int_tailleGrille; k++)

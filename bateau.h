@@ -102,4 +102,17 @@ batostruc* constructionFlotteHumain(batostruc* listedesbateaux,int int_tailleGri
   \remarks
 */
 int demandeNombreBateau(int int_tailleGrille);
+
+/*!
+  \fn batostruc construitFlotte(batostruc bateau, int int_tailleGrille)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Mon Dec  9 16:21:57 2019
+  \brief permet de remplir une valeur du tableau des bateaux
+  \param batostruc bateau : valeur du tableau des bateaux à remplir
+  \param int int_tailleGrille : taille de la grille pour s'assurer qu'on ne prenne pas un bateau plus grand que cette dernière
+  \return batostruc bateau : entrée du tableau complétée 
+  \remarks 
+*/
+batostruc construitFlotte(batostruc bateau, int int_tailleGrille);
 #endif

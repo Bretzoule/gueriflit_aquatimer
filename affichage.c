@@ -11,6 +11,7 @@
 /* Inclusion des entêtes de librairies */
 #include "affichage.h"
 
+
 /*!
 \fn void init()
 \brief initialise la matrice
@@ -50,9 +51,19 @@ void afficherGrille(int** ppint_grille,int int_tailleGrille)
     }
     printf("+\n");
 printf(" %c ",i+65 );
-    for (size_t j = 0; j < int_tailleGrille; j++)
+    for (int j = 0; j < int_tailleGrille; j++)
     {
-      printf("| %d ",ppint_grille[i][j]);
+      if (ppint_grille[i][j]==1) {
+        printf("| O ");
+      }
+      if (ppint_grille[i][j]==2) {
+        printf("| \033[31mX ");
+      }
+      if (ppint_grille[i][j]==-1 {
+        printf("| X ");
+      } else {
+        printf("|  ");
+      }
     }
     printf("|\n");
 

@@ -24,6 +24,9 @@ int demandeValeur(int int_valeur) {
   return (int_valeur);
 }
 
+
+
+
 int voisinNord(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
 {
   return (tint_jeu[int_x][(int_y - 1 + int_largeur) % int_largeur]);
@@ -140,17 +143,14 @@ int ajouteBateau(int **Grille, int int_tailleBateau, int int_tailleGrille)
   } while ((int_debutBateauX > 0) && (int_debutBateauY > 0)  && (int_debutBateauX < int_tailleGrille) && (int_debutBateauY < int_tailleGrille) && (checkVideAutour(Grille, int_finBateauY, int_finBateauX, int_tailleGrille) != 0)); /* On redemande les coordonnées tant que l'emplacement n'est pas valide */
   int_i = int_debutBateauX;
   int_j = int_debutBateauY;
-  free(coord);
-  coord = malloc(sizeof(char) * 2);
   do
   {
     printf("Dernière case du bateau : \n");
     demandeCoord(coord);
-    printf("\n");
     int_finBateauY = atoi(&coord[1])-1;
     int_finBateauX = (char)toupper(coord[0]) - 65;
   } while ((int_finBateauX > 0) && (int_finBateauX < int_tailleGrille) && (int_finBateauY > 0) && (int_finBateauY < int_tailleGrille) && (((abs(int_debutBateauX - int_finBateauX) == int_tailleBateau) && (int_debutBateauY == int_finBateauY)) || ((abs(int_debutBateauY - int_finBateauY+1) == int_tailleBateau) && (int_debutBateauX == int_finBateauX))) && (checkVideAutour(Grille, int_finBateauY, int_finBateauX, int_tailleGrille) != 0));
-  int_placementValide = checkVideAutour(Grille, int_finBateauY, int_finBateauX, int_tailleGrille);
+  int_placementValide = 0;
   while ((int_i <= int_finBateauX) && (int_placementValide != 0))
   {
     while ((int_j <= int_finBateauY) && (int_placementValide != 0))
@@ -204,7 +204,7 @@ batostruc* constructionFlotteHumain(batostruc* listedesbateaux,int int_tailleGri
     listedesbateaux = malloc(sizeof(batostruc)*int_nombreBateaux);
     for (int_i = 0; int_i < int_nombreBateaux; int_i++)
     {
-      //construitFlotte(listedesbateaux[int_i]);
+      listedesbateaux[int_i] = construitFlotte(listedesbateaux[int_i],int_tailleGrille);
     }
   } else
   {
@@ -228,4 +228,31 @@ batostruc* constructionFlotteHumain(batostruc* listedesbateaux,int int_tailleGri
     }
   }
   return(listedesbateaux);
+}
+
+/*!
+  \fn batostruc construitFlotte(batostruc bateau, int int_tailleGrille)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Mon Dec  9 16:21:57 2019
+  \brief permet de remplir une valeur du tableau des bateaux
+  \param batostruc bateau : valeur du tableau des bateaux à remplir
+  \param int int_tailleGrille : taille de la grille pour s'assurer qu'on ne prenne pas un bateau plus grand que cette dernière
+  \return batostruc bateau : entrée du tableau complétée 
+  \remarks 
+*/
+batostruc construitFlotte(batostruc bateau, int int_tailleGrille) {
+  char str_tmp[50];
+  do
+  {
+    printf("Veuillez entrer la taille de votre premier bateau (cette valeur doit être inférieure à la taille de la grille, ici %d) : \n",int_tailleGrille);
+    bateau.taille = demandeValeur(bateau.taille);
+  } while ((bateau.taille > 0) && (bateau.taille <= int_tailleGrille));
+  do
+  {
+    printf("Veuillez entrer le nom de votre bateau (taille du mot inférieure à 20 caractères !");
+    scanf("%s", str_tmp);
+  } while (strlen(str_tmp) < 20);
+  strcpy(str_tmp,bateau.nom);
+  return(bateau);
 }

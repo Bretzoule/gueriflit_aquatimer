@@ -59,7 +59,7 @@ printf(" %c ",i+65 );
       if (ppint_grille[i][j]==2) {
         printf("| \033[31mX ");
       }
-      if (ppint_grille[i][j]==-1 {
+      if (ppint_grille[i][j]==-1) {
         printf("| X ");
       } else {
         printf("|  ");

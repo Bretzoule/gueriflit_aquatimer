@@ -20,10 +20,11 @@ int main(int argc, char const *argv[]) {
   srand(time(NULL));
   int** ppint_grille;
   int int_okPosee = 0;
+  int int_i;
   int int_tailleGrille = 10;
   int int_modePerso = 0;
   batostruc* flotteUtilisee = NULL;
-  int* ptrint_nombreBato = NULL;
+  int int_nombreBateaux = 10;
   printf("Quelle est la taille de votre grille (veuillez entrer 10 pour une grille par défaut)\n");
   int_tailleGrille = demandeValeur(int_tailleGrille);
   while (int_tailleGrille < 7) {
@@ -36,14 +37,16 @@ int main(int argc, char const *argv[]) {
     printf("J'avais dit 1 ou 0....\n");
     int_modePerso = demandeValeur(int_modePerso);
   }
-  flotteUtilisee = constructionFlotteHumain(flotteUtilisee,int_tailleGrille,int_modePerso);
-  printf("%d \n",ptrint_nombreBato); /* bug */
+  if (int_modePerso == 1) {
+    int_nombreBateaux = demandeNombreBateau(int_tailleGrille);
+  }
+  flotteUtilisee = constructionFlotteHumain(flotteUtilisee,int_tailleGrille,int_modePerso,int_nombreBateaux);
+  printf("%d \n",int_nombreBateaux);
   init(&ppint_grille, int_tailleGrille);
   afficherGrille(ppint_grille,int_tailleGrille);
-  int int_i;
-  for (int_i = 0; int_i < ptrint_nombreBato; int_i++) /* bug */
+  for (int_i = 0; int_i < int_nombreBateaux; int_i++)
   {
-    printf("Vous placez un %s \n",flotteUtilisee[int_i].nom);
+    printf("Vous placez un %s, taille = %d \n",flotteUtilisee[int_i].nom, flotteUtilisee[int_i].taille);
     do
     {
       int_okPosee = ajouteBateau(ppint_grille,flotteUtilisee[int_i].taille,int_tailleGrille);

@@ -90,8 +90,7 @@ int ajouteBateau(int **Grille, int int_tailleBateau, int int_tailleGrille);
   \remarks
 */
 
-batostruc* constructionFlotteHumain(batostruc* listedesbateaux,int int_tailleGrille,int int_modePerso);
-
+batostruc* constructionFlotteHumain(batostruc* listedesbateaux,int int_tailleGrille,int int_modePerso,int int_nombreBateaux);
 /*!
   \fn int demandeNombreBateau(int int_tailleGrille)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>

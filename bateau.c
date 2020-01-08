@@ -135,30 +135,32 @@ int ajouteBateau(int **Grille, int int_tailleBateau, int int_tailleGrille)
     demandeCoord(coord); /* Récupération coordonnées */
     int_debutBateauY = atoi(&coord[1])-1;
     int_debutBateauX = (char)toupper(coord[0])-65;
-  } while (((int_debutBateauX >= 0) && (int_debutBateauX < int_tailleGrille) && (int_debutBateauY >= 0) && (int_debutBateauY < int_tailleGrille)) && (checkVideAutour(Grille, int_debutBateauX, int_debutBateauY, int_tailleGrille) != 0)); /* On redemande les coordonnées tant que l'emplacement n'est pas valide */
+    int_placementValide = checkVideAutour(Grille, int_finBateauY, int_finBateauX, int_tailleGrille);
+  } while (((int_debutBateauX > 0) && (int_debutBateauX <= int_tailleGrille) && (int_debutBateauY > 0) && (int_debutBateauY <= int_tailleGrille)) && (int_placementValide != 0)); /* On redemande les coordonnées tant que l'emplacement n'est pas valide */
   int_i = int_debutBateauY;
   int_j = int_debutBateauX;
   do
   {
-    printf("Dernière case du bateau");
+    printf("Dernière case du bateau :");
     demandeCoord(coord);
-    int_debutBateauY = atoi(&coord[1])-1;
-    int_debutBateauX = (char)toupper(coord[0]) - 65;
-  } while ((int_finBateauX >= 0) && (int_finBateauX < int_tailleGrille) && (int_finBateauY >= 0) && (int_finBateauY < int_tailleGrille) && (((abs(int_debutBateauX - int_finBateauX + 1) == int_tailleBateau) && (int_debutBateauY == int_finBateauY)) || ((abs(int_debutBateauY - int_finBateauY + 1) == int_tailleBateau) && (int_debutBateauX == int_finBateauX))) && (checkVideAutour(Grille, int_finBateauY, int_finBateauX, int_tailleGrille) != 0));
-  while ((int_i <= int_finBateauY) && (int_placementValide == 1))
+    printf("\n");
+    int_finBateauY = atoi(&coord[1])-1;
+    int_finBateauX = (char)toupper(coord[0]) - 65;
+    int_placementValide = checkVideAutour(Grille, int_finBateauY, int_finBateauX, int_tailleGrille);
+  } while ((int_finBateauX >= 0) && (int_finBateauX < int_tailleGrille) && (int_finBateauY >= 0) && (int_finBateauY < int_tailleGrille) && (((abs(int_debutBateauX - int_finBateauX + 1) == int_tailleBateau) && (int_debutBateauY == int_finBateauY)) || ((abs(int_debutBateauY - int_finBateauY + 1) == int_tailleBateau) && (int_debutBateauX == int_finBateauX))) && (int_placementValide != 0));
+  while ((int_i <= int_finBateauY) && (int_placementValide != 0))
   {
-    while ((int_j <= int_finBateauX) && (int_placementValide == 1))
+    while ((int_j <= int_finBateauX) && (int_placementValide != 0))
     {
       if (checkVideAutour(Grille, int_i, int_j, int_tailleGrille) != 0)
-         /* vérification placement valide */
       {
-        int_placementValide = 0;
+        int_placementValide = 1;
       }
       int_j++;
     }
     int_i++;
   }
-  if (int_placementValide == 1)
+  if (int_placementValide == 0)
   {
     for (int_i = int_debutBateauY; int_i <= int_finBateauY; int_i++)
     {
@@ -172,7 +174,7 @@ int ajouteBateau(int **Grille, int int_tailleBateau, int int_tailleGrille)
   }
   else
   {
-    printf("Erreur de placement !");
+    printf("Erreur de placement !\n");
     int_okPosee = 0;
   }
   free(coord);
@@ -191,14 +193,11 @@ int demandeNombreBateau(int int_tailleGrille) {
   return (int_nbBateau);
 }
 
-batostruc* constructionFlotteHumain(batostruc* listedesbateaux,int int_tailleGrille, int int_modePerso) {
+batostruc* constructionFlotteHumain(batostruc* listedesbateaux,int int_tailleGrille, int int_modePerso, int int_nombreBateaux) {
   int int_i;
   int int_j;
   int int_k;
-  int int_nombreBateaux = 10;
-  ptrint_nombreBato = &int_nombreBateaux;
   if (int_modePerso == 1) {
-    int_nombreBateaux = demandeNombreBateau(int_tailleGrille);
     listedesbateaux = malloc(sizeof(batostruc)*int_nombreBateaux);
     for (int_i = 0; int_i < int_nombreBateaux; int_i++)
     {

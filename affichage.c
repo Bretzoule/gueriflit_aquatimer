@@ -18,10 +18,10 @@
 \version 0.1
 \date 9/12/19
 */
-void init(int*** ppint_grille)
+void init(int*** ppint_grille, int int_tailleGrille)
 {
   *ppint_grille =calloc(int_tailleGrille,sizeof(int*));
-  for (int i = 0; i < N; i++) //allocation de l'espace pour la matrice
+  for (int i = 0; i < int_tailleGrille; i++) //allocation de l'espace pour la matrice
   {
     (*ppint_grille)[i] = calloc(int_tailleGrille,sizeof(int*));
   }

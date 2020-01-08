@@ -90,5 +90,17 @@ int ajouteBateau(int **Grille, int int_tailleBateau, int int_tailleGrille);
   \remarks
 */
 
-batostruc* constructionFlotteHumain(int int_modePerso);
+batostruc* constructionFlotteHumain(batostruc* listedesbateaux,int int_tailleGrille,int int_modePerso);
+
+/*!
+  \fn int demandeNombreBateau(int int_tailleGrille)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Wed Jan  8 08:43:13 2020
+  \brief permet de donner une valeur arbitraire maximale du nombre de bateaux sur la grille en fonction de sa taille
+  \param int int_tailleGrille : taille de la grille en entrée
+  \return int_nbBateau : nombre de bateaux à placer
+  \remarks
+*/
+int demandeNombreBateau(int int_tailleGrille);
 #endif

@@ -46,6 +46,7 @@ int main(int argc, char const *argv[]) {
   afficherGrille(ppint_grille,int_tailleGrille);
   for (int_i = 0; int_i < int_nombreBateaux; int_i++)
   {
+    system("clear");
     printf("Vous placez un %s, taille = %d \n",flotteUtilisee[int_i].nom, flotteUtilisee[int_i].taille);
     do
     {

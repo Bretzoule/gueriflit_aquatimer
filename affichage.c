@@ -18,12 +18,12 @@
 \version 0.1
 \date 9/12/19
 */
-void init(int*** ppint_grille)
+void init(int*** ppint_grille, int int_tailleGrille)
 {
-  *ppint_grille =calloc(N,sizeof(int*));
-  for (int i = 0; i < N; i++) //allocation de l'espace pour la matrice
+  *ppint_grille =calloc(int_tailleGrille,sizeof(int*));
+  for (int i = 0; i < int_tailleGrille; i++) //allocation de l'espace pour la matrice
   {
-    (*ppint_grille)[i] = calloc(N,sizeof(int*));
+    (*ppint_grille)[i] = calloc(int_tailleGrille,sizeof(int*));
   }
 }
 
@@ -34,23 +34,23 @@ void init(int*** ppint_grille)
 \version 0.1
 \date 9/12/19
 */
-void afficherGrille(int** ppint_grille)
+void afficherGrille(int** ppint_grille,int int_tailleGrille)
 {
   printf("   ");
-  for (int k = 1; k < N+1; k++) {
+  for (int k = 1; k < int_tailleGrille+1; k++) {
       printf("  %d ",k );
   }
   printf("\n");
-  for (int i = 0; i < N; i++)
+  for (int i = 0; i < int_tailleGrille; i++)
   {
     printf("   ");
-    for (int k = 0; k < N; k++)
+    for (int k = 0; k < int_tailleGrille; k++)
     {
       printf("+---" ); // pour faire une belle matrice sur le terminal
     }
     printf("+\n");
 printf(" %c ",i+65 );
-    for (size_t j = 0; j < N; j++)
+    for (size_t j = 0; j < int_tailleGrille; j++)
     {
       printf("| %d ",ppint_grille[i][j]);
     }
@@ -58,7 +58,7 @@ printf(" %c ",i+65 );
 
   }
   printf("   ");
-  for (int k = 0; k < N; k++)
+  for (int k = 0; k < int_tailleGrille; k++)
   {
     printf("+---" );
   }

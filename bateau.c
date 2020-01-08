@@ -9,8 +9,20 @@
  */
 #include <stdlib.h>
 #include <ctype.h>
+#include <string.h>
 #include <stdio.h>
+#include <math.h>
 #include "bateau.h"
+
+int demandeValeur(int int_valeur) {
+  int int_retour = 0;
+  int_retour = scanf("%d", &int_valeur);
+    if (int_retour == 0) {
+      fprintf(stderr, "Entrée incorrecte\n"); // verification entrée
+      exit(ERREUR_SAISIE);
+    }
+  return (int_valeur);
+}
 
 int voisinNord(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
 {
@@ -167,39 +179,50 @@ int ajouteBateau(int **Grille, int int_tailleBateau, int int_tailleGrille)
   return (int_okPosee); // répéter cette fonction tant que le placement n'est pas valide
 }
 
-/*!
-  \fn int constructionFlotteHumain(int** ttint_jeu, int tailleGrille)
-  \author LEFLOCH Thomas <leflochtho@eisti.eu>
-  \version 0.1
-  \date Tue Jan  7 13:19:48 2020
-  \brief Permet de récupérer le nombre de bateaux à placer et leur taille/nom
-  \param int int_tailleGrille : permet de décider si le joueur joue en mode personnalisé ..x.. ou en mode standard : 10x10
-  \return &listedesbateaux : il s'agit de la liste des bateaux utilisés dans la partie
-  \remarks
-*/
 
-batostruc* constructionFlotteHumain(int int_modePerso) {
-  int int_tailleGrille = 10;
+int demandeNombreBateau(int int_tailleGrille) {
+  int int_nbBateau = 0;
+  int int_nbMaxBateaux = round((int_tailleGrille*int_tailleGrille)/10);
+  printf("Le nombre maximal de bateaux pour une grille de taille \"%d\" est : %d \n", int_tailleGrille, int_nbMaxBateaux);
+  while ((int_nbBateau > int_nbMaxBateaux) && (int_nbBateau < 0)) {
+    printf("Le nombre entrée dépasse la capacité de la grille !\n");
+      int_nbBateau = demandeValeur(int_nbBateau);
+  }
+  return (int_nbBateau);
+}
+
+batostruc* constructionFlotteHumain(batostruc* listedesbateaux,int int_tailleGrille, int int_modePerso) {
   int int_i;
+  int int_j;
+  int int_k;
   int int_nombreBateaux = 0;
-  batostruc *listedesbateaux;
-  if (int_tailleGrille != 10) {
-    int_nombreBateaux = demandeNombreBateaux();
+  if (int_modePerso == 1) {
+    int_nombreBateaux = demandeNombreBateau(int_tailleGrille);
     listedesbateaux = malloc(sizeof(batostruc)*int_nombreBateaux);
-
     for (int_i = 0; int_i < int_nombreBateaux; int_i++)
     {
-      construitFlotte(listedesbateaux[int_i]);
+      //construitFlotte(listedesbateaux[int_i]);
     }
-  }else
+  } else
   {
+    int_tailleGrille = 10;
     listedesbateaux = malloc(sizeof(batostruc)*10);
-    (listedesbateaux[0]) = {"Porte-Avion", 6 } /* aide inès plz */
-     listedesbateaux[1] = ;
-      listedesbateaux[2] = ;
-      /* ..... à compléter ...... */
+    strcpy(listedesbateaux[0].nom,"Porte-Avion");
+    listedesbateaux[0].taille = 6;
+    strcpy(listedesbateaux[1].nom,"Croiseur");
+    listedesbateaux[1].taille = 4;
+    strcpy(listedesbateaux[2].nom,"Croiseur");
+    listedesbateaux[2].taille = 4;
+    for (int_k = 3; int_k < 6; int_k++)
+    {
+      strcpy(listedesbateaux[2].nom,"Sous-Marin");
+      listedesbateaux[2].taille = 3;
+    }
+    for (int_j = 6; int_j < 10; int_j++)
+    {
+      strcpy(listedesbateaux[int_j].nom,"Torpilleur");
+      listedesbateaux[int_j].taille = 2;
+    }
   }
-  
-  
   return(listedesbateaux);
 }

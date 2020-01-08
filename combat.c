@@ -73,7 +73,7 @@ void demandeCoord(char *coord)
 \version 0.1
 \date
 */
-int tir(int** ppint_grille){
+int tir(int** ppint_grille,int int_tailleGrille){
   char *coord = malloc(sizeof(char) * 2);
   int int_coord_x;
   int int_coord_y;
@@ -83,10 +83,13 @@ int tir(int** ppint_grille){
     demandeCoord(coord);
     int_coord_y = atoi(&coord[1])-1;
     int_coord_x = (char)toupper(coord[0])-65;
+    if (int_coord_x >9) {
+      printf("rentrez une coordonnées X valide\n");
+      scanf("%s",&coord[0] );
+      int_coord_x = (char)toupper(coord[0])-65;
+    }
     int_test = valitir(ppint_grille,int_coord_x,int_coord_y);
-    printf("%d\n",int_test );
-  } while ((((int_coord_x < 0) || (int_coord_x > 9))||((int_coord_y < 0) || (int_coord_y > 9)))&&(int_test==1));
-  printf("lol\n");
+  } while ((((int_coord_x < 0) || (int_coord_x > int_tailleGrille-1))||((int_coord_y < 0) || (int_coord_y > int_tailleGrille-1))) ||(int_test==1));
   int_retour =effettir(ppint_grille,int_coord_x,int_coord_y);
   return(int_retour);
 }

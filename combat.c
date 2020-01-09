@@ -62,6 +62,7 @@ void demandeCoord(char *coord)
   printf("Entrez vos coordonnées de la forme \"A9\"\n");
   fflush(stdin);
   int_retour = scanf("%s", coord);
+  fflush(stdin);
   if (int_retour == 0)
   {
     exit(ERREUR_SAISIE);

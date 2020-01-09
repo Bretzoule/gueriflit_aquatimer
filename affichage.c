@@ -54,21 +54,21 @@ void afficherGrille(int** ppint_grille,int int_tailleGrille)
     for (int j = 0; j < int_tailleGrille; j++)
     {
       if (ppint_grille[i][j]==1) {
-        printf("| O ");
+        printf("| ■ ");
       }
       else
       {
         if (ppint_grille[i][j]==2) {
-          printf("| \033[31mX ");
+          printf("| \033[31m■\033[0m ");
         }
         else
         {
           if (ppint_grille[i][j]==-1) {
-            printf("| X ");
+            printf("| \033[36m▒\033[0m ");
           }
           else
           {
-            printf("| ~ ");
+            printf("| \033[34m▒\033[0m ");
 
           }
         }

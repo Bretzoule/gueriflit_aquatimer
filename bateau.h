@@ -31,6 +31,17 @@ typedef struct batostruc {
   int taille;
 }batostruc;
 
+/*!
+  \fn int demandeValeur(int int_valeur)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Mon Dec  9 16:21:57 2019
+  \brief permet de demander une valeur
+  \param int_valeur : valeur à renseigner
+  \return int_valeur : valeur renseignée
+  \remarks
+*/
+int demandeValeur(int int_valeur);
 
 int voisinNord(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur);
 int voisinNordEst(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur);
@@ -79,5 +90,42 @@ int ajouteBateau(int **Grille, int int_tailleBateau, int int_tailleGrille);
   \remarks
 */
 
-batostruc* constructionFlotteHumain(int int_modePerso);
+batostruc* constructionFlotteHumain(batostruc* listedesbateaux,int int_tailleGrille,int int_modePerso,int int_nombreBateaux);
+/*!
+  \fn int demandeNombreBateau(int int_tailleGrille)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Wed Jan  8 08:43:13 2020
+  \brief permet de donner une valeur arbitraire maximale du nombre de bateaux sur la grille en fonction de sa taille
+  \param int int_tailleGrille : taille de la grille en entrée
+  \return int_nbBateau : nombre de bateaux à placer
+  \remarks
+*/
+int demandeNombreBateau(int int_tailleGrille);
+
+/*!
+  \fn batostruc construitFlotte(batostruc bateau, int int_tailleGrille)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Mon Dec  9 16:21:57 2019
+  \brief permet de remplir une valeur du tableau des bateaux
+  \param batostruc bateau : valeur du tableau des bateaux à remplir
+  \param int int_tailleGrille : taille de la grille pour s'assurer qu'on ne prenne pas un bateau plus grand que cette dernière
+  \return batostruc bateau : entrée du tableau complétée
+  \remarks
+*/
+batostruc construitFlotte(batostruc bateau, int int_tailleGrille);
+
+/*!
+  \fn int askDirection(int int_directionBato)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Thu Jan  9 16:02:13 2020
+  \brief permet de demander la direction d'un bateau
+  \param int int_directionBato : direction du bateau
+  \return int int_directionBato : direction du bateau
+  \remarks
+*/
+
+int askDirection(int int_directionBato);
 #endif

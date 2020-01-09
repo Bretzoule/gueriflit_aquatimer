@@ -10,4 +10,5 @@
 
 void init(int*** ppint_grille, int int_tailleGrille);
 void afficherGrille(int** ppint_grille, int int_tailleGrille);
+void afficherEnmie(int** ppint_grille,int int_tailleGrille);
 #endif

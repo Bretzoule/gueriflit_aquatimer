@@ -11,6 +11,9 @@
 /* Inclusion des entêtes de librairies */
 #include <stdlib.h>
 #include <stdio.h>
+#include "affichage.h"
+#include "combat.h"
+#include "bateau.h"
 
 /*!
 \fn void ()
@@ -19,6 +22,9 @@
 \version 0.1
 \date
 */
-void (){
+void jeusplitscreen(){
+  int** ppint_grille_J1;
+  int** ppint_grille_J2;
+
 
 }

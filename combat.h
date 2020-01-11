@@ -14,6 +14,6 @@ int effettir(int** ppint_grille, int int_coord_x, int int_coord_y);
 int valitir(int** ppint_grille, int int_coord_x, int int_coord_y);
 void demandeCoord(char *coord);
 int tir(int** ppint_grille,int int_tailleGrille);
-int Fin(int** ppint_grille,int int_tailleGrille);
+int fin(int** ppint_grille,int int_tailleGrille);
 int rapporttir(int** ppint_grille, int int_coord_x, int int_coord_y,int int_tailleGrille);
 #endif

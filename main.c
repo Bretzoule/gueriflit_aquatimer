@@ -55,7 +55,7 @@ int main(int argc, char const *argv[]) {
       afficherGrille(ppint_grille,int_tailleGrille);
     } while (int_okPosee != 1);
   }
-  for (int i = 0; i < 4; i++) {
+  while(fin(ppint_grille,int_tailleGrille)!=0) {
     tir(ppint_grille,int_tailleGrille);
     afficherGrille(ppint_grille,int_tailleGrille);
     afficherEnmie(ppint_grille,int_tailleGrille);

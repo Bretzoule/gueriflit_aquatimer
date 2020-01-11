@@ -75,7 +75,7 @@ void demandeCoord(char *coord)
 \version 0.1
 \date 11/01/2020
 */
-int Fin(int** ppint_grille,int int_tailleGrille){
+int fin(int** ppint_grille,int int_tailleGrille){
   int int_compteur;
   int_compteur =0;
   for (int i = 0; i < int_tailleGrille; i++) {
@@ -96,23 +96,55 @@ int Fin(int** ppint_grille,int int_tailleGrille){
 */
 int rapporttir(int** ppint_grille, int int_coord_x, int int_coord_y,int int_tailleGrille){
   int int_compteur;
+  int int_X;
+  int int_Y;
   int_compteur =0;
+  int_X = int_coord_x;
+  int_Y = int_coord_y;
   if (ppint_grille[int_coord_x][int_coord_y]==2) {
     int_compteur =1;
-    while ((int_coord_x <int_tailleGrille)||(ppint_grille[int_coord_x+1][int_coord_y]!=2)) {
+    while ((int_coord_x <int_tailleGrille)&&(ppint_grille[int_coord_x][int_coord_y]==2)&&(int_compteur != -1)) {
+      if (ppint_grille[int_coord_x][int_coord_y]==1) {
+        int_compteur = -1;
+      } else {
+        int_compteur = int_compteur+1;
+        int_coord_x = int_coord_x +1;
+      }
+      printf("1\n" );
+    }
+    int_coord_x =int_X;
+    while ((-1 <int_coord_x)&&(ppint_grille[int_coord_x][int_coord_y]==2)&&(int_compteur != -1)) {
+      if (ppint_grille[int_coord_x][int_coord_y]==1) {
+        int_compteur = -1;
+      }
+      else {
+      int_coord_x = int_coord_x -1;
       int_compteur = int_compteur+1;
     }
-    while ((-1 <int_coord_x)||(ppint_grille[int_coord_x-1][int_coord_y]!=2)) {
+          printf("2\n" );
+    }
+    int_coord_x =int_X;
+    while ((int_coord_y <int_tailleGrille)&&(ppint_grille[int_coord_x][int_coord_y]==2)&&(int_compteur != -1)) {
+      if (ppint_grille[int_coord_x][int_coord_y]==1) {
+        int_compteur = -1;
+      }else {
+      int_coord_y = int_coord_y +1;
       int_compteur = int_compteur+1;
     }
-    while ((int_coord_y <int_tailleGrille)||(ppint_grille[int_coord_x][int_coord_y+1]!=2)) {
+          printf("3\n" );
+    }
+    int_coord_y =int_Y;
+    while ((-1 <int_coord_y)&&(ppint_grille[int_coord_x][int_coord_y]==2)&&(int_compteur != -1)) {
+      if (ppint_grille[int_coord_x][int_coord_y]==1) {
+        int_compteur = -1;
+      } else {
+      int_coord_y = int_coord_y -1;
       int_compteur = int_compteur+1;
     }
-    while ((-1 <int_coord_y)||(ppint_grille[int_coord_x][int_coord_y-1]!=2)) {
-      int_compteur = int_compteur+1;
+          printf("4\n" );
     }
   }
-  return(int_compteur);
+    return(int_compteur-4);
 }
 /*!
 \fn int tir(int** ppint_grille)
@@ -126,7 +158,6 @@ int tir(int** ppint_grille,int int_tailleGrille){
   int int_coord_x;
   int int_coord_y;
   int int_retour;
-  int int_retour2;
   int int_test;
   do {
     demandeCoord(coord);
@@ -139,8 +170,8 @@ int tir(int** ppint_grille,int int_tailleGrille){
     }
     int_test = valitir(ppint_grille,int_coord_x,int_coord_y);
   } while ((((int_coord_x < 0) || (int_coord_x > int_tailleGrille-1))||((int_coord_y < 0) || (int_coord_y > int_tailleGrille-1))) ||(int_test==1));
-  int_retour =effettir(ppint_grille,int_coord_x,int_coord_y);
-  int_retour2 = rapporttir(ppint_grille,int_coord_x,int_coord_y,int_tailleGrille);
-
-  return(int_retour2);
+  effettir(ppint_grille,int_coord_x,int_coord_y);
+  int_retour = rapporttir(ppint_grille,int_coord_x,int_coord_y,int_tailleGrille);
+  printf("%d\n",int_retour );
+  return(int_retour);
 }

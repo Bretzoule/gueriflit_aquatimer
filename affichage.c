@@ -65,7 +65,7 @@ void afficherGrille(int** ppint_grille,int int_tailleGrille)
         else
         {
           if (ppint_grille[i][j]==-1) {
-            printf("| \033[36m▒\033[0m ");
+            printf("| \033[96m▒\033[0m ");
           }
           else
           {
@@ -120,7 +120,7 @@ void afficherEnmie(int** ppint_grille,int int_tailleGrille){
         else
         {
           if (ppint_grille[i][j]==-1) {
-            printf("| \033[36m▒\033[0m ");
+            printf("| \033[96m▒\033[0m ");
           }
           else
           {

@@ -62,10 +62,57 @@ void demandeCoord(char *coord)
   printf("Entrez vos coordonnées de la forme \"A9\"\n");
   fflush(stdin);
   int_retour = scanf("%s", coord);
+  fflush(stdin);
   if (int_retour == 0)
   {
     exit(ERREUR_SAISIE);
   }
+}
+/*!
+\fn int Fin(int** ppint_grille,int int_tailleGrille)
+\brief condition de fin pour la partie
+\author Hugo POINTEREAU <pointereau@eisti.eu>
+\version 0.1
+\date 11/01/2020
+*/
+int Fin(int** ppint_grille,int int_tailleGrille){
+  int int_compteur;
+  int_compteur =0;
+  for (int i = 0; i < int_tailleGrille; i++) {
+    for (int j = 0; j < int_tailleGrille; j++) {
+      if (ppint_grille[i][j]==1) {
+        int_compteur = int_compteur +1;
+      }
+    }
+  }
+  return (int_compteur);
+}
+/*!
+\fn int rapporttir(int** ppint_grille, int int_coord_x, int int_coord_y,int int_tailleGrille)
+\brief dit la du taille du bateaux qui a ete coulé
+\author Hugo POINTEREAU <pointereau@eisti.eu>
+\version 0.1
+\date 11/01/2020
+*/
+int rapporttir(int** ppint_grille, int int_coord_x, int int_coord_y,int int_tailleGrille){
+  int int_compteur;
+  int_compteur =0;
+  if (ppint_grille[int_coord_x][int_coord_y]==2) {
+    int_compteur =1;
+    while ((int_coord_x <int_tailleGrille)||(ppint_grille[int_coord_x+1][int_coord_y]!=2)) {
+      int_compteur = int_compteur+1;
+    }
+    while ((-1 <int_coord_x)||(ppint_grille[int_coord_x-1][int_coord_y]!=2)) {
+      int_compteur = int_compteur+1;
+    }
+    while ((int_coord_y <int_tailleGrille)||(ppint_grille[int_coord_x][int_coord_y+1]!=2)) {
+      int_compteur = int_compteur+1;
+    }
+    while ((-1 <int_coord_y)||(ppint_grille[int_coord_x][int_coord_y-1]!=2)) {
+      int_compteur = int_compteur+1;
+    }
+  }
+  return(int_compteur);
 }
 /*!
 \fn int tir(int** ppint_grille)
@@ -79,6 +126,7 @@ int tir(int** ppint_grille,int int_tailleGrille){
   int int_coord_x;
   int int_coord_y;
   int int_retour;
+  int int_retour2;
   int int_test;
   do {
     demandeCoord(coord);
@@ -92,5 +140,7 @@ int tir(int** ppint_grille,int int_tailleGrille){
     int_test = valitir(ppint_grille,int_coord_x,int_coord_y);
   } while ((((int_coord_x < 0) || (int_coord_x > int_tailleGrille-1))||((int_coord_y < 0) || (int_coord_y > int_tailleGrille-1))) ||(int_test==1));
   int_retour =effettir(ppint_grille,int_coord_x,int_coord_y);
-  return(int_retour);
+  int_retour2 = rapporttir(ppint_grille,int_coord_x,int_coord_y,int_tailleGrille);
+
+  return(int_retour2);
 }

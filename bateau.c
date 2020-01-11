@@ -75,21 +75,21 @@ int checkVideAutour(int **tint_jeu, int int_x, int int_y, int int_tailleGrille)
   }
   else
   {
-    if ((int_x == 0) && (int_y == int_tailleGrille))
+    if ((int_x == 0) && (int_y == int_tailleGrille-1))
     {
       printf("Je rentre dans 0,max \n");
       int_res = (voisinSud(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinSudOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille));
     }
     else
     {
-      if ((int_x == int_tailleGrille) && (int_y == 0))
+      if ((int_x == int_tailleGrille-1) && (int_y == 0))
       {
         printf("Je rentre dans max,0 \n");
         int_res = (voisinNord(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNordEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille));
       }
       else
       {
-        if ((int_x == int_tailleGrille) && (int_y == int_tailleGrille))
+        if ((int_x == int_tailleGrille-1) && (int_y == int_tailleGrille-1))
         {
           printf("Je rentre dans max,max \n");
           int_res = (voisinNord(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNordOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille));
@@ -107,12 +107,12 @@ int checkVideAutour(int **tint_jeu, int int_x, int int_y, int int_tailleGrille)
               printf("Je rentre dans 0,y \n");
               int_res = (voisinSud(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinSudOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinSudEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille));
             } else
-            { if ((int_x == int_tailleGrille) && (int_y != int_tailleGrille) && (int_y != 0))
+            { if ((int_x == int_tailleGrille-1) && (int_y != int_tailleGrille-1) && (int_y != 0))
               {
                 printf("Je rentre dans max,y \n");
                 int_res = (voisinNord(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNordOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNordEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille));
               } else
-              { if ((int_y == int_tailleGrille) && (int_x != int_tailleGrille) && (int_x != 0))
+              { if ((int_y == int_tailleGrille-1) && (int_x != int_tailleGrille-1) && (int_x != 0))
                 {
                   printf("Je rentre dans x,max \n");
                   int_res = (voisinSud(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNord(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinSudOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNordOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille));
@@ -146,13 +146,14 @@ int askDirection(int int_directionBato) {
 
 int verifRange(int int_longueurTab, int int_X, int int_Y, int int_Direction,int int_tailleBateau) {
   int int_valide = 0;
+  printf("NIGGER \n");
   if (int_Direction == 2) { // orienté vertical sud
-    if ((int_X + int_tailleBateau) < int_longueurTab) {
+    if ((int_X + int_tailleBateau) <= int_longueurTab) {
       int_valide = 1;
     }
     printf("Int_valide = %d \n",int_valide);
   } else {
-   if ((int_Y + int_tailleBateau) < int_longueurTab) {
+   if ((int_Y + int_tailleBateau) <= int_longueurTab) {
      int_valide = 1;
     }
   }
@@ -188,14 +189,12 @@ void placeBateau(int** Grille, int int_debutBateauX, int int_debutBateauY, int i
   if (int_directionBateau == 2) {
     int_i = int_debutBateauX;
     while (int_i < (int_debutBateauX + int_tailleBateau)) {
-      printf("Zouloued \n");
       Grille[int_i][int_debutBateauY] = BATEAU_VIVANT;
       int_i++;
     }
   } else {
     int_i = int_debutBateauY;
     while (int_i < (int_debutBateauY + int_tailleBateau)) {
-      printf("Chibros \n");
      Grille[int_debutBateauX][int_i] = BATEAU_VIVANT;
       int_i++;
     }
@@ -210,9 +209,9 @@ int ajouteBateau(int **Grille, int int_tailleBateau, int int_tailleGrille)
   int int_debutBateauY = 0;
   int int_okPosee = 1;
   int int_directionBato = 0;
-  int_directionBato = askDirection(int_directionBato);
   do
   {
+    int_directionBato = askDirection(int_directionBato);
     printf("Début du bateau : \n");
     demandeCoord(coord); /* Récupération coordonnées */
     int_debutBateauY = atoi(&coord[1])-1;

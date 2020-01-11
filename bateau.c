@@ -20,19 +20,19 @@ int demandeValeur(int int_valeur) {
   int_retour = scanf("%d", &int_valeur);
     if (int_retour == 0) {
       fprintf(stderr, "Entrée incorrecte\n"); // verification entrée
-      exit(ERREUR_SAISIE);
+      int_valeur = -1;
     }
   return (int_valeur);
 }
 
-int voisinNord(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
+int voisinEst(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
 {
   return (tint_jeu[int_x][(int_y - 1 + int_largeur) % int_largeur]);
 }
 
 int voisinNordEst(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
 {
-  return (tint_jeu[(int_x + 1) % int_longueur][(int_y + int_largeur - 1) % int_largeur]);
+  return (tint_jeu[(int_x + int_largeur - 1) % int_longueur][(int_y + 1) % int_largeur]);
 }
 
 int voisinNordOuest(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
@@ -40,9 +40,9 @@ int voisinNordOuest(int **tint_jeu, int int_x, int int_y, int int_longueur, int 
   return (tint_jeu[(int_x + int_largeur - 1) % int_largeur][(int_y + int_longueur - 1) % int_longueur]);
 }
 
-int voisinSud(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
+int voisinOuest(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
 {
-  return (tint_jeu[int_x][(int_y + 1) % int_largeur]);
+  return (tint_jeu[int_x][(int_y - 1) % int_largeur]);
 }
 
 int voisinSudEst(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
@@ -52,15 +52,15 @@ int voisinSudEst(int **tint_jeu, int int_x, int int_y, int int_longueur, int int
 
 int voisinSudOuest(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
 {
-  return (tint_jeu[(int_x + int_longueur - 1) % int_longueur][(int_y + 1) % int_largeur]);
+  return (tint_jeu[(int_x + 1) % int_longueur][(int_y + int_longueur - 1) % int_largeur]);
 }
 
-int voisinOuest(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
+int voisinSud(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
 {
   return (tint_jeu[(int_x + int_longueur - 1) % int_longueur][(int_y)]);
 }
 
-int voisinEst(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
+int voisinNord(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
 {
   return (tint_jeu[(int_x + int_longueur + 1) % int_longueur][(int_y)]);
 }
@@ -96,13 +96,13 @@ int checkVideAutour(int **tint_jeu, int int_x, int int_y, int int_tailleGrille)
         }
         else
         {
-          if ((int_y == 0) && (int_x != 0))
+          if ((int_y == 0) && (int_x != 0) && (int_x != int_tailleGrille -1))
           {
             printf("Je rentre dans x,0 \n");
             int_res = (voisinSud(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNord(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinSudEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNordEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille));
           }
           else
-          { if ((int_x == 0) && (int_y != 0))
+          { if ((int_x == 0) && (int_y != 0) && (int_y != int_tailleGrille-1))
             {
               printf("Je rentre dans 0,y \n");
               int_res = (voisinSud(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinSudOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinSudEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille));

@@ -24,11 +24,15 @@
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Tue Jan  7 13:19:48 2020
+  \param char nom[20] : nom du bateau
+  \param int taille : taille du bateau
+  \param int statut :statut du bateau
   \brief Structure comprenant les informations concernant les bateaux joués dans le jeu
 */
 typedef struct batostruc {
   char nom[20];
   int taille;
+  int statut;
 }batostruc;
 
 /*!
@@ -111,8 +115,71 @@ int demandeNombreBateau(int int_tailleGrille);
   \brief permet de remplir une valeur du tableau des bateaux
   \param batostruc bateau : valeur du tableau des bateaux à remplir
   \param int int_tailleGrille : taille de la grille pour s'assurer qu'on ne prenne pas un bateau plus grand que cette dernière
-  \return batostruc bateau : entrée du tableau complétée 
-  \remarks 
+  \return batostruc bateau : entrée du tableau complétée
+  \remarks
 */
 batostruc construitFlotte(batostruc bateau, int int_tailleGrille);
+
+/*!
+  \fn int askDirection(int int_directionBato)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Thu Jan  9 16:02:13 2020
+  \brief permet de demander la direction d'un bateau
+  \param int int_directionBato : direction du bateau
+  \return int int_directionBato : direction du bateau
+  \remarks
+*/
+
+int askDirection(int int_directionBato);
+
+/*!
+  \fn int verifRange(int int_longueurTab, int int_X, int int_Y, int int_Direction)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Fri Jan 10 10:49:08 2020
+  \brief permet de vérifier si le bateau serait dans le plateau avec cette orientation
+  \param int int_longueurTab : longueur du tableau
+  \param int int_X : coordonnée X
+  \param int int_Y : coordonnée Y
+  \param int int_Direction : orientation du bateau
+  \param int int_tailleBateau : taille du bateau
+  \return int int_valide : 1 si dans le tablo, 0 sinon
+  \remarks
+*/
+
+int verifRange(int int_longueurTab, int int_X, int int_Y, int int_Direction,int int_tailleBateau);
+
+/*!
+  \fn int verifVoisins(int** Grille, int int_X, int int_Y, int int_tailleGrille, int int_directionBateau)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Fri Jan 10 11:14:12 2020
+  \param int** Grille : grille de jeu
+  \param int int_X : coordonnée X
+  \param int int_Y : coordonnée Y
+  \param int int_Direction : orientation du bateau
+  \param int int_tailleBateau : taille du bateau
+  \brief permet de vérifier les voisins sur la longueur du bateau et sa direction
+  \remarks
+*/
+
+int verifVoisins(int** Grille, int int_X, int int_Y, int int_tailleGrille, int int_directionBateau, int int_tailleBateau);
+
+/*!
+  \fn void placeBateau(int** Grille, int int_debutBateauX, int int_debutBateauY, int int_tailleBateau, int int_directionBateau)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Fri Jan 10 13:31:43 2020
+  \param int** Grille : grille de jeu
+  \param int int_X : coordonnée X
+  \param int int_Y : coordonnée Y
+  \param int int_Direction : orientation du bateau
+  \param int int_tailleBateau : taille du bateau
+  \brief Permet de placer les bateaux sur la grille
+  \remarks
+*/
+
+void placeBateau(int** Grille, int int_debutBateauX, int int_debutBateauY, int int_tailleBateau, int int_directionBateau);
+
 #endif

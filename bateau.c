@@ -70,56 +70,47 @@ int checkVideAutour(int **tint_jeu, int int_x, int int_y, int int_tailleGrille)
   int int_res = 0;
   if ((int_x == 0) && (int_y == 0))
   {
-    printf("Je rentre dans 0,0 \n");
     int_res = (voisinSud(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinSudEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille));
   }
   else
   {
     if ((int_x == 0) && (int_y == int_tailleGrille-1))
     {
-      printf("Je rentre dans 0,max \n");
       int_res = (voisinSud(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinSudOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille));
     }
     else
     {
       if ((int_x == int_tailleGrille-1) && (int_y == 0))
       {
-        printf("Je rentre dans max,0 \n");
         int_res = (voisinNord(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNordEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille));
       }
       else
       {
         if ((int_x == int_tailleGrille-1) && (int_y == int_tailleGrille-1))
         {
-          printf("Je rentre dans max,max \n");
           int_res = (voisinNord(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNordOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille));
         }
         else
         {
           if ((int_y == 0) && (int_x != 0) && (int_x != int_tailleGrille -1))
           {
-            printf("Je rentre dans x,0 \n");
             int_res = (voisinSud(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNord(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinSudEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNordEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille));
           }
           else
           { if ((int_x == 0) && (int_y != 0) && (int_y != int_tailleGrille-1))
             {
-              printf("Je rentre dans 0,y \n");
               int_res = (voisinSud(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinSudOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinSudEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille));
             } else
             { if ((int_x == int_tailleGrille-1) && (int_y != int_tailleGrille-1) && (int_y != 0))
               {
-                printf("Je rentre dans max,y \n");
                 int_res = (voisinNord(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNordOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNordEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille));
               } else
               { if ((int_y == int_tailleGrille-1) && (int_x != int_tailleGrille-1) && (int_x != 0))
                 {
-                  printf("Je rentre dans x,max \n");
                   int_res = (voisinSud(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNord(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinSudOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNordOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille));
                 }
                 else
                 {
-                  printf("Je rentre dans x,y \n");
                   int_res = (voisinSud(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinSudOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinSudEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNord(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNordEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinNordOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinEst(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille) + voisinOuest(tint_jeu, int_x, int_y, int_tailleGrille, int_tailleGrille));
                 }
               }
@@ -129,7 +120,6 @@ int checkVideAutour(int **tint_jeu, int int_x, int int_y, int int_tailleGrille)
       }
     }
   }
-  printf("La valeur du voisin est : %d \n",int_res);
   return (int_res);
 }
 
@@ -146,12 +136,10 @@ int askDirection(int int_directionBato) {
 
 int verifRange(int int_longueurTab, int int_X, int int_Y, int int_Direction,int int_tailleBateau) {
   int int_valide = 0;
-  printf("NIGGER \n");
   if (int_Direction == 2) { // orienté vertical sud
     if ((int_X + int_tailleBateau) <= int_longueurTab) {
       int_valide = 1;
     }
-    printf("Int_valide = %d \n",int_valide);
   } else {
    if ((int_Y + int_tailleBateau) <= int_longueurTab) {
      int_valide = 1;
@@ -180,7 +168,6 @@ int verifVoisins(int** Grille, int int_X, int int_Y, int int_tailleGrille, int i
       int_valide = 1;
     }
   }
-  printf("int_valide = %d \n", int_valide);
   return (int_valide);
 }
 
@@ -216,7 +203,6 @@ int ajouteBateau(int **Grille, int int_tailleBateau, int int_tailleGrille)
     demandeCoord(coord); /* Récupération coordonnées */
     int_debutBateauY = atoi(&coord[1])-1;
     int_debutBateauX = (char)toupper(coord[0])-65;
-    printf("int_debutBatoX = %d\n",int_debutBateauX);
   } while (((int_debutBateauX < 0)  || (int_debutBateauX > int_tailleGrille)) || ((int_debutBateauY < 0) || (int_debutBateauY > int_tailleGrille)) || (checkVideAutour(Grille, int_debutBateauX,int_debutBateauY,int_tailleGrille) != 0) || (Grille[int_debutBateauX][int_debutBateauY] != EAU_VIVANTE)); /* On redemande les coordonnées tant que l'emplacement n'est pas valide */
     free(coord);
     if (verifRange(int_tailleGrille,int_debutBateauX,int_debutBateauY,int_directionBato,int_tailleBateau) == 1) {

@@ -12,19 +12,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "affichage.h"
+#include "jeu.h"
 #include "combat.h"
 #include "bateau.h"
-
-
-/*!
-  \fn int askGrille(void)
-  \author LEFLOCH Thomas <leflochtho@eisti.eu>
-  \version 0.1
-  \date Mon Jan 13 16:02:46 2020
-  \brief permet de demander la taille de la grille
-  \return int_tailleGrille : taille de la grille de jeu
-  \remarks
-*/
 
 int askGrille(void) {
   int int_tailleGrille = 0;
@@ -48,32 +38,34 @@ int askFlotteCustom(void) {
   return (int_modePerso);
 }
 
-/*!
-  \fn void initTabJoueur(int** ppint_grille,int int_tailleGrille, batostruc* flotteUtilisee, int int_joueur)
-  \author LEFLOCH Thomas <leflochtho@eisti.eu>
-  \version 0.1
-  \date Mon Jan 13 16:31:50 2020
-  \brief permet d'initialiser la grille pour un joueur
-  \remarks
-*/
-
 void initTabJoueur(int** ppint_grille,int int_tailleGrille, batostruc* flotteUtilisee, int int_joueur, int int_nombreBateaux) {
   int int_i;
+  int m;
   int int_okPosee;
+  system("clear");
   printf("Initialisation grille pour le joueur %d ! \n",int_joueur);
-  init(&ppint_grille, int_tailleGrille);
   for (int_i = 0; int_i < int_nombreBateaux; int_i++)
   {
-    system("clear");
     afficherGrille(ppint_grille,int_tailleGrille);
     printf("Vous placez un %s, taille = %d \n",flotteUtilisee[int_i].nom, flotteUtilisee[int_i].taille);
      do
      {
        int_okPosee = ajouteBateau(ppint_grille,flotteUtilisee[int_i].taille,int_tailleGrille);
-       afficherGrille(ppint_grille,int_tailleGrille);
      } while (int_okPosee != 1);
   }
+  afficherGrille(ppint_grille,int_tailleGrille);
+  printf(" \n Appuyez sur une touche pour continuer ! \n");
 }
+
+void freeGrille(int*** ppint_matrice, int int_tailleGrille) {
+  int int_i;
+  for (int_i = 0; int_i < int_tailleGrille; int_i++)
+  {
+    free((*ppint_matrice)[int_i]); // libère la matrice
+  }
+  free(*ppint_matrice);
+}
+
 
 void jeuSplitScreen(void) {
   batostruc* flotteUtilisee = NULL;
@@ -89,17 +81,23 @@ void jeuSplitScreen(void) {
     int_nombreBateaux = demandeNombreBateau(int_tailleGrille);
   }
   flotteUtilisee = constructionFlotteHumain(flotteUtilisee,int_tailleGrille,int_modePerso,int_nombreBateaux);
+  init(&ppint_grille_J1, int_tailleGrille);
   initTabJoueur(ppint_grille_J1,int_tailleGrille,flotteUtilisee,1,int_nombreBateaux);
-  initTabJoueur(ppint_grille_J1,int_tailleGrille,flotteUtilisee,1, int_nombreBateaux);
+  init(&ppint_grille_J2, int_tailleGrille);
+  initTabJoueur(ppint_grille_J2,int_tailleGrille,flotteUtilisee,2, int_nombreBateaux);
   while(fin(ppint_grille_J1,int_tailleGrille)!=0 || (fin(ppint_grille_J1,int_tailleGrille)!=0)) {
     if (int_joueur == 1) {
+      printf("Au joueur %d de jouer !\n", int_joueur);
       tir(ppint_grille_J2,int_tailleGrille);
       afficherGrille(ppint_grille_J1,int_tailleGrille);
       afficherEnmie(ppint_grille_J2,int_tailleGrille);
+      system("clear");
     } else {
+      printf("Au joueur %d de jouer !\n", int_joueur);
       tir(ppint_grille_J1,int_tailleGrille);
       afficherGrille(ppint_grille_J2,int_tailleGrille);
       afficherEnmie(ppint_grille_J1,int_tailleGrille);
+      system("clear");
     }
     int_joueur = ((int_joueur)%2)+1;
   }
@@ -108,7 +106,7 @@ void jeuSplitScreen(void) {
   } else {
     printf("Le joueur 1 à gagné la partie ! \n");
   }
-  freeGrille(ppint_grille_J1);
-  freeGrille(ppint_grille_J2);
-  freeTab(flotteUtilisee);
+  freeGrille(&ppint_grille_J1,int_tailleGrille);
+  freeGrille(&ppint_grille_J2,int_tailleGrille);
+  free(flotteUtilisee);
 }

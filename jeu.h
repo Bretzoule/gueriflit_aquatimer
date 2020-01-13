@@ -45,4 +45,28 @@ int askGrille(void);
 
 void jeuSplitScreen(void);
 
+/*!
+  \fn void initTabJoueur(int** ppint_grille,int int_tailleGrille, batostruc* flotteUtilisee, int int_joueur)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Mon Jan 13 16:31:50 2020
+  \brief permet d'initialiser la grille pour un joueur
+  \remarks
+*/
+
+void initTabJoueur(int** ppint_grille,int int_tailleGrille, batostruc* flotteUtilisee, int int_joueur, int int_nombreBateaux);
+
+/*!
+  \fn void freeGrille(int*** ppint_matrice, int int_tailleGrille)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Mon Jan 13 17:25:40 2020
+  \param int*** ppint_matrice : matrice à libérer
+  \param int int_tailleGrille : taille de la matrice
+  \brief permet de libérer la grille
+  \remarks
+*/
+
+void freeGrille(int*** ppint_matrice, int int_tailleGrille);
+
 #endif

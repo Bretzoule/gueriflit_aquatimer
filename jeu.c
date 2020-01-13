@@ -40,7 +40,6 @@ int askFlotteCustom(void) {
 
 void initTabJoueur(int** ppint_grille,int int_tailleGrille, batostruc* flotteUtilisee, int int_joueur, int int_nombreBateaux) {
   int int_i;
-  int m;
   int int_okPosee;
   system("clear");
   printf("Initialisation grille pour le joueur %d ! \n",int_joueur);

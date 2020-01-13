@@ -102,10 +102,11 @@ int rapporttir(int** ppint_grille, int int_coord_x, int int_coord_y,int int_tail
   int_X = int_coord_x;
   int_Y = int_coord_y;
   if (ppint_grille[int_coord_x][int_coord_y]==2) {
-    int_compteur =1;
-    while ((int_coord_x <int_tailleGrille)&&(ppint_grille[int_coord_x][int_coord_y]==2)&&(int_compteur != -1)) {
+    int_compteur =int_tailleGrille ;
+    while ((int_coord_x <int_tailleGrille)&&((ppint_grille[int_coord_x][int_coord_y]==1)||(ppint_grille[int_coord_x][int_coord_y]==2))) {
       if (ppint_grille[int_coord_x][int_coord_y]==1) {
-        int_compteur = -1;
+        int_compteur = 0;
+        int_coord_x = int_coord_x +1;
       } else {
         int_compteur = int_compteur+1;
         int_coord_x = int_coord_x +1;
@@ -113,9 +114,10 @@ int rapporttir(int** ppint_grille, int int_coord_x, int int_coord_y,int int_tail
       printf("1\n" );
     }
     int_coord_x =int_X;
-    while ((-1 <int_coord_x)&&(ppint_grille[int_coord_x][int_coord_y]==2)&&(int_compteur != -1)) {
+    while ((-1 <int_coord_x)&&((ppint_grille[int_coord_x][int_coord_y]==1)||(ppint_grille[int_coord_x][int_coord_y]==2))) {
       if (ppint_grille[int_coord_x][int_coord_y]==1) {
-        int_compteur = -1;
+        int_compteur = 0;
+        int_coord_x = int_coord_x -1;
       }
       else {
       int_coord_x = int_coord_x -1;
@@ -124,9 +126,10 @@ int rapporttir(int** ppint_grille, int int_coord_x, int int_coord_y,int int_tail
           printf("2\n" );
     }
     int_coord_x =int_X;
-    while ((int_coord_y <int_tailleGrille)&&(ppint_grille[int_coord_x][int_coord_y]==2)&&(int_compteur != -1)) {
+    while ((int_coord_y <int_tailleGrille)&&((ppint_grille[int_coord_x][int_coord_y]==1)||(ppint_grille[int_coord_x][int_coord_y]==2))) {
       if (ppint_grille[int_coord_x][int_coord_y]==1) {
-        int_compteur = -1;
+        int_compteur = 0;
+        int_coord_y = int_coord_y +1;
       }else {
       int_coord_y = int_coord_y +1;
       int_compteur = int_compteur+1;
@@ -134,9 +137,10 @@ int rapporttir(int** ppint_grille, int int_coord_x, int int_coord_y,int int_tail
           printf("3\n" );
     }
     int_coord_y =int_Y;
-    while ((-1 <int_coord_y)&&(ppint_grille[int_coord_x][int_coord_y]==2)&&(int_compteur != -1)) {
+    while ((-1 <int_coord_y)&&((ppint_grille[int_coord_x][int_coord_y]==1)||(ppint_grille[int_coord_x][int_coord_y]==2))) {
       if (ppint_grille[int_coord_x][int_coord_y]==1) {
-        int_compteur = -1;
+        int_compteur = 0;
+        int_coord_y = int_coord_y -1;
       } else {
       int_coord_y = int_coord_y -1;
       int_compteur = int_compteur+1;
@@ -144,7 +148,7 @@ int rapporttir(int** ppint_grille, int int_coord_x, int int_coord_y,int int_tail
           printf("4\n" );
     }
   }
-    return(int_compteur-4);
+    return(int_compteur-int_tailleGrille-3);
 }
 /*!
 \fn int tir(int** ppint_grille)

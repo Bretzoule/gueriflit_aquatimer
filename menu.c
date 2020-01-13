@@ -41,8 +41,7 @@ int choixmenu(void){ // permet de savoir qu'elle est le nombre pour le menu
 \menu pour le jeu de la bataille navale avec affichage
 */
 void menu(void){
-  int int_menu; // menu avec indication sur le terminal de se qu'il faut faire
-  int** ppint_grille;
+  int int_menu; // menu avec indication sur le terminal de ce qu'il faut faire
   printf("██████╗  █████╗ ████████╗ █████╗ ██╗██╗     ██╗     ███████╗\n");
   printf("██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗██║██║     ██║     ██╔════╝\n");
   printf("██████╔╝███████║   ██║   ███████║██║██║     ██║     █████╗  \n");
@@ -51,12 +50,12 @@ void menu(void){
   printf("╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝\n");
   printf("\n");
   printf("\n");
-  printf("███╗   ██╗ █████╗ ██╗   ██╗ █████╗ ██╗     ███████╗\n");
-  printf("████╗  ██║██╔══██╗██║   ██║██╔══██╗██║     ██╔════╝\n");
-  printf("██╔██╗ ██║███████║██║   ██║███████║██║     █████╗  \n");
-  printf("██║╚██╗██║██╔══██║╚██╗ ██╔╝██╔══██║██║     ██╔══╝  \n");
-  printf("██║ ╚████║██║  ██║ ╚████╔╝ ██║  ██║███████╗███████╗\n");
-  printf("╚═╝  ╚═══╝╚═╝  ╚═╝  ╚═══╝  ╚═╝  ╚═╝╚══════╝╚══════╝\n");
+  printf("    ███╗   ██╗ █████╗ ██╗   ██╗ █████╗ ██╗     ███████╗\n");
+  printf("    ████╗  ██║██╔══██╗██║   ██║██╔══██╗██║     ██╔════╝\n");
+  printf("    ██╔██╗ ██║███████║██║   ██║███████║██║     █████╗  \n");
+  printf("    ██║╚██╗██║██╔══██║╚██╗ ██╔╝██╔══██║██║     ██╔══╝  \n");
+  printf("    ██║ ╚████║██║  ██║ ╚████╔╝ ██║  ██║███████╗███████╗\n");
+  printf("    ╚═╝  ╚═══╝╚═╝  ╚═╝  ╚═══╝  ╚═╝  ╚═╝╚══════╝╚══════╝\n");
   printf("\n");
   printf("\n");
   printf("\n");
@@ -68,12 +67,17 @@ void menu(void){
   int_menu = choixmenu();
   switch (int_menu){ // chaque choix se fait dans ce switch
   case 1 :
+    printf("Initialisation mode 1v1 ! \n");
+      jeuSplitScreen();
     break;
   case 2 :
+    printf("Initialisation mode 1vIA - niveau de difficulté : Mousse ! \n");
     break;
   case 3 :
+    printf("Initialisation mode 1vIA - niveau de difficulté : Barbe Noire ! \n");
     break;
   default:
+    printf("Au revoir ! \n");
     break;
      }
 }

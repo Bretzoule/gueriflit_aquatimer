@@ -20,7 +20,7 @@ int demandeValeur(int int_valeur) {
   int_retour = scanf("%d", &int_valeur);
     if (int_retour == 0) {
       fprintf(stderr, "Entrée incorrecte\n"); // verification entrée
-      int_valeur = -1;
+      exit(ERREUR_SAISIE);
     }
   return (int_valeur);
 }

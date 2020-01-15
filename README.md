@@ -1,9 +1,9 @@
-# BatailleNavale
+# Guériflit Aquatimer
 
 NOTICE D'UTILISATION DE NOTRE PROJET
 
 
-Projet d'informatique en langage C consistant à coder le jeu "Bataille Navale".
+Projet d'informatique en langage C consistant à coder le jeu "Bataille Navale" que nous nommons "Guériflit Aquatimer"
 
 
 GitLab : https://gitlab.etude.eisti.fr/projetdec1/bataillenavale

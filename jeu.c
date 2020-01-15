@@ -10,6 +10,7 @@
 
 /* Inclusion des entêtes de librairies */
 #include <stdlib.h>
+#include <unistd.h>
 #include <stdio.h>
 #include "affichage.h"
 #include "jeu.h"
@@ -53,7 +54,6 @@ void initTabJoueur(int** ppint_grille,int int_tailleGrille, batostruc* flotteUti
      } while (int_okPosee != 1);
   }
   afficherGrille(ppint_grille,int_tailleGrille);
-  printf(" \n Appuyez sur une touche pour continuer ! \n");
 }
 
 void freeGrille(int*** ppint_matrice, int int_tailleGrille) {
@@ -73,7 +73,10 @@ void jeuSplitScreen(void) {
   int** ppint_grille_J1;
   int** ppint_grille_J2;
   int int_joueur = 1;
+  int int_condtir = 0;
   int int_nombreBateaux = 10;
+  int int_finJ1 = 1;
+  int int_finJ2 = 1;
   int_tailleGrille = askGrille();
   int_modePerso = askFlotteCustom();
   if (int_modePerso == 1) {
@@ -84,19 +87,35 @@ void jeuSplitScreen(void) {
   initTabJoueur(ppint_grille_J1,int_tailleGrille,flotteUtilisee,1,int_nombreBateaux);
   init(&ppint_grille_J2, int_tailleGrille);
   initTabJoueur(ppint_grille_J2,int_tailleGrille,flotteUtilisee,2, int_nombreBateaux);
-  while(fin(ppint_grille_J1,int_tailleGrille)!=0 || (fin(ppint_grille_J1,int_tailleGrille)!=0)) {
+  system("clear");
+
+  while((int_finJ1!=0) && (int_finJ2!=0)) {
     if (int_joueur == 1) {
-      printf("Au joueur %d de jouer !\n", int_joueur);
-      tir(ppint_grille_J2,int_tailleGrille);
-      afficherGrille(ppint_grille_J1,int_tailleGrille);
-      afficherEnmie(ppint_grille_J2,int_tailleGrille);
-      system("clear");
+      int_condtir = 0;
+      while ((int_condtir != -13) && (int_finJ2!=0)) {
+        printf("Au joueur %d de jouer !\n", int_joueur);
+        afficherEnmie(ppint_grille_J2,int_tailleGrille);
+        int_condtir = tir(ppint_grille_J2,int_tailleGrille);
+        system("clear");
+        afficherGrille(ppint_grille_J1,int_tailleGrille);
+        afficherEnmie(ppint_grille_J2,int_tailleGrille);
+        sleep(3);
+        system("clear");
+        int_finJ2 = fin(ppint_grille_J2,int_tailleGrille);
+      }
     } else {
-      printf("Au joueur %d de jouer !\n", int_joueur);
-      tir(ppint_grille_J1,int_tailleGrille);
-      afficherGrille(ppint_grille_J2,int_tailleGrille);
-      afficherEnmie(ppint_grille_J1,int_tailleGrille);
-      system("clear");
+      int_condtir =0;
+      while ((int_condtir != -13)&& (int_finJ1!=0)) {
+        printf("Au joueur %d de jouer !\n", int_joueur);
+        afficherEnmie(ppint_grille_J1,int_tailleGrille);
+        int_condtir = tir(ppint_grille_J1,int_tailleGrille);
+        system("clear");
+        afficherGrille(ppint_grille_J2,int_tailleGrille);
+        afficherEnmie(ppint_grille_J1,int_tailleGrille);
+        sleep(3);
+        system("clear");
+        int_finJ1 = fin(ppint_grille_J1,int_tailleGrille);
+      }
     }
     int_joueur = ((int_joueur)%2)+1;
   }

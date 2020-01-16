@@ -47,9 +47,8 @@ void coordIA(int int_tailleGrille,char *coord){
   int int_Y;
   int_X = rand()%(int_tailleGrille);
   int_Y = rand()%(int_tailleGrille);
-  coord[0]= (char)int_X;
-  coord[1]= (char)int_Y;
-  printf("coord : %s \n",coord);
+  sprintf(&coord[0],"%d",int_X);
+  sprintf(&coord[1],"%d",int_Y);
 }
 
 int ajouteBateauIA(int **Grille, int int_tailleBateau, int int_tailleGrille)

@@ -65,6 +65,7 @@ void menu(void){
   printf(" 2 : Bataille Navale contre une IA bateau !\n");
   printf("\n");
   printf(" 3 : Bataille Navale contre une IA plus intelligente !\n");
+  printf("\n");
 printf("**********************************************************************\n");
   printf("\n");
   int_menu = choixmenu();

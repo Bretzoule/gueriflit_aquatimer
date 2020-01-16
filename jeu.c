@@ -16,6 +16,7 @@
 #include "jeu.h"
 #include "combat.h"
 #include "bateau.h"
+#include "ia.h"
 
 int askGrille(void) {
   int int_tailleGrille = 0;
@@ -51,6 +52,18 @@ void initTabJoueur(int** ppint_grille,int int_tailleGrille, batostruc* flotteUti
      do
      {
        int_okPosee = ajouteBateau(ppint_grille,flotteUtilisee[int_i].taille,int_tailleGrille);
+     } while (int_okPosee != 1);
+  }
+  afficherGrille(ppint_grille,int_tailleGrille);
+}
+void initTabIA(int** ppint_grille,int int_tailleGrille, batostruc* flotteUtilisee, int int_joueur, int int_nombreBateaux) {
+  int int_i;
+  int int_okPosee;
+  for (int_i = 0; int_i < int_nombreBateaux; int_i++)
+  {
+     do
+     {
+       int_okPosee = ajouteBateauIA(ppint_grille,flotteUtilisee[int_i].taille,int_tailleGrille);
      } while (int_okPosee != 1);
   }
   afficherGrille(ppint_grille,int_tailleGrille);
@@ -185,5 +198,71 @@ void jeuSplitScreen(void) {
   }
   freeGrille(&ppint_grille_J1,int_tailleGrille);
   freeGrille(&ppint_grille_J2,int_tailleGrille);
+  free(flotteUtilisee);
+}
+
+/*!
+\fn void ()
+\brief
+\author Hugo POINTEREAU <pointereau@eisti.eu>
+\version 0.1
+\date
+*/
+void jeuIabateau(void) {
+  batostruc* flotteUtilisee = NULL;
+  int int_tailleGrille;
+  int int_modePerso = 0;
+  int** ppint_grille_J1;
+  int** ppint_grille_IA;
+  int int_joueur = 1;
+  int int_condtir = 0;
+  int int_nombreBateaux = 10;
+  int int_finJ1 = 1;
+  int int_finIA = 1;
+  int_tailleGrille = askGrille();
+  int_modePerso = askFlotteCustom();
+  if (int_modePerso == 1) {
+    int_nombreBateaux = demandeNombreBateau(int_tailleGrille);
+  }
+  flotteUtilisee = constructionFlotteHumain(flotteUtilisee,int_tailleGrille,int_modePerso,int_nombreBateaux);
+  init(&ppint_grille_J1, int_tailleGrille);
+  initTabJoueur(ppint_grille_J1,int_tailleGrille,flotteUtilisee,1,int_nombreBateaux);
+  init(&ppint_grille_IA, int_tailleGrille);
+  initTabIA(ppint_grille_IA,int_tailleGrille,flotteUtilisee,2, int_nombreBateaux);
+  system("clear");
+
+  while((int_finJ1!=0) && (int_finIA!=0)) {
+    if (int_joueur == 1) {
+      int_condtir = 0;
+      while ((int_condtir != -13) && (int_finIA!=0)) {
+        printf("Au joueur %d de jouer !\n", int_joueur);
+        afficherEnmie(ppint_grille_IA,int_tailleGrille);
+        int_condtir = tir(ppint_grille_IA,int_tailleGrille);
+        afficherGrille(ppint_grille_J1,int_tailleGrille);
+        afficherEnmie(ppint_grille_IA,int_tailleGrille);
+        int_finIA = fin(ppint_grille_IA,int_tailleGrille);
+        testToucheCoule(int_condtir,int_nombreBateaux,flotteUtilisee,int_joueur);
+        sleep(5);
+        //system("clear");
+      }
+    } else {
+      int_condtir =0;
+      while ((int_condtir != -13)&& (int_finJ1!=0)) {
+        int_condtir = tirIA(ppint_grille_J1,int_tailleGrille);
+        afficherGrille(ppint_grille_IA,int_tailleGrille);
+        afficherEnmie(ppint_grille_J1,int_tailleGrille);
+        int_finJ1 = fin(ppint_grille_J1,int_tailleGrille);
+        testToucheCoule(int_condtir,int_nombreBateaux,flotteUtilisee,int_joueur);
+      }
+    }
+    int_joueur = ((int_joueur)%2)+1;
+  }
+  if (fin(ppint_grille_J1,int_tailleGrille) == 0) {
+    printf("L'IA à gagné la partie ! \n");
+  } else {
+    printf("Le joueur 1 à gagné la partie ! \n");
+  }
+  freeGrille(&ppint_grille_J1,int_tailleGrille);
+  freeGrille(&ppint_grille_IA,int_tailleGrille);
   free(flotteUtilisee);
 }

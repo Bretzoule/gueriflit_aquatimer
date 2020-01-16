@@ -83,5 +83,6 @@ void freeGrille(int*** ppint_matrice, int int_tailleGrille);
 */
 
 void testToucheCoule(int int_valeurTouche, int int_tailleFlotte, batostruc* flotte,int int_joueur);
-
+void initTabIA(int** ppint_grille,int int_tailleGrille, batostruc* flotteUtilisee, int int_joueur, int int_nombreBateaux);
+void jeuIabateau(void);
 #endif

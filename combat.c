@@ -14,6 +14,8 @@
 #include <ctype.h>
 #include "combat.h"
 #include "affichage.h"
+#include "ia.h"
+
 /*!
 \fn int tir()
 \brief
@@ -177,5 +179,31 @@ int tir(int** ppint_grille,int int_tailleGrille){
   effettir(ppint_grille,int_coord_x,int_coord_y);
   int_retour = rapporttir(ppint_grille,int_coord_x,int_coord_y,int_tailleGrille);
   printf("%d\n",int_retour );
+  return(int_retour);
+}
+
+/*!
+\fn int tirIA(int** ppint_grille)
+\brief
+\author Hugo POINTEREAU <pointereau@eisti.eu>
+\version 0.1
+\date
+*/
+int tirIA(int** ppint_grille,int int_tailleGrille){
+  char *coord = malloc(sizeof(char) * 2);
+  int int_coord_x;
+  int int_coord_y;
+  int int_retour;
+  int int_test;
+  do {
+    coordIA(int_tailleGrille,coord);
+    int_coord_y = atoi(&coord[1]);
+    int_coord_x = atoi(&coord[0]);
+    int_test = valitir(ppint_grille,int_coord_x,int_coord_y);
+  } while ((((int_coord_x < 0) || (int_coord_x > int_tailleGrille-1))||((int_coord_y < 0) || (int_coord_y > int_tailleGrille-1))) ||(int_test==1));
+  effettir(ppint_grille,int_coord_x,int_coord_y);
+  int_retour = rapporttir(ppint_grille,int_coord_x,int_coord_y,int_tailleGrille);
+  printf("%d\n",int_retour );
+  free(coord);
   return(int_retour);
 }

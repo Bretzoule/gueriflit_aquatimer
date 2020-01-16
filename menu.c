@@ -76,6 +76,7 @@ printf("**********************************************************************\n
     break;
   case 2 :
     printf("Initialisation mode 1vIA - niveau de difficulté : Mousse ! \n");
+    jeuIabateau();
     break;
   case 3 :
     printf("Initialisation mode 1vIA - niveau de difficulté : Barbe Noire ! \n");

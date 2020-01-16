@@ -10,7 +10,6 @@
 #define EAU_MORTE -1
 #define N 10
 
-void tireIARandom(int **tint_jeu, int int_tailleGrille) ;
 int choixdirectionia();
 void coordIA(int int_tailleGrille,char *coord);
 int ajouteBateauIA(int **Grille, int int_tailleBateau, int int_tailleGrille);

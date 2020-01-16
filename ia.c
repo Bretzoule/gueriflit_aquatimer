@@ -19,19 +19,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <time.h>
 #include "ia.h"
 #include "bateau.h"
 
-void tireIARandom(int **tint_jeu, int int_tailleGrille)
-{
-    int int_coord1 = 0;
-    int int_coord2 = 0;
-    do
-    {
-        int_coord1 = (rand()/(double)RAND_MAX * ((int_tailleGrille - 1) + 1));
-        int_coord2 = (rand()/(double)RAND_MAX * ((int_tailleGrille - 1) + 1));
-    } while ((tint_jeu[int_coord1][int_coord2] != 0) && (tint_jeu[int_coord1][int_coord2] != 1));
-}
 /*!
 \fn int choixdirectionia()
 \brief random pour la direction du bateau de l'IA
@@ -41,7 +32,7 @@ void tireIARandom(int **tint_jeu, int int_tailleGrille)
 */
 int choixdirectionia(){
   int int_randompos;
-  int_randompos = (rand()/(double)RAND_MAX * ((2 - 1) + 1));
+  int_randompos = (rand()%(2-1)+1);
   return (int_randompos);
 }
 /*!
@@ -54,10 +45,11 @@ int choixdirectionia(){
 void coordIA(int int_tailleGrille,char *coord){
   int int_X;
   int int_Y;
-  int_X = (rand()/(double)RAND_MAX * (int_tailleGrille-1));
-  int_Y = (rand()/(double)RAND_MAX * (int_tailleGrille-1));
-  coord[0]= int_X;
-  coord[1]= int_Y;
+  int_X = rand()%(int_tailleGrille);
+  int_Y = rand()%(int_tailleGrille);
+  coord[0]= (char)int_X;
+  coord[1]= (char)int_Y;
+  printf("coord : %s \n",coord);
 }
 
 int ajouteBateauIA(int **Grille, int int_tailleBateau, int int_tailleGrille)

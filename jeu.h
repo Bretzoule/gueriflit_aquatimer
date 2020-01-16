@@ -69,4 +69,19 @@ void initTabJoueur(int** ppint_grille,int int_tailleGrille, batostruc* flotteUti
 
 void freeGrille(int*** ppint_matrice, int int_tailleGrille);
 
+/*!
+  \fn void testToucheCoule(int int_valeurTouche, int int_tailleFlotte, batostruc* flotte)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Thu Jan 16 09:48:20 2020
+  \brief permet de dire si un bateau à été touché, coulé ou touché coulé (rapporte le type de bateau coulé
+  \param int int_valeurTouche : si != -13, bateau touché, si positif, bateau coulé
+  \param int int_tailleFlotte : taille de la flotte
+  \param batostruc* flotte : flotte utilisée par le joueur
+  \param int int_joueur : numéro du joueur
+  \remarks
+*/
+
+void testToucheCoule(int int_valeurTouche, int int_tailleFlotte, batostruc* flotte,int int_joueur);
+
 #endif

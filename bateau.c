@@ -247,19 +247,24 @@ batostruc* constructionFlotteHumain(batostruc* listedesbateaux,int int_tailleGri
     listedesbateaux = malloc(sizeof(batostruc)*int_nombreBateaux);
     strcpy(listedesbateaux[0].nom,"Porte-Avion");
     listedesbateaux[0].taille = 6;
+    listedesbateaux[0].statut = BATEAU_VIVANT;
     strcpy(listedesbateaux[1].nom,"Croiseur");
     listedesbateaux[1].taille = 4;
+    listedesbateaux[1].statut = BATEAU_VIVANT;
     strcpy(listedesbateaux[2].nom,"Croiseur");
     listedesbateaux[2].taille = 4;
+    listedesbateaux[2].statut = BATEAU_VIVANT;
     for (int_k = 3; int_k < 6; int_k++)
     {
       strcpy(listedesbateaux[int_k].nom,"Sous-Marin");
       listedesbateaux[int_k].taille = 3;
+      listedesbateaux[int_k].statut = BATEAU_VIVANT;
     }
     for (int_j = 6; int_j < 10; int_j++)
     {
       strcpy(listedesbateaux[int_j].nom,"Torpilleur");
       listedesbateaux[int_j].taille = 2;
+      listedesbateaux[int_j].statut = BATEAU_VIVANT;
     }
   }
   return(listedesbateaux);
@@ -277,6 +282,7 @@ batostruc construitFlotte(batostruc bateau, int int_tailleGrille) {
     scanf("%s", str_tmp);
     fflush(stdin);
     strcpy(bateau.nom,str_tmp);
+    bateau.statut = BATEAU_VIVANT;
     printf("Votre bateau est un : %s de taille %d \n",bateau.nom,bateau.taille);
   return(bateau);
 }

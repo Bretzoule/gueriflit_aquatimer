@@ -17,12 +17,7 @@
 #include "jeu.h"
 
 
-/*!
-\fn int menu(void)
-\brief créer le menu pour le choix des questions
-\author Hugo Pointereau
-\retunr 0 si pas de probleme
-*/
+
 int choixmenu(void){ // permet de savoir qu'elle est le nombre pour le menu
   int int_retour;
   int int_choix;
@@ -34,12 +29,7 @@ int choixmenu(void){ // permet de savoir qu'elle est le nombre pour le menu
      }
      return (int_choix);
 }
-/*!
-\fn void menu(void)
-\brief permet d'afficher les différentes choix pour les questions
-\author Hugo Pointereau
-\menu pour le jeu de la bataille navale avec affichage
-*/
+
 void menu(void){
   int int_menu; // menu avec indication sur le terminal de ce qu'il faut faire
   printf("██╗     ███████╗     ██████╗ ██╗   ██╗███████╗██████╗ ██╗███████╗██╗     ██╗████████╗\n");

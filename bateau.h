@@ -47,13 +47,125 @@ typedef struct batostruc {
 */
 int demandeValeur(int int_valeur);
 
+/*!
+  \fn int voisinNord(int** tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Mon Dec  9 17:41:32 2019
+  \brief permet de determiner la valeur de la cellule Nord
+  \param ***tint_jeu : adresse du tableau en entrée
+  \param int_longueur : longueur du tableau
+  \param int_largeur : largeur du tableau
+  \param int_x : coordonées en x de la case
+  \param int_y : coordonnées en y de la case
+  \return : valeur de la case
+  \remarks
+*/
 int voisinNord(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur);
+/*!
+  \fn int voisinNordEst(int** tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Mon Dec  9 17:41:32 2019
+  \brief permet de determiner la valeur de la cellule Nord Est
+  \param ***tint_jeu : adresse du tableau en entrée
+  \param int_longueur : longueur du tableau
+  \param int_largeur : largeur du tableau
+  \param int_x : coordonées en x de la case
+  \param int_y : coordonnées en y de la case
+  \return : valeur de la case
+  \remarks
+*/
 int voisinNordEst(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur);
+/*!
+  \fn int voisinNordOuest(int** tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Mon Dec  9 17:41:32 2019
+  \brief permet de determiner la valeur de la cellule Nord ouest
+  \param ***tint_jeu : adresse du tableau en entrée
+  \param int_longueur : longueur du tableau
+  \param int_largeur : largeur du tableau
+  \param int_x : coordonées en x de la case
+  \param int_y : coordonnées en y de la case
+  \return : valeur de la case
+  \remarks
+*/
 int voisinNordOuest(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur);
+/*!
+  \fn int voisinSud(int** tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Mon Dec  9 17:41:32 2019
+  \brief permet de determiner la valeur de la cellule Sud
+  \param ***tint_jeu : adresse du tableau en entrée
+  \param int_longueur : longueur du tableau
+  \param int_largeur : largeur du tableau
+  \param int_x : coordonées en x de la case
+  \param int_y : coordonnées en y de la case
+  \return : valeur de la case
+  \remarks
+*/
 int voisinSud(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur);
+/*!
+  \fn int voisinSudEst(int** tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Mon Dec  9 17:41:32 2019
+  \brief permet de determiner la valeur de la cellule Sud est
+  \param ***tint_jeu : adresse du tableau en entrée
+  \param int_longueur : longueur du tableau
+  \param int_largeur : largeur du tableau
+  \param int_x : coordonées en x de la case
+  \param int_y : coordonnées en y de la case
+  \return : valeur de la case
+  \remarks
+*/
 int voisinSudEst(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur);
+/*!
+  \fn int voisinSudOuest(int** tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Mon Dec  9 17:41:32 2019
+  \brief permet de determiner la valeur de la cellule Sud ouest
+  \param ***tint_jeu : adresse du tableau en entrée
+  \param int_longueur : longueur du tableau
+  \param int_largeur : largeur du tableau
+  \param int_x : coordonées en x de la case
+  \param int_y : coordonnées en y de la case
+  \return : valeur de la case
+  \remarks
+*/
 int voisinSudOuest(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur);
+/*!
+  \fn int voisinOuest(int** tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Mon Dec  9 17:41:32 2019
+  \brief permet de determiner la valeur de la cellule Ouest
+  \param ***tint_jeu : adresse du tableau en entrée
+  \param int_longueur : longueur du tableau
+  \param int_largeur : largeur du tableau
+  \param int_x : coordonées en x de la case
+  \param int_y : coordonnées en y de la case
+  \return : valeur de la case
+  \remarks
+*/
 int voisinOuest(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur);
+/*!
+  \fn int voisinEst(int** tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Mon Dec  9 17:41:32 2019
+  \brief permet de determiner la valeur de la cellule Est
+  \param ***tint_jeu : adresse du tableau en entrée
+  \param int_longueur : longueur du tableau
+  \param int_largeur : largeur du tableau
+  \param int_x : coordonées en x de la case
+  \param int_y : coordonnées en y de la case
+  \return : valeur de la case
+  \remarks
+*/
 int voisinEst(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur);
 /*!
   \fn int checkVideAutour(int** Grille)

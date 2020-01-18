@@ -23,25 +23,11 @@
 #include "ia.h"
 #include "bateau.h"
 
-/*!
-\fn int choixdirectionia()
-\brief random pour la direction du bateau de l'IA
-\author Hugo POINTEREAU <pointereau@eisti.eu>
-\version 0.1
-\date 16/01/2020
-*/
 int choixdirectionia(){
   int int_randompos;
   int_randompos = (rand()%(2-1)+1);
   return (int_randompos);
 }
-/*!
-\fn int coordIA(int int_tailleGrille)
-\brief retourner les coordonné pour les bateaux de l'IA
-\author Hugo POINTEREAU <pointereau@eisti.eu>
-\version 0.1
-\date  16/01/2020
-*/
 void coordIA(int int_tailleGrille,char *coord){
   int int_X;
   int int_Y;

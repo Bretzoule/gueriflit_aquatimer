@@ -12,13 +12,6 @@
 #include "affichage.h"
 
 
-/*!
-\fn void init()
-\brief initialise la matrice
-\author Hugo POINTEREAU <pointereau@eisti.eu>
-\version 0.1
-\date 9/12/19
-*/
 void init(int*** ppint_grille, int int_tailleGrille)
 {
   *ppint_grille =calloc(int_tailleGrille,sizeof(int*));
@@ -28,13 +21,6 @@ void init(int*** ppint_grille, int int_tailleGrille)
   }
 }
 
-/*!
-\fn void afficherGrille(int** ppint_grille)
-\brief  affiche la grille du jeu
-\author Hugo POINTEREAU <pointereau@eisti.eu>
-\version 0.1
-\date 9/12/19
-*/
 void afficherGrille(int** ppint_grille,int int_tailleGrille)
 {
   printf("GRILLE DE VOS BATEAUX\n");
@@ -54,17 +40,17 @@ void afficherGrille(int** ppint_grille,int int_tailleGrille)
     printf(" %c ",i+65 );
     for (int j = 0; j < int_tailleGrille; j++)
     {
-      if (ppint_grille[i][j]==1) {
+      if (ppint_grille[i][j]==BATEAU_VIVANT) {
         printf("| ■ ");
       }
       else
       {
-        if (ppint_grille[i][j]==2) {
+        if (ppint_grille[i][j]==BATEAU_TOUCHE) {
           printf("| \033[31m■\033[0m ");
         }
         else
         {
-          if (ppint_grille[i][j]==-1) {
+          if (ppint_grille[i][j]==EAU_MORTE) {
             printf("| \033[96m▒\033[0m ");
           }
           else
@@ -84,13 +70,7 @@ void afficherGrille(int** ppint_grille,int int_tailleGrille)
   }
   printf("+\n");
 }
-/*!
-\fn void afficherenmie()
-\brief
-\author Hugo POINTEREAU <pointereau@eisti.eu>
-\version 0.1
-\date
-*/
+
 void afficherEnmie(int** ppint_grille,int int_tailleGrille){
   printf("GRILLE DE VOS TIRS\n");
   printf("   ");
@@ -109,17 +89,17 @@ void afficherEnmie(int** ppint_grille,int int_tailleGrille){
     printf(" %c ",i+65 );
     for (int j = 0; j < int_tailleGrille; j++)
     {
-      if (ppint_grille[i][j]==1) {
+      if (ppint_grille[i][j]==BATEAU_VIVANT) {
         printf("| \033[34m▒\033[0m ");
       }
       else
       {
-        if (ppint_grille[i][j]==2) {
+        if (ppint_grille[i][j]==BATEAU_TOUCHE) {
           printf("| \033[31m■\033[0m ");
         }
         else
         {
-          if (ppint_grille[i][j]==-1) {
+          if (ppint_grille[i][j]==EAU_MORTE) {
             printf("| \033[96m▒\033[0m ");
           }
           else

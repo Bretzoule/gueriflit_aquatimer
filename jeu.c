@@ -106,22 +106,22 @@ void testToucheCoule(int int_valeurTouche, int int_tailleFlotte, int int_tailleG
   } else {
     if (int_valeurTouche == (-int_tailleGrille-3)) {
       printf("\n");
-      printf("███████╗██████╗ ██╗      █████╗ ███████╗██╗  ██╗  \033[1;36m██╗\033[0m  \033[34m    , \033[0m\n");
-      printf("██╔════╝██╔══██╗██║     ██╔══██╗██╔════╝██║  ██║  \033[1;36m██║\033[0m  \033[34m    )\\ \033[0m\n");
-      printf("███████╗██████╔╝██║     ███████║███████╗███████║  \033[1;36m██║\033[0m  \033[34m   /  \\ \033[0m\n");
-      printf("╚════██║██╔═══╝ ██║     ██╔══██║╚════██║██╔══██║  \033[1;36m╚═╝\033[0m  \033[34m  '  ~ ' \033[0m\n");
-      printf("███████║██║     ███████╗██║  ██║███████║██║  ██║  \033[1;36m██╗\033[0m  \033[34m  ',  ,'\033[0m\n");
-      printf("╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝  \033[1;36m╚═╝\033[0m   \033[34m   `' \033[0m\n");
+      printf("███████╗██████╗ ██╗      █████╗ ███████╗██╗  ██╗  \033[1;34m██╗\033[0m  \033[1;36m    , \033[0m\n");
+      printf("██╔════╝██╔══██╗██║     ██╔══██╗██╔════╝██║  ██║  \033[1;34m██║\033[0m  \033[1;36m    )\\ \033[0m\n");
+      printf("███████╗██████╔╝██║     ███████║███████╗███████║  \033[1;34m██║\033[0m  \033[1;36m   /  \\ \033[0m\n");
+      printf("╚════██║██╔═══╝ ██║     ██╔══██║╚════██║██╔══██║  \033[1;34m╚═╝\033[0m  \033[1;36m  '  ~ ' \033[0m\n");
+      printf("███████║██║     ███████╗██║  ██║███████║██║  ██║  \033[1;34m██╗\033[0m  \033[1;36m  ',  ,'\033[0m\n");
+      printf("╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝  \033[1;34m╚═╝\033[0m   \033[1;36m  `' \033[0m\n");
       printf("On ne vous a pas demandé de canarder les poissons capitaine ! Visez les ennemis un peu ! \n");
     } else {
       printf("\n");
-      printf("██╗  ██╗██╗████████╗\033[01;33m██╗\033[0m          .                     \n");
-      printf("██║  ██║██║╚══██╔══╝\033[01;33m██║\033[0m          _\\____                \n");
-      printf("███████║██║   ██║   \033[01;33m██║\033[0m           |_===__`.        ==/ \n");
-      printf("██╔══██║██║   ██║   \033[01;33m╚═╝\033[0m           /  '---'|_ _ _ _/  \n");
-      printf("██║  ██║██║   ██║   \033[01;33m██╗\033[0m    [0;31m#~##\033[0m__/_[0;31mON FIRE\033[0m_/_|_|_|_|   \n");
-      printf("╚═╝  ╚═╝╚═╝   ╚═╝   \033[01;33m╚═╝\033[0m    [0;31m_*-$#~#\033[0m---------------==.'  \n");
-      printf("                           [0;31m|&@~#~#\033[0m_______________.'    \n");
+      printf("██╗  ██╗██╗████████╗\033[33m██╗\033[0m          .                     \n");
+      printf("██║  ██║██║╚══██╔══╝\033[33m██║\033[0m          _\\____                \n");
+      printf("███████║██║   ██║   \033[33m██║\033[0m           |_===__`.      ==/ \n");
+      printf("██╔══██║██║   ██║   \033[33m╚═╝\033[0m           /  '---'|_ _ _ _/  \n");
+      printf("██║  ██║██║   ██║   \033[33m██╗\033[0m    \033[0;31m#~##\033[0m__/_\033[0;31mON FIRE\033[0m_/_|_|_|_|   \n");
+      printf("╚═╝  ╚═╝╚═╝   ╚═╝   \033[33m╚═╝\033[0m   \033[0;31m_*-$#~#\033[0m---------------==.'  \n");
+      printf("                           \033[0;31m|&@~#~#\033[0m_______________.'    \n");
       printf("Joli tir capitaine ! On dirait qu'on a endommagé quelque chose ! \n");
     }
   }
@@ -162,7 +162,7 @@ void jeuSplitScreen(void) {
         afficherGrille(ppint_grille_J1,int_tailleGrille);
         afficherEnmie(ppint_grille_J2,int_tailleGrille);
         int_finJ2 = fin(ppint_grille_J2,int_tailleGrille);
-        testToucheCoule(int_condtir,int_nombreBateaux,flotteUtilisee,int_joueur);
+        testToucheCoule(int_condtir,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
         sleep(5);
         system("clear");
       }
@@ -175,7 +175,7 @@ void jeuSplitScreen(void) {
         afficherGrille(ppint_grille_J2,int_tailleGrille);
         afficherEnmie(ppint_grille_J1,int_tailleGrille);
         int_finJ1 = fin(ppint_grille_J1,int_tailleGrille);
-        testToucheCoule(int_condtir,int_nombreBateaux,flotteUtilisee,int_joueur);
+        testToucheCoule(int_condtir,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
         sleep(5);
         system("clear");
       }
@@ -183,9 +183,29 @@ void jeuSplitScreen(void) {
     int_joueur = ((int_joueur)%2)+1;
   }
   if (fin(ppint_grille_J1,int_tailleGrille) == 0) {
-    printf("Le joueur 2 à gagné la partie ! \n");
+    printf("\033[1;33m              ___________		\033[0m \n");
+    printf("\033[1;33m             '._==_==_=_.'		\033[0m \n");
+    printf("\033[1;33m             .-\\:      /-.		\033[0m \n");
+    printf("\033[1;33m            | (|:.     |) |		\033[0m \n");
+    printf("\033[1;33m             '-|:.     |-'		\033[0m \n");
+    printf("\033[1;33m               \\::.    / 		\033[0m \n");
+    printf("\033[1;33m                '::. .'  		\033[0m \n");
+    printf("\033[1;33m                  ) (    		\033[0m \n");
+    printf("\033[1;33m                _.' '._  		\033[0m \n");
+    printf("\033[1;33m               `\"\"\"\"\"\"\"` 		\033[0m \n");
+    printf("LE JOUEUR 2 REMPORTE LA PARTIE           \n");
   } else {
-    printf("Le joueur 1 à gagné la partie ! \n");
+    printf("\033[1;33m              ___________		\033[0m \n");
+    printf("\033[1;33m             '._==_==_=_.'		\033[0m \n");
+    printf("\033[1;33m             .-\\:      /-.		\033[0m \n");
+    printf("\033[1;33m            | (|:.     |) |		\033[0m \n");
+    printf("\033[1;33m             '-|:.     |-'		\033[0m \n");
+    printf("\033[1;33m               \\::.    / 		\033[0m \n");
+    printf("\033[1;33m                '::. .'  		\033[0m \n");
+    printf("\033[1;33m                  ) (    		\033[0m \n");
+    printf("\033[1;33m                _.' '._  		\033[0m \n");
+    printf("\033[1;33m               `\"\"\"\"\"\"\"` 		\033[0m \n");
+    printf("LE JOUEUR 1 REMPORTE LA PARTIE           \n");
   }
   freeGrille(&ppint_grille_J1,int_tailleGrille);
   freeGrille(&ppint_grille_J2,int_tailleGrille);
@@ -232,7 +252,7 @@ void jeuIabateau(void) {
         afficherGrille(ppint_grille_J1,int_tailleGrille);
         afficherEnmie(ppint_grille_IA,int_tailleGrille);
         int_finIA = fin(ppint_grille_IA,int_tailleGrille);
-        testToucheCoule(int_condtir,int_nombreBateaux,flotteUtilisee,int_joueur);
+        testToucheCoule(int_condtir,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
         sleep(5);
         //system("clear");
       }
@@ -243,7 +263,7 @@ void jeuIabateau(void) {
         afficherGrille(ppint_grille_IA,int_tailleGrille);
         afficherEnmie(ppint_grille_J1,int_tailleGrille);
         int_finJ1 = fin(ppint_grille_J1,int_tailleGrille);
-        testToucheCoule(int_condtir,int_nombreBateaux,flotteUtilisee,int_joueur);
+        testToucheCoule(int_condtir,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
       }
     }
     int_joueur = ((int_joueur)%2)+1;

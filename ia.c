@@ -28,18 +28,15 @@ int choixdirectionia(){
   int_randompos = (rand()%(2-1)+1);
   return (int_randompos);
 }
-void coordIA(int int_tailleGrille,char *coord){
-  int int_X;
-  int int_Y;
-  int_X = rand()%(int_tailleGrille);
-  int_Y = rand()%(int_tailleGrille);
-  sprintf(&coord[0],"%d",int_X);
-  sprintf(&coord[1],"%d",int_Y);
+int coordIAX(int int_tailleGrille){
+  return(rand()%(int_tailleGrille));
+}
+int coordIAY(int int_tailleGrille){
+  return(rand()%(int_tailleGrille));
 }
 
 int ajouteBateauIA(int **Grille, int int_tailleBateau, int int_tailleGrille)
 {
-  char *coord = malloc(sizeof(char) * 2);
   int int_debutBateauX = 0;
   int int_debutBateauY = 0;
   int int_okPosee = 1;
@@ -47,11 +44,9 @@ int ajouteBateauIA(int **Grille, int int_tailleBateau, int int_tailleGrille)
   do
   {
     int_directionBato = choixdirectionia();
-    coordIA(int_tailleGrille,coord); /* Récupération coordonnées */
-    int_debutBateauY = atoi(&coord[1]);
-    int_debutBateauX = atoi(&coord[0]);
+    int_debutBateauY = coordIAY(int_tailleGrille);
+    int_debutBateauX = coordIAX(int_tailleGrille);
   } while (((int_debutBateauX < 0)  || (int_debutBateauX > int_tailleGrille)) || ((int_debutBateauY < 0) || (int_debutBateauY > int_tailleGrille)) || (checkVideAutour(Grille, int_debutBateauX,int_debutBateauY,int_tailleGrille) != 0) || (Grille[int_debutBateauX][int_debutBateauY] != EAU_VIVANTE)); /* On redemande les coordonnées tant que l'emplacement n'est pas valide */
-    free(coord);
     if (verifRange(int_tailleGrille,int_debutBateauX,int_debutBateauY,int_directionBato,int_tailleBateau) == 1) {
       if (verifVoisins(Grille,int_debutBateauX,int_debutBateauY,int_tailleGrille,int_directionBato,int_tailleBateau) == 1) {
         placeBateau(Grille,int_debutBateauX,int_debutBateauY,int_tailleBateau,int_directionBato);

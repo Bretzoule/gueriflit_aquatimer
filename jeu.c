@@ -22,7 +22,7 @@ int askGrille(void) {
   int int_tailleGrille = 0;
   printf("Quelle est la taille de votre grille (veuillez entrer 10 pour une grille par défaut)\n");
   int_tailleGrille = demandeValeur(int_tailleGrille);
-  while (int_tailleGrille < 7) {
+  while ((int_tailleGrille < 7) || (int_tailleGrille > 26)) {
     printf("Vous n'allez pas jouer sur une grille aussi petite quand même (la valeur minimale acceptable est 7) !\n");
     int_tailleGrille = demandeValeur(int_tailleGrille);
   }

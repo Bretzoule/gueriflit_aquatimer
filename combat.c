@@ -147,9 +147,9 @@ int tirIA(int** ppint_grille,int int_tailleGrille){
   int int_retour;
   int int_test;
   do {
-    coordIA(int_tailleGrille,coord);
-    int_coord_y = atoi(&coord[1]);
-    int_coord_x = atoi(&coord[0]);
+
+    int_coord_y = coordIAY(int_tailleGrille);
+    int_coord_x = coordIAX(int_tailleGrille);
     int_test = valitir(ppint_grille,int_coord_x,int_coord_y);
   } while ((((int_coord_x < 0) || (int_coord_x > int_tailleGrille-1))||((int_coord_y < 0) || (int_coord_y > int_tailleGrille-1))) ||(int_test==1));
   effettir(ppint_grille,int_coord_x,int_coord_y);

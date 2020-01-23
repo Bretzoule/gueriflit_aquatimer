@@ -13,10 +13,12 @@
 #include <unistd.h>
 #include <stdio.h>
 #include "affichage.h"
+#include "loadFiles.h"
 #include "jeu.h"
 #include "combat.h"
 #include "bateau.h"
 #include "ia.h"
+
 
 int askGrille(void) {
   int int_tailleGrille = 0;
@@ -127,24 +129,9 @@ void testToucheCoule(int int_valeurTouche, int int_tailleFlotte, int int_tailleG
   }
 }
 
-/*!
-  \fn int joueJoueur(int** Grille,
-  \author LEFLOCH Thomas <leflochtho@eisti.eu>
-  \version 0.1
-  \date Thu Jan 23 09:49:01 2020
-  \brief permet de dérouler les fonctions de tir, de mise à jour de la grille et d'affichage du jeu
-  \param int** GrilleAttaque : grille de jeu en attaque
-  \param int** GrilleDefense : grille de jeu en défense
-  \param int int_tailleGrille : taille de la grille en entrée
-  \param batostruc* flotte : flotte utilisée
-  \param int int_joueur : numéro du joueur
-  \param int int_nombreBateaux : nombre de bateaux
-  \remarks
-*/
-
-int joueJoueur(int** GrilleAttaque, int** GrilleDefense,int int_nombreBateaux,int int_tailleGrille,batostruc flotteUtilisee,int int_joueur) {
+int joueJoueur(int** GrilleAttaque, int** GrilleDefense,int int_nombreBateaux,int int_tailleGrille,batostruc* flotteUtilisee,int int_joueur) {
   int int_condtir = 0;
-  afficherEnmie(GrileAttaque,int_tailleGrille);
+  afficherEnmie(GrilleAttaque,int_tailleGrille);
   int_condtir = tir(GrilleAttaque,int_tailleGrille);
   afficherGrille(GrilleDefense,int_tailleGrille);
   afficherEnmie(GrilleAttaque,int_tailleGrille);
@@ -199,7 +186,7 @@ void jeuSplitScreen(int int_loadGame) {
       }
     }
     int_joueur = ((int_joueur)%2)+1;
-    int_leaveSave = askSave(ppint_grille_J1,ppint_grille_J2,int_tailleGrille,flotteUtilisee,int_joueur,int_nbBateaux);
+    int_leaveSave = askSave(ppint_grille_J1,ppint_grille_J2,int_tailleGrille,flotteUtilisee,int_joueur,int_nombreBateaux);
   }
   if (fin(ppint_grille_J1,int_tailleGrille) == 0) {
     afficheVictoire();
@@ -242,7 +229,7 @@ void afficheVictoire() {
 \version 0.1
 \date
 */
-void jeuIabateau(void) {
+void jeuIabateau(int int_loadGame) {
   batostruc* flotteUtilisee = NULL;
   int int_tailleGrille;
   int int_modePerso = 0;
@@ -253,6 +240,9 @@ void jeuIabateau(void) {
   int int_nombreBateaux = 10;
   int int_finJ1 = 1;
   int int_finIA = 1;
+  char filePath[50] = "";
+  FILE *fichierSav = NULL;
+  if (int_loadGame == 0) {
   int_tailleGrille = askGrille();
   int_modePerso = askFlotteCustom();
   if (int_modePerso == 1) {
@@ -264,29 +254,34 @@ void jeuIabateau(void) {
   init(&ppint_grille_IA, int_tailleGrille);
   initTabIA(ppint_grille_IA,int_tailleGrille,flotteUtilisee,2, int_nombreBateaux);
   system("clear");
-
+  } else {
+    askFilePath(filePath);
+    fichierSav = openFile(filePath);
+    int_tailleGrille = getIntFromSave(fichierSav);
+    int_nombreBateaux = getIntFromSave(fichierSav);
+    printf("int_taillegrille = %d et int_nbBateau = %d \n",int_tailleGrille, int_nombreBateaux);
+/*    getFlotteFromSave(fichierSav,int_nbBateaux);
+    init(&ppint_grille_IA, int_tailleGrille);
+    init(&ppint_grille_J1, int_tailleGrille);
+    getTabFromSave(ppint_grille_J1,ppint_grille_IA,int_tailleGrille);
+    int_player = getIntFromSave(fichierSav);*/
+    fclose(fichierSav);
+  }
   while((int_finJ1!=0) && (int_finIA!=0)) {
     if (int_joueur == 1) {
       int_condtir = 0;
       while ((int_condtir != (-int_tailleGrille-3)) && (int_finIA!=0)) {
         printf("Au joueur %d de jouer !\n", int_joueur);
-        afficherEnmie(ppint_grille_IA,int_tailleGrille);
-        int_condtir = tir(ppint_grille_IA,int_tailleGrille);
-        afficherGrille(ppint_grille_J1,int_tailleGrille);
-        afficherEnmie(ppint_grille_IA,int_tailleGrille);
+        int_condtir = joueJoueur(ppint_grille_IA,ppint_grille_J1,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
         int_finIA = fin(ppint_grille_IA,int_tailleGrille);
-        testToucheCoule(int_condtir,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
         sleep(5);
-        //system("clear");
+        system("clear");
       }
     } else {
       int_condtir =0;
       while ((int_condtir != (-int_tailleGrille-3))&& (int_finJ1!=0)) {
-        int_condtir = tirIA(ppint_grille_J1,int_tailleGrille);
-        afficherGrille(ppint_grille_IA,int_tailleGrille);
-        afficherEnmie(ppint_grille_J1,int_tailleGrille);
+        int_condtir = joueJoueur(ppint_grille_J1,ppint_grille_IA,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
         int_finJ1 = fin(ppint_grille_J1,int_tailleGrille);
-        testToucheCoule(int_condtir,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
       }
     }
     int_joueur = ((int_joueur)%2)+1;
@@ -297,7 +292,6 @@ void jeuIabateau(void) {
   } else {
     afficheVictoire();
     printf("            LE JOUEUR 1 REMPORTE LA PARTIE           \n");
-  }
   }
   freeGrille(&ppint_grille_J1,int_tailleGrille);
   freeGrille(&ppint_grille_IA,int_tailleGrille);

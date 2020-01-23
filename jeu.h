@@ -40,9 +40,10 @@ int askGrille(void);
   \version 0.1
   \date Mon Jan 13 16:23:34 2020
   \brief permet d'initialiser le jeu en mode joueur vs joueur
+  \param int int_loadGame : 1 si l'on commence une nouvelle partie, 0 si on en charge une
   \remarks
 */
-void jeuSplitScreen(void);
+void jeuSplitScreen(int int_loadGame);
 
 /*!
   \fn void initTabJoueur(int** ppint_grille,int int_tailleGrille, batostruc* flotteUtilisee, int int_joueur)
@@ -99,26 +100,44 @@ void testToucheCoule(int int_valeurTouche, int int_tailleFlotte, int int_tailleG
 */
 void initTabIA(int** ppint_grille,int int_tailleGrille, batostruc* flotteUtilisee, int int_joueur, int int_nombreBateaux);
 
+
+/*!
+  \fn int joueJoueur(int** Grille,
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Thu Jan 23 09:49:01 2020
+  \brief permet de dérouler les fonctions de tir, de mise à jour de la grille et d'affichage du jeu
+  \param int** GrilleAttaque : grille de jeu en attaque
+  \param int** GrilleDefense : grille de jeu en défense
+  \param int int_tailleGrille : taille de la grille en entrée
+  \param batostruc* flotte : flotte utilisée
+  \param int int_joueur : numéro du joueur
+  \param int int_nombreBateaux : nombre de bateaux
+  \remarks
+*/
+
+int joueJoueur(int** GrilleAttaque, int** GrilleDefense,int int_nombreBateaux,int int_tailleGrille,batostruc* flotteUtilisee,int int_joueur);
+
 /*!
   \fn void jeuSplitScreen(void)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Mon Jan 13 16:23:34 2020
   \brief permet d'initialiser le jeu en mode joueur vs IA Facile
+  \param int int_loadGame : 1 si l'on commence une nouvelle partie, 0 si on en charge une
   \remarks
 */
-void jeuIabateau(void);
+void jeuIabateau(int int_loadGame);
 
 /*!
-  \fn void afficheVictoire(int int_joueur)
+  \fn void afficheVictoire(void)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Tue Jan 21 13:57:22 2020
   \brief permet d'afficher le trophée
-  \return int int_joueur : nombre du joueur
   \remarks
 */
 
-void afficheVictoire(int int_joueur);
+void afficheVictoire(void);
 
 #endif

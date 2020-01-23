@@ -45,7 +45,7 @@ int askLoad() {
   {
     printf("Voulez vous charger une partie déjà commencée ? - Tapez 1 si oui, 0 sinon ! \n");
     int_load = demandeValeur(int_load);
-  } while ((int_load != 1) || (int_load != 0));
+  } while ((int_load != 1) && (int_load != 0));
   return (int_load);
 }
 
@@ -88,7 +88,8 @@ printf("**********************************************************************\n
     break;
   case 2 :
     printf("Initialisation mode 1vIA - niveau de difficulté : Mousse ! \n");
-    jeuIabateau();
+    int_load = askLoad();
+    jeuIabateau(int_load);
     break;
   case 3 :
     printf("Initialisation mode 1vIA - niveau de difficulté : Barbe Noire ! \n");

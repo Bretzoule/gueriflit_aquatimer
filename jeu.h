@@ -108,4 +108,17 @@ void initTabIA(int** ppint_grille,int int_tailleGrille, batostruc* flotteUtilise
   \remarks
 */
 void jeuIabateau(void);
+
+/*!
+  \fn void afficheVictoire(int int_joueur)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Tue Jan 21 13:57:22 2020
+  \brief permet d'afficher le trophée
+  \return int int_joueur : nombre du joueur
+  \remarks
+*/
+
+void afficheVictoire(int int_joueur);
+
 #endif

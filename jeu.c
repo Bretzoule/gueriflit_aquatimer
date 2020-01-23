@@ -95,7 +95,7 @@ void testToucheCoule(int int_valeurTouche, int int_tailleFlotte, int int_tailleG
         printf(" ██╔══██╗██║   ██║██║   ██║██║╚██╔╝██║ \033[0;31m╚═╝\033[0m    \033[0;31m|._                   _./  \033[0m\n");
         printf(" ██████╔╝╚██████╔╝╚██████╔╝██║ ╚═╝ ██║ \033[0;31m██╗\033[0m       \033[1;31m```--. . , ; .--'''     \033[0m\n");
         printf(" ╚═════╝  ╚═════╝  ╚═════╝ ╚═╝     ╚═╝ \033[0;31m╚═╝\033[0m              \033[0;31m| |   |          \033[0m\n");
-        printf("                                                     \033[1;31m.-=||  | |=-.       \033[0m\n");
+        printf("                                                     \033[1;31m.-=\033[0;31m||  | |\033[1;31m=-.       \033[0m\n");
         printf("                                                    \033[1;31m `-=#$&@@$#=-'       \033[0m\n");
         printf("                    Ez                                  \033[0;31m| ;  :|          \033[0m\n");
         printf("                                               \033[0;31m_____.,-#&!$@$#@§~,._____ \033[0m\n");
@@ -117,8 +117,8 @@ void testToucheCoule(int int_valeurTouche, int int_tailleFlotte, int int_tailleG
       printf("\n");
       printf("██╗  ██╗██╗████████╗\033[33m██╗\033[0m          .                     \n");
       printf("██║  ██║██║╚══██╔══╝\033[33m██║\033[0m          _\\____                \n");
-      printf("███████║██║   ██║   \033[33m██║\033[0m           |_===__`.      ==/ \n");
-      printf("██╔══██║██║   ██║   \033[33m╚═╝\033[0m           /  '---'|_ _ _ _/  \n");
+      printf("███████║██║   ██║   \033[33m██║\033[0m           |_===__`.        ==/ \n");
+      printf("██╔══██║██║   ██║   \033[33m╚═╝\033[0m           /  '---'|_ _ _ _ _/  \n");
       printf("██║  ██║██║   ██║   \033[33m██╗\033[0m    \033[0;31m#~##\033[0m__/_\033[0;31mON FIRE\033[0m_/_|_|_|_|   \n");
       printf("╚═╝  ╚═╝╚═╝   ╚═╝   \033[33m╚═╝\033[0m   \033[0;31m_*-$#~#\033[0m---------------==.'  \n");
       printf("                           \033[0;31m|&@~#~#\033[0m_______________.'    \n");
@@ -127,19 +127,45 @@ void testToucheCoule(int int_valeurTouche, int int_tailleFlotte, int int_tailleG
   }
 }
 
+/*!
+  \fn int joueJoueur(int** Grille,
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Thu Jan 23 09:49:01 2020
+  \brief permet de dérouler les fonctions de tir, de mise à jour de la grille et d'affichage du jeu
+  \param int** GrilleAttaque : grille de jeu en attaque
+  \param int** GrilleDefense : grille de jeu en défense
+  \param int int_tailleGrille : taille de la grille en entrée
+  \param batostruc* flotte : flotte utilisée
+  \param int int_joueur : numéro du joueur
+  \param int int_nombreBateaux : nombre de bateaux
+  \remarks
+*/
+
+int joueJoueur(int** GrilleAttaque, int** GrilleDefense,int int_nombreBateaux,int int_tailleGrille,batostruc flotteUtilisee,int int_joueur) {
+  int int_condtir = 0;
+  afficherEnmie(GrileAttaque,int_tailleGrille);
+  int_condtir = tir(GrilleAttaque,int_tailleGrille);
+  afficherGrille(GrilleDefense,int_tailleGrille);
+  afficherEnmie(GrilleAttaque,int_tailleGrille);
+  testToucheCoule(int_condtir,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
+  return (int_condtir);
+}
 
 
-void jeuSplitScreen(void) {
+void jeuSplitScreen(int int_loadGame) {
   batostruc* flotteUtilisee = NULL;
   int int_tailleGrille;
   int int_modePerso = 0;
-  int** ppint_grille_J1;
-  int** ppint_grille_J2;
+  int** ppint_grille_J1 = NULL;
+  int** ppint_grille_J2 = NULL;
   int int_joueur = 1;
   int int_condtir = 0;
   int int_nombreBateaux = 10;
   int int_finJ1 = 1;
   int int_finJ2 = 1;
+  int int_leaveSave = 0;
+  if (int_loadGame == 1) {
   int_tailleGrille = askGrille();
   int_modePerso = askFlotteCustom();
   if (int_modePerso == 1) {
@@ -151,65 +177,62 @@ void jeuSplitScreen(void) {
   init(&ppint_grille_J2, int_tailleGrille);
   initTabJoueur(ppint_grille_J2,int_tailleGrille,flotteUtilisee,2, int_nombreBateaux);
   system("clear");
-
-  while((int_finJ1!=0) && (int_finJ2!=0)) {
+  }
+  while((int_finJ1!=0) && (int_finJ2!=0) && (int_leaveSave != 1)) {
     if (int_joueur == 1) {
       int_condtir = 0;
       while ((int_condtir != (-int_tailleGrille-3)) && (int_finJ2!=0)) {
         printf("Au joueur %d de jouer !\n", int_joueur);
-        afficherEnmie(ppint_grille_J2,int_tailleGrille);
-        int_condtir = tir(ppint_grille_J2,int_tailleGrille);
-        afficherGrille(ppint_grille_J1,int_tailleGrille);
-        afficherEnmie(ppint_grille_J2,int_tailleGrille);
+        int_condtir = joueJoueur(ppint_grille_J2,ppint_grille_J1,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
         int_finJ2 = fin(ppint_grille_J2,int_tailleGrille);
-        testToucheCoule(int_condtir,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
         sleep(5);
         system("clear");
       }
     } else {
       int_condtir =0;
-      while ((int_condtir != (-int_tailleGrille-3))&& (int_finJ1!=0)) {
+      while ((int_condtir != (-int_tailleGrille-3))&& (int_finJ1!=0) && (int_leaveSave != 1)) {
         printf("Au joueur %d de jouer !\n", int_joueur);
-        afficherEnmie(ppint_grille_J1,int_tailleGrille);
-        int_condtir = tir(ppint_grille_J1,int_tailleGrille);
-        afficherGrille(ppint_grille_J2,int_tailleGrille);
-        afficherEnmie(ppint_grille_J1,int_tailleGrille);
+        int_condtir = joueJoueur(ppint_grille_J1,ppint_grille_J2,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
         int_finJ1 = fin(ppint_grille_J1,int_tailleGrille);
-        testToucheCoule(int_condtir,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
         sleep(5);
         system("clear");
       }
     }
     int_joueur = ((int_joueur)%2)+1;
+    int_leaveSave = askSave(ppint_grille_J1,ppint_grille_J2,int_tailleGrille,flotteUtilisee,int_joueur,int_nbBateaux);
   }
   if (fin(ppint_grille_J1,int_tailleGrille) == 0) {
-    printf("\033[1;33m              ___________		\033[0m \n");
-    printf("\033[1;33m             '._==_==_=_.'		\033[0m \n");
-    printf("\033[1;33m             .-\\:      /-.		\033[0m \n");
-    printf("\033[1;33m            | (|:.     |) |		\033[0m \n");
-    printf("\033[1;33m             '-|:.     |-'		\033[0m \n");
-    printf("\033[1;33m               \\::.    / 		\033[0m \n");
-    printf("\033[1;33m                '::. .'  		\033[0m \n");
-    printf("\033[1;33m                  ) (    		\033[0m \n");
-    printf("\033[1;33m                _.' '._  		\033[0m \n");
-    printf("\033[1;33m               `\"\"\"\"\"\"\"` 		\033[0m \n");
-    printf("LE JOUEUR 2 REMPORTE LA PARTIE           \n");
+    afficheVictoire();
+    printf("            LE JOUEUR 2 REMPORTE LA PARTIE           \n");
   } else {
-    printf("\033[1;33m              ___________		\033[0m \n");
-    printf("\033[1;33m             '._==_==_=_.'		\033[0m \n");
-    printf("\033[1;33m             .-\\:      /-.		\033[0m \n");
-    printf("\033[1;33m            | (|:.     |) |		\033[0m \n");
-    printf("\033[1;33m             '-|:.     |-'		\033[0m \n");
-    printf("\033[1;33m               \\::.    / 		\033[0m \n");
-    printf("\033[1;33m                '::. .'  		\033[0m \n");
-    printf("\033[1;33m                  ) (    		\033[0m \n");
-    printf("\033[1;33m                _.' '._  		\033[0m \n");
-    printf("\033[1;33m               `\"\"\"\"\"\"\"` 		\033[0m \n");
-    printf("LE JOUEUR 1 REMPORTE LA PARTIE           \n");
+    afficheVictoire();
+    printf("            LE JOUEUR 1 REMPORTE LA PARTIE           \n");
   }
   freeGrille(&ppint_grille_J1,int_tailleGrille);
   freeGrille(&ppint_grille_J2,int_tailleGrille);
   free(flotteUtilisee);
+}
+
+/*!
+  \fn void afficheVictoire(int int_joueur)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Tue Jan 21 13:57:22 2020
+  \brief permet d'afficher le trophée
+  \remarks
+*/
+
+void afficheVictoire() {
+    printf("\033[1;33m              ___________		\033[0m \n");
+    printf("\033[1;33m             '._==_==_=_.'       	\033[0m \n");
+    printf("\033[1;33m             .-\\:      /-.      	\033[0m \n");
+    printf("\033[1;33m            | (|:.     |) |      	\033[0m \n");
+    printf("\033[1;33m             '-|:.     |-'       	\033[0m \n");
+    printf("\033[1;33m               \\::.    /        	\033[0m \n");
+    printf("\033[1;33m                '::. .'  		\033[0m \n");
+    printf("\033[1;33m                  ) (    		\033[0m \n");
+    printf("\033[1;33m                _.' '._  		\033[0m \n");
+    printf("\033[1;33m            \"\"\"\"\"\"\"`      	\033[0m \n");
 }
 
 /*!
@@ -269,9 +292,12 @@ void jeuIabateau(void) {
     int_joueur = ((int_joueur)%2)+1;
   }
   if (fin(ppint_grille_J1,int_tailleGrille) == 0) {
-    printf("L'IA à gagné la partie ! \n");
+    afficheVictoire();
+    printf("            L'IA REMPORTE LA PARTIE           \n");
   } else {
-    printf("Le joueur 1 à gagné la partie ! \n");
+    afficheVictoire();
+    printf("            LE JOUEUR 1 REMPORTE LA PARTIE           \n");
+  }
   }
   freeGrille(&ppint_grille_J1,int_tailleGrille);
   freeGrille(&ppint_grille_IA,int_tailleGrille);

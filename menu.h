@@ -25,4 +25,17 @@ int choixmenu(void);
 \menu pour le jeu de la bataille navale avec affichage
 */
 void menu(void);
+
+/*!
+  \fn int askLoad()
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Tue Jan 21 14:26:53 2020
+  \brief permet de demander si l'utilisateur veut charger une partie
+  \return int int_load : 1 si l'utilisateur veut charger, 0 sinon
+  \remarks
+*/
+
+int askLoad();
+
 #endif

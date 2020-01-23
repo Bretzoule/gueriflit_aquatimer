@@ -152,7 +152,9 @@ void jeuSplitScreen(int int_loadGame) {
   int int_finJ1 = 1;
   int int_finJ2 = 1;
   int int_leaveSave = 0;
-  if (int_loadGame == 1) {
+  char filePath[50] = "";
+  FILE *fichierSav = NULL;
+  if (int_loadGame == 0) {
   int_tailleGrille = askGrille();
   int_modePerso = askFlotteCustom();
   if (int_modePerso == 1) {
@@ -164,7 +166,19 @@ void jeuSplitScreen(int int_loadGame) {
   init(&ppint_grille_J2, int_tailleGrille);
   initTabJoueur(ppint_grille_J2,int_tailleGrille,flotteUtilisee,2, int_nombreBateaux);
   system("clear");
-  }
+  } else {
+    askFilePath(filePath);
+    fichierSav = openFile(filePath);
+    int_tailleGrille = getIntFromSave(fichierSav);
+    int_nombreBateaux = getIntFromSave(fichierSav);
+    printf("int_taillegrille = %d et int_nbBateau = %d \n",int_tailleGrille, int_nombreBateaux);
+    init(&ppint_grille_J1, int_tailleGrille);
+    init(&ppint_grille_J2, int_tailleGrille);
+    flotteUtilisee = getFlotteFromSave(fichierSav,int_nombreBateaux,flotteUtilisee);
+    //getTabFromSave(ppint_grille_J1,ppint_grille_J2,int_tailleGrille);
+    //int_player = getIntFromSave(fichierSav);
+    fclose(fichierSav);
+    
   while((int_finJ1!=0) && (int_finJ2!=0) && (int_leaveSave != 1)) {
     if (int_joueur == 1) {
       int_condtir = 0;
@@ -177,7 +191,7 @@ void jeuSplitScreen(int int_loadGame) {
       }
     } else {
       int_condtir =0;
-      while ((int_condtir != (-int_tailleGrille-3))&& (int_finJ1!=0) && (int_leaveSave != 1)) {
+      while ((int_condtir != (-int_tailleGrille-3))&& (int_finJ1!=0)) {
         printf("Au joueur %d de jouer !\n", int_joueur);
         int_condtir = joueJoueur(ppint_grille_J1,ppint_grille_J2,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
         int_finJ1 = fin(ppint_grille_J1,int_tailleGrille);
@@ -186,7 +200,7 @@ void jeuSplitScreen(int int_loadGame) {
       }
     }
     int_joueur = ((int_joueur)%2)+1;
-    int_leaveSave = askSave(ppint_grille_J1,ppint_grille_J2,int_tailleGrille,flotteUtilisee,int_joueur,int_nombreBateaux);
+    int_leaveSave = askSave(filePath,ppint_grille_J1,ppint_grille_J2,int_tailleGrille,flotteUtilisee,int_joueur,int_nombreBateaux);
   }
   if (fin(ppint_grille_J1,int_tailleGrille) == 0) {
     afficheVictoire();
@@ -219,7 +233,7 @@ void afficheVictoire() {
     printf("\033[1;33m                '::. .'  		\033[0m \n");
     printf("\033[1;33m                  ) (    		\033[0m \n");
     printf("\033[1;33m                _.' '._  		\033[0m \n");
-    printf("\033[1;33m            \"\"\"\"\"\"\"`      	\033[0m \n");
+    printf("\033[1;33m                     \"\"\"\"\"\"\"`      	\033[0m \n");
 }
 
 /*!
@@ -240,6 +254,7 @@ void jeuIabateau(int int_loadGame) {
   int int_nombreBateaux = 10;
   int int_finJ1 = 1;
   int int_finIA = 1;
+  int int_leaveSave = 0;
   char filePath[50] = "";
   FILE *fichierSav = NULL;
   if (int_loadGame == 0) {
@@ -260,19 +275,19 @@ void jeuIabateau(int int_loadGame) {
     int_tailleGrille = getIntFromSave(fichierSav);
     int_nombreBateaux = getIntFromSave(fichierSav);
     printf("int_taillegrille = %d et int_nbBateau = %d \n",int_tailleGrille, int_nombreBateaux);
-/*    getFlotteFromSave(fichierSav,int_nbBateaux);
     init(&ppint_grille_IA, int_tailleGrille);
     init(&ppint_grille_J1, int_tailleGrille);
-    getTabFromSave(ppint_grille_J1,ppint_grille_IA,int_tailleGrille);
-    int_player = getIntFromSave(fichierSav);*/
+    flotteUtilisee = getFlotteFromSave(fichierSav,int_nombreBateaux,flotteUtilisee);
+    //getTabFromSave(ppint_grille_J1,ppint_grille_IA,int_tailleGrille);
+    //int_player = getIntFromSave(fichierSav);
     fclose(fichierSav);
   }
-  while((int_finJ1!=0) && (int_finIA!=0)) {
+  while((int_finJ1!=0) && (int_finIA!=0) && (int_leaveSave != 1) {
     if (int_joueur == 1) {
       int_condtir = 0;
       while ((int_condtir != (-int_tailleGrille-3)) && (int_finIA!=0)) {
         printf("Au joueur %d de jouer !\n", int_joueur);
-        int_condtir = joueJoueur(ppint_grille_IA,ppint_grille_J1,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
+        int_condtir = joueJoueur(ppint_grille_J1,ppint_grille_IA,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
         int_finIA = fin(ppint_grille_IA,int_tailleGrille);
         sleep(5);
         system("clear");
@@ -280,11 +295,13 @@ void jeuIabateau(int int_loadGame) {
     } else {
       int_condtir =0;
       while ((int_condtir != (-int_tailleGrille-3))&& (int_finJ1!=0)) {
-        int_condtir = joueJoueur(ppint_grille_J1,ppint_grille_IA,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
+        int_condtir = tirIA(ppint_grille_J1,int_tailleGrille);
+        testToucheCoule(int_condtir,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
         int_finJ1 = fin(ppint_grille_J1,int_tailleGrille);
       }
     }
     int_joueur = ((int_joueur)%2)+1;
+    int_leaveSave = askSave(filePath,ppint_grille_J1,ppint_grille_IA,int_tailleGrille,flotteUtilisee,int_joueur,int_nombreBateaux);
   }
   if (fin(ppint_grille_J1,int_tailleGrille) == 0) {
     afficheVictoire();

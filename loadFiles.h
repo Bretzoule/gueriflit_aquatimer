@@ -50,7 +50,7 @@ int saveGameToFile(int** GrilleJ1, int** GrilleJ2, int int_tailleGrille, batostr
   \return int int_retour : Retourne 1 si la sauvegarde à été effectuée
   \remarks
 */
-int askSave(int** GrilleJ1, int** GrilleJ2, int int_tailleGrille, batostruc* flotte, int int_joueur,int int_nbBateaux);
+int askSave(char* filePath, int** GrilleJ1, int** GrilleJ2, int int_tailleGrille, batostruc* flotte, int int_joueur,int int_nbBateaux);
 
 
 /*!
@@ -59,6 +59,7 @@ int askSave(int** GrilleJ1, int** GrilleJ2, int int_tailleGrille, batostruc* flo
   \version 0.1
   \date Thu Jan 23 14:02:19 2020
   \brief permet de récupérer un entier sur le flux de fichier
+  \param FILE* fichierSav : permet de retourner l'entité FILE* associée au fichier
   \return int int_retour : entier à retourner
   \remarks
 */
@@ -90,4 +91,20 @@ FILE* openFile(char* filePath);
 */
 
 void askFilePath(char* filePath);
+
+
+/*!
+  \fn int getIntFromSave(FILE* fichierSav)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Thu Jan 23 14:02:19 2020
+  \brief permet de récupérer un entier sur le flux de fichier
+  \param FILE* fichierSav : permet de retourner l'entité FILE* associée au fichier
+  \param int int_nombreBateau : nombre de bateaux sur la grille
+  \param batostruc* flotteUtilisée : flotteutilisée en entrée
+  \return batostruc flotteUtilisée : flotteutilisée remplie en sortie
+  \remarks
+*/
+batostruc* getFlotteFromSave(FILE* fichierSav, int int_nombreBateaux, batostruc* flotteUtilisee);
+
 #endif

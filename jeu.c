@@ -130,7 +130,7 @@ void testToucheCoule(int int_valeurTouche, int int_tailleFlotte, int int_tailleG
 }
 
 int joueJoueur(int** GrilleAttaque, int** GrilleDefense,int int_nombreBateaux,int int_tailleGrille,batostruc* flotteUtilisee,int int_joueur) {
-  int int_condtir = 0;
+  int int_condtir = 1;
   afficherEnmie(GrilleAttaque,int_tailleGrille);
   int_condtir = tir(GrilleAttaque,int_tailleGrille);
   afficherGrille(GrilleDefense,int_tailleGrille);
@@ -147,12 +147,12 @@ void jeuSplitScreen(int int_loadGame) {
   int** ppint_grille_J1 = NULL;
   int** ppint_grille_J2 = NULL;
   int int_joueur = 1;
-  int int_condtir = 0;
+  int int_condtir = 1;
   int int_nombreBateaux = 10;
   int int_finJ1 = 1;
   int int_finJ2 = 1;
   int int_leaveSave = 0;
-  char filePath[50] = "";
+  char filePath[100] = "";
   FILE *fichierSav = NULL;
   if (int_loadGame == 0) {
   int_tailleGrille = askGrille();
@@ -171,14 +171,13 @@ void jeuSplitScreen(int int_loadGame) {
     fichierSav = openFile(filePath);
     int_tailleGrille = getIntFromSave(fichierSav);
     int_nombreBateaux = getIntFromSave(fichierSav);
-    printf("int_taillegrille = %d et int_nbBateau = %d \n",int_tailleGrille, int_nombreBateaux);
     init(&ppint_grille_J1, int_tailleGrille);
     init(&ppint_grille_J2, int_tailleGrille);
     flotteUtilisee = getFlotteFromSave(fichierSav,int_nombreBateaux,flotteUtilisee);
-    //getTabFromSave(ppint_grille_J1,ppint_grille_J2,int_tailleGrille);
-    //int_player = getIntFromSave(fichierSav);
+    getTabFromSave(fichierSav,ppint_grille_J1,ppint_grille_J2,int_tailleGrille);
+    int_joueur = getIntFromSave(fichierSav);
     fclose(fichierSav);
-    
+  }
   while((int_finJ1!=0) && (int_finJ2!=0) && (int_leaveSave != 1)) {
     if (int_joueur == 1) {
       int_condtir = 0;
@@ -200,14 +199,19 @@ void jeuSplitScreen(int int_loadGame) {
       }
     }
     int_joueur = ((int_joueur)%2)+1;
-    int_leaveSave = askSave(filePath,ppint_grille_J1,ppint_grille_J2,int_tailleGrille,flotteUtilisee,int_joueur,int_nombreBateaux);
+    if ((int_finJ1!=0) && (int_finJ2!=0)) {
+        int_leaveSave = askSave(filePath,ppint_grille_J1,ppint_grille_J2,int_tailleGrille,flotteUtilisee,int_joueur,int_nombreBateaux);
+
+    }
   }
+  if (int_leaveSave != 1) {
   if (fin(ppint_grille_J1,int_tailleGrille) == 0) {
     afficheVictoire();
     printf("            LE JOUEUR 2 REMPORTE LA PARTIE           \n");
   } else {
     afficheVictoire();
     printf("            LE JOUEUR 1 REMPORTE LA PARTIE           \n");
+  }
   }
   freeGrille(&ppint_grille_J1,int_tailleGrille);
   freeGrille(&ppint_grille_J2,int_tailleGrille);
@@ -233,7 +237,7 @@ void afficheVictoire() {
     printf("\033[1;33m                '::. .'  		\033[0m \n");
     printf("\033[1;33m                  ) (    		\033[0m \n");
     printf("\033[1;33m                _.' '._  		\033[0m \n");
-    printf("\033[1;33m                     \"\"\"\"\"\"\"`      	\033[0m \n");
+    printf("\033[1;33m                 \"\"\"\"\"\"\"`      	\033[0m \n");
 }
 
 /*!
@@ -274,15 +278,14 @@ void jeuIabateau(int int_loadGame) {
     fichierSav = openFile(filePath);
     int_tailleGrille = getIntFromSave(fichierSav);
     int_nombreBateaux = getIntFromSave(fichierSav);
-    printf("int_taillegrille = %d et int_nbBateau = %d \n",int_tailleGrille, int_nombreBateaux);
     init(&ppint_grille_IA, int_tailleGrille);
     init(&ppint_grille_J1, int_tailleGrille);
     flotteUtilisee = getFlotteFromSave(fichierSav,int_nombreBateaux,flotteUtilisee);
-    //getTabFromSave(ppint_grille_J1,ppint_grille_IA,int_tailleGrille);
-    //int_player = getIntFromSave(fichierSav);
+    getTabFromSave(fichierSav,ppint_grille_J1,ppint_grille_IA,int_tailleGrille);
+    int_joueur = getIntFromSave(fichierSav);
     fclose(fichierSav);
   }
-  while((int_finJ1!=0) && (int_finIA!=0) && (int_leaveSave != 1) {
+  while((int_finJ1!=0) && (int_finIA!=0) && (int_leaveSave != 1)) {
     if (int_joueur == 1) {
       int_condtir = 0;
       while ((int_condtir != (-int_tailleGrille-3)) && (int_finIA!=0)) {
@@ -301,14 +304,18 @@ void jeuIabateau(int int_loadGame) {
       }
     }
     int_joueur = ((int_joueur)%2)+1;
+    if ((int_finJ1!=0) && (int_finIA!=0)) {
     int_leaveSave = askSave(filePath,ppint_grille_J1,ppint_grille_IA,int_tailleGrille,flotteUtilisee,int_joueur,int_nombreBateaux);
+    }
   }
+  if (int_leaveSave != 1) {
   if (fin(ppint_grille_J1,int_tailleGrille) == 0) {
     afficheVictoire();
     printf("            L'IA REMPORTE LA PARTIE           \n");
   } else {
     afficheVictoire();
     printf("            LE JOUEUR 1 REMPORTE LA PARTIE           \n");
+  }
   }
   freeGrille(&ppint_grille_J1,int_tailleGrille);
   freeGrille(&ppint_grille_IA,int_tailleGrille);

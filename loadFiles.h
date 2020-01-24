@@ -19,6 +19,7 @@
 #define EXIT_SUCCESS 0
 #define ERREUR_SAISIE -1
 #define ERREUR_OUVERTURE -1
+#define ERREUR_ALLOC -1
 
 /*!
   \fn int saveGameToFile(int** Grille, int int_tailleGrille, batostruc* flotte, int int_joueur, int int_nbBateaux)
@@ -106,5 +107,18 @@ void askFilePath(char* filePath);
   \remarks
 */
 batostruc* getFlotteFromSave(FILE* fichierSav, int int_nombreBateaux, batostruc* flotteUtilisee);
+
+/*!
+  \fn void getTabFromSave(int** GrilleJ1, int** GrilleJ2, int int_tailleGrille)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Fri Jan 24 14:46:42 2020
+  \brief permet de récupérer la grille depuis la sauvegarde
+  \param int** GrilleJ1 : grille du joueur 1
+  \param int** GrilleJ2 : grille de joueur 2 (ou de l'IA)
+  \param int int_tailleGrille : taille de la grille en entrée
+  \remarks
+*/
+void getTabFromSave(FILE* fichierSav,int** GrilleJ1, int** GrilleJ2, int int_tailleGrille);
 
 #endif

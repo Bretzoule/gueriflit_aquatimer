@@ -96,4 +96,6 @@ int rapporttir(int** ppint_grille, int int_coord_x, int int_coord_y,int int_tail
 \date 11/01/2020
 */
 int tirIA(int** ppint_grille,int int_tailleGrille);
+int tirIASC(int** ppint_grille,int int_tailleGrille,int int_coord_x,int int_coord_y);
+int TirV2(int** ppint_grille, int int_coord_x, int int_coord_y,int int_tailleGrille);
 #endif

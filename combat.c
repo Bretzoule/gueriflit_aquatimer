@@ -157,3 +157,47 @@ int tirIA(int** ppint_grille,int int_tailleGrille){
   free(coord);
   return(int_retour);
 }
+
+
+int tirIASC(int** ppint_grille,int int_tailleGrille,int int_coord_x,int int_coord_y){
+  int int_retour;
+  effettir(ppint_grille,int_coord_x,int_coord_y);
+  int_retour = rapporttir(ppint_grille,int_coord_x,int_coord_y,int_tailleGrille);
+  return(int_retour);
+}
+
+
+
+int TirV2(int** ppint_grille, int int_coord_x, int int_coord_y,int int_tailleGrille){
+  int int_retour;
+  int int_X;
+  int int_Y;
+  int_X = int_coord_x;
+  int_Y = int_coord_y;
+  if (ppint_grille[int_coord_x][int_coord_y]==2) {
+    int_coord_x= int_coord_x+1;
+    while ((int_coord_x <int_tailleGrille)&&(ppint_grille[int_coord_x][int_coord_y]==1)) {
+      int_retour=tirIASC(ppint_grille,int_tailleGrille,int_coord_x,int_coord_y);
+      int_coord_x= int_coord_x+1;
+      }
+    int_coord_x =int_X;
+    int_coord_x= int_coord_x-1;
+    while ((-1 <int_coord_x)&&(ppint_grille[int_coord_x][int_coord_y]==1)) {
+      int_retour=tirIASC(ppint_grille,int_tailleGrille,int_coord_x,int_coord_y);
+      int_coord_x= int_coord_x-1;
+    }
+    int_coord_x =int_X;
+    int_coord_y= int_coord_y+1;
+    while ((int_coord_y <int_tailleGrille)&&(ppint_grille[int_coord_x][int_coord_y]==1)) {
+      int_retour=tirIASC(ppint_grille,int_tailleGrille,int_coord_x,int_coord_y);
+      int_coord_y= int_coord_y+1;
+    }
+    int_coord_y =int_Y;
+    int_coord_y= int_coord_y-1;
+    while ((-1 <int_coord_y)&&(ppint_grille[int_coord_x][int_coord_y]==1)) {
+      int_retour=tirIASC(ppint_grille,int_tailleGrille,int_coord_x,int_coord_y);
+      int_coord_y= int_coord_y-1;
+    }
+  }
+    return(int_retour);
+}

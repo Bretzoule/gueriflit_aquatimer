@@ -93,6 +93,8 @@ printf("**********************************************************************\n
     break;
   case 3 :
     printf("Initialisation mode 1vIA - niveau de difficulté : Barbe Noire ! \n");
+    int_load = askLoad();
+    jeuIANRV(int_load);
     break;
   default:
     printf("Au revoir ! \n");

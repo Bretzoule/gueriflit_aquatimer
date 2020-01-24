@@ -137,7 +137,7 @@ void jeuIabateau(int int_loadGame);
   \brief permet d'afficher le trophée
   \remarks
 */
-
+void jeuIANRV(int int_loadGame);
 void afficheVictoire(void);
 
 #endif

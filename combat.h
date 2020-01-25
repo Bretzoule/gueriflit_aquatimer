@@ -21,7 +21,7 @@
 #define N 10
 
 /*!
-  \fn int effettir(int** ppint_grille, int int_coord_x, int int_coord_y))
+  \fn int effettir(int** ppint_grille, int int_coord_x, int int_coord_y)
   \brief permet de modifier la valeur d'une case du tableau comme case touchée (bateau touché / eau touché)
   \param int** ppint_grille : grille de jeu
   \param int int_coord_x : coordonnée de tir, X
@@ -47,7 +47,7 @@ int effettir(int** ppint_grille, int int_coord_x, int int_coord_y);
 int valitir(int** ppint_grille, int int_coord_x, int int_coord_y);
 
 /*!
-  \fn demandeCoord(char** coord)
+  \fn demandeCoord(char *coord)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Thu Dec 19 11:23:22 2019
@@ -58,7 +58,7 @@ int valitir(int** ppint_grille, int int_coord_x, int int_coord_y);
 void demandeCoord(char *coord);
 
 /*!
-\fn int tir(int** ppint_grille)
+\fn int tir(int** ppint_grille,int int_tailleGrille)
 \brief Assure la fonction de tir du programme pour le joueur
 \author Hugo POINTEREAU <pointereau@eisti.eu>
 \param int** ppint_grille : grille en entrée
@@ -70,7 +70,7 @@ void demandeCoord(char *coord);
 int tir(int** ppint_grille,int int_tailleGrille);
 
 /*!
-\fn int Fin(int** ppint_grille,int int_tailleGrille)
+\fn int fin(int** ppint_grille,int int_tailleGrille)
 \brief condition de fin pour la partie
 \author Hugo POINTEREAU <pointereau@eisti.eu>
 \version 0.1
@@ -96,7 +96,7 @@ int fin(int** ppint_grille,int int_tailleGrille);
 int rapporttir(int** ppint_grille, int int_coord_x, int int_coord_y,int int_tailleGrille);
 
 /*!
-\fn int tirIA(int** ppint_grille)
+\fn int tirIA(int** ppint_grille, int int_tailleGrille)
 \brief Assure la fonction de tir du programme pour l'IA
 \author Hugo POINTEREAU <pointereau@eisti.eu>
 \param int** ppint_grille : grille en entrée

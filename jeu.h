@@ -1,6 +1,16 @@
 #ifndef JEU_H
 #define JEU_H
+/*! \file jeu.h
+ *  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+ *  \version 0.1
+ *  \date Sat Jan 25 19:04:26 2020
+ *
+ *  \brief Ensemble des définitions des fonctions de jeu.c
+ *
+ *
+ */
 
+// Inclusion des entêtes de librairies
 #include <stdlib.h>
 #include <stdio.h>
 #define ERREURALLOCATION -1
@@ -35,7 +45,7 @@ int askFlotteCustom(void);
 int askGrille(void);
 
 /*!
-  \fn void jeuSplitScreen(void)
+  \fn void jeuSplitScreen(int int_loadGame)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Mon Jan 13 16:23:34 2020
@@ -46,7 +56,7 @@ int askGrille(void);
 void jeuSplitScreen(int int_loadGame);
 
 /*!
-  \fn void initTabJoueur(int** ppint_grille,int int_tailleGrille, batostruc* flotteUtilisee, int int_joueur)
+  \fn void initTabJoueur(int** ppint_grille,int int_tailleGrille, batostruc* flotteUtilisee, int int_joueur, int int_nombreBateaux)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Mon Jan 13 16:31:50 2020
@@ -70,7 +80,7 @@ void initTabJoueur(int** ppint_grille,int int_tailleGrille, batostruc* flotteUti
 void freeGrille(int*** ppint_matrice, int int_tailleGrille);
 
 /*!
-  \fn void testToucheCoule(int int_valeurTouche, int int_tailleFlotte, batostruc* flotte)
+  \fn void testToucheCoule(int int_valeurTouche, int int_tailleFlotte, int int_tailleGrille, batostruc* flotte, int int_joueur)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Thu Jan 16 09:48:20 2020
@@ -86,7 +96,7 @@ void freeGrille(int*** ppint_matrice, int int_tailleGrille);
 void testToucheCoule(int int_valeurTouche, int int_tailleFlotte, int int_tailleGrille, batostruc* flotte, int int_joueur);
 
 /*!
-  \fn void testToucheCoule(int int_valeurTouche, int int_tailleFlotte, batostruc* flotte)
+  \fn void initTabIA(int** ppint_grille,int int_tailleGrille, batostruc* flotteUtilisee, int int_joueur, int int_nombreBateaux)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Thu Jan 16 09:48:20 2020
@@ -102,7 +112,7 @@ void initTabIA(int** ppint_grille,int int_tailleGrille, batostruc* flotteUtilise
 
 
 /*!
-  \fn int joueJoueur(int** Grille,
+  \fn int joueJoueur(int** GrilleAttaque, int** GrilleDefense,int int_nombreBateaux,int int_tailleGrille,batostruc* flotteUtilisee,int int_joueur)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Thu Jan 23 09:49:01 2020

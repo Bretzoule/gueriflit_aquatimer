@@ -21,7 +21,7 @@
 #define N 10
 
 /*!
-\fn int menu(void)
+\fn int choixmenu(void)
 \brief créer le menu pour le choix des questions
 \author Hugo Pointereau
 \return int int_choix : retourne 0 si pas de probleme

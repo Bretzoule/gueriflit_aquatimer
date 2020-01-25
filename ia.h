@@ -1,6 +1,16 @@
 #ifndef IA_H
 #define IA_H
+/*! \file ia.h
+ *  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+ *  \version 0.1
+ *  \date Sat Jan 25 19:04:48 2020
+ *
+ *  \brief  Ensemble des définitions des fonctions de ia.c
+ *
+ *
+ */
 
+// Inclusion des entêtes de librairies
 #include <stdlib.h>
 #include <stdio.h>
 #define ERREURALLOCATION -1
@@ -11,7 +21,7 @@
 #define N 10
 
 /*!
-\fn int choixdirectionia()
+\fn int choixdirectionia(void)
 \brief random pour la direction du bateau de l'IA
 \author Hugo POINTEREAU <pointereau@eisti.eu>
 \return int int_randomPos : choix aléatoire d'une direction
@@ -20,7 +30,7 @@
 */
 int choixdirectionia(void);
 /*!
-\fn int coordIA(int int_tailleGrille, char *coord)
+\fn int coordIAX(int int_tailleGrille);
 \brief modifie les coordonnées passées en parametre
 \author Hugo POINTEREAU <pointereau@eisti.eu>
 \param int int_tailleGrile : taille de la grille
@@ -30,7 +40,7 @@ int choixdirectionia(void);
 */
 int coordIAX(int int_tailleGrille);
 /*!
-\fn int coordIA(int int_tailleGrille, char *coord)
+\fn int coordIAY(int int_tailleGrille);
 \brief modifie les coordonnées passées en parametre
 \author Hugo POINTEREAU <pointereau@eisti.eu>
 \param int int_tailleGrile : taille de la grille
@@ -40,7 +50,7 @@ int coordIAX(int int_tailleGrille);
 */
 int coordIAY(int int_tailleGrille);
 /*!
-\fn int coordIA(int int_tailleGrille)
+\fn int ajouteBateauIA(int **Grille, int int_tailleBateau, int int_tailleGrille);
 \brief retourner les coordonné pour les bateaux de l'IA
 \author Hugo POINTEREAU <pointereau@eisti.eu>
 \param int** Grille : grille de jeu

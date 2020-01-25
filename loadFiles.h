@@ -34,12 +34,13 @@
 void supprSave(char* filePath);
 
 /*!
-  \fn int saveGameToFile(int** Grille, int int_tailleGrille, batostruc* flotte, int int_joueur, int int_nbBateaux)
+  \fn int saveGameToFile(int** GrilleJ1, int** GrilleJ2, int int_tailleGrille, batostruc* flotte, int int_joueur,int int_nbBateaux)
   \author LEFLOCH Thomas <leflochtho@eisti.eu> & DRAESCHER Lucas <draescherl@eisti.eu>
   \version 0.1
   \date Tue Jan 21 14:31:52 2020
   \brief permet de sauvegarder la partie à un état donné, à l'aide du numéro de joueur, la taille de la grille, le nombre de bateaux, la flotte ainsi que la grille
-  \param int** Grille : grille de jeu
+  \param int** GrilleJ1 : grille de jeu J1
+  \param int** GrilleJ2: grille de jeu J2
   \param int int_tailleGrille : taille de la grille en entrée
   \param batostruc* flotte : flotte utilisée
   \param int int_joueur : numéro du joueur
@@ -50,12 +51,14 @@ void supprSave(char* filePath);
 int saveGameToFile(int** GrilleJ1, int** GrilleJ2, int int_tailleGrille, batostruc* flotte, int int_joueur,int int_nbBateaux);
 
 /*!
-  \fn int askSave(int** Grille, int int_tailleGrille, batostruc* flotte, int int_joueur, int int_nbBateaux)
+  \fn int askSave(char* filePath, int** GrilleJ1, int** GrilleJ2, int int_tailleGrille, batostruc* flotte, int int_joueur,int int_nbBateaux)
   \author LEFLOCH Thomas <leflochtho@eisti.eu> & DRAESCHER Lucas <draescherl@eisti.eu>
   \version 0.1
   \date Tue Jan 21 14:31:52 2020
   \brief permet de sauvegarder la partie à un état donné, à l'aide du numéro de joueur, la taille de la grille, le nombre de bateaux, la flotte ainsi que la grille
-  \param int** Grille : grille de jeu
+  \param char* filePath : chemin du fichier
+  \param int** GrilleJ1: grille de jeu J1
+  \param int** GrilleJ2: grille de jeu J2
   \param int int_tailleGrille : taille de la grille en entrée
   \param batostruc* flotte : flotte utilisée
   \param int int_joueur : numéro du joueur
@@ -80,7 +83,21 @@ int askSave(char* filePath, int** GrilleJ1, int** GrilleJ2, int int_tailleGrille
 int getIntFromSave(FILE* fichierSav);
 
 /*!
-  \fn FILE* openFile(char* filePath[50])
+  \fn int validationFichier(char* filePath)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Sat Jan 25 19:17:17 2020
+  \brief permet de valider ou non un fichier
+  \param FILE* fichierSav : fichier en entrée
+  \return int int_retour : retourne 1 si tout s'est bien passé
+  \remarks
+*/
+
+int validationFichier(char* filePath);
+
+
+/*!
+  \fn FILE* openFile(char* filePath)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Thu Jan 23 13:55:23 2020
@@ -94,7 +111,7 @@ FILE* openFile(char* filePath);
 
 
 /*!
-  \fn void askFilePath(char* filePath[50])
+  \fn void askFilePath(char* filePath)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Thu Jan 23 13:40:29 2020
@@ -107,7 +124,7 @@ void askFilePath(char* filePath);
 
 
 /*!
-  \fn int getIntFromSave(FILE* fichierSav)
+  \fn int getFlotteFromSave(FILE* fichierSav, int int_nombreBateaux, batostruc* flotteUtilisee)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Thu Jan 23 14:02:19 2020
@@ -121,11 +138,12 @@ void askFilePath(char* filePath);
 batostruc* getFlotteFromSave(FILE* fichierSav, int int_nombreBateaux, batostruc* flotteUtilisee);
 
 /*!
-  \fn void getTabFromSave(int** GrilleJ1, int** GrilleJ2, int int_tailleGrille)
+  \fn void getTabFromSave(FILE* fichierSav,int** GrilleJ1, int** GrilleJ2, int int_tailleGrille)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Fri Jan 24 14:46:42 2020
   \brief permet de récupérer la grille depuis la sauvegarde
+  \param FILE* fichierSav : permet de retourner l'entité FILE* associée au fichier
   \param int** GrilleJ1 : grille du joueur 1
   \param int** GrilleJ2 : grille de joueur 2 (ou de l'IA)
   \param int int_tailleGrille : taille de la grille en entrée

@@ -19,7 +19,7 @@
 #define EXIT_SUCCESS 0
 #define ERREUR_SAISIE -1
 /*!
-  \struct typedef struct batostruc
+  \struct struct batostruc
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Tue Jan  7 13:19:48 2020
@@ -167,7 +167,7 @@ int voisinOuest(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_
 */
 int voisinEst(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_largeur);
 /*!
-  \fn int checkVideAutour(int** Grille)
+  \fn int checkVideAutour(int **Grille, int int_PosX, int int_PosY, int int_tailleGrille)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Thu Dec 19 11:23:22 2019
@@ -181,7 +181,7 @@ int voisinEst(int **tint_jeu, int int_x, int int_y, int int_longueur, int int_la
 */
 int checkVideAutour(int **Grille, int int_PosX, int int_PosY, int int_tailleGrille);
 /*!
-  \fn int ajouteBateau(int** Grille)
+  \fn int ajouteBateau(int **Grille, int int_tailleBateau, int int_tailleGrille)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Thu Dec 19 11:23:22 2019
@@ -195,7 +195,7 @@ int checkVideAutour(int **Grille, int int_PosX, int int_PosY, int int_tailleGril
 int ajouteBateau(int **Grille, int int_tailleBateau, int int_tailleGrille);
 
 /*!
-  \fn int constructionFlotteHumain(int** ttint_jeu, int tailleGrille)
+  \fn batostruc* constructionFlotteHumain(batostruc* listedesbateaux,int int_tailleGrille,int int_modePerso,int int_nombreBateaux);
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Tue Jan  7 13:19:48 2020
@@ -245,7 +245,7 @@ batostruc construitFlotte(batostruc bateau, int int_tailleGrille);
 int askDirection(int int_directionBato);
 
 /*!
-  \fn int verifRange(int int_longueurTab, int int_X, int int_Y, int int_Direction)
+  \fn int verifRange(int int_longueurTab, int int_X, int int_Y, int int_Direction,int int_tailleBateau)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Fri Jan 10 10:49:08 2020
@@ -262,7 +262,7 @@ int askDirection(int int_directionBato);
 int verifRange(int int_longueurTab, int int_X, int int_Y, int int_Direction,int int_tailleBateau);
 
 /*!
-  \fn int verifVoisins(int** Grille, int int_X, int int_Y, int int_tailleGrille, int int_directionBateau)
+  \fn int verifVoisins(int** Grille, int int_X, int int_Y, int int_tailleGrille, int int_directionBateau, int int_tailleBateau)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Fri Jan 10 11:14:12 2020

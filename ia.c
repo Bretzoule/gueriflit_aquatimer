@@ -1,4 +1,4 @@
-/*! \file bateau.c
+/*! \file ia.c
  *  \author LEFLOCH Thomas <leflochtho@eisti.eu>
  *  \version 0.1
  *  \date Mon Jan 6 17:19:41 2020
@@ -7,15 +7,6 @@
  *
  *
  */
-/*!
-\fn int tireIARandom(char *coord)
-\brief  tire de manière aléatoire
-\author LEFLOCH Thomas <leflochtho@eisti.eu>
-\version 0.1
-\date 9/12/19
-\param int** tint_jeu : grille de jeu
-\param int int_tailleGrille : taille de la grille
-*/
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>

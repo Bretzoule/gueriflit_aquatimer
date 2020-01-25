@@ -4,6 +4,14 @@ Projet d'informatique en langage C consistant à coder le jeu "Bataille Navale" 
 
 ## Compilation
 
+Compilation simple : make all
+
+Nettoyer les .o : make clean
+
+Générer le Doxygen : make doxy
+
+## Execution
+
 Pour exécuter le jeu il vous suffit d'entrer la commande :
 "./gueriflit"
 

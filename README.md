@@ -5,7 +5,7 @@ Projet d'informatique en langage C consistant à coder le jeu "Bataille Navale" 
 ## Compilation
 
 Pour exécuter le jeu il vous suffit d'entrer la commande :
-"./jeu"
+"./gueriflit"
 
 ## Contribution
 

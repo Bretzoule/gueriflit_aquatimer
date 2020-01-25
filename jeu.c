@@ -253,15 +253,15 @@ void jeuIabateau(int int_loadGame) {
   batostruc* flotteUtilisee = NULL;
   int int_tailleGrille;
   int int_modePerso = 0;
-  int** ppint_grille_J1;
-  int** ppint_grille_IA;
+  int** ppint_grille_J1 = NULL;
+  int** ppint_grille_IA = NULL;
   int int_joueur = 1;
   int int_condtir = 0;
   int int_nombreBateaux = 10;
   int int_finJ1 = 1;
   int int_finIA = 1;
   int int_leaveSave = 0;
-  char filePath[50] = "";
+  char filePath[100] = "";
   FILE *fichierSav = NULL;
   if (int_loadGame == 0) {
   int_tailleGrille = askGrille();
@@ -292,7 +292,7 @@ void jeuIabateau(int int_loadGame) {
       int_condtir = 0;
       while ((int_condtir != (-int_tailleGrille-3)) && (int_finIA!=0)) {
         printf("Au joueur %d de jouer !\n", int_joueur);
-        int_condtir = joueJoueur(ppint_grille_J1,ppint_grille_IA,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
+        int_condtir = joueJoueur(ppint_grille_IA,ppint_grille_J1,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
         int_finIA = fin(ppint_grille_IA,int_tailleGrille);
         sleep(5);
         system("clear");
@@ -300,6 +300,7 @@ void jeuIabateau(int int_loadGame) {
     } else {
       int_condtir =0;
       while ((int_condtir != (-int_tailleGrille-3))&& (int_finJ1!=0)) {
+        printf("L'IA joue !\n");
         int_condtir = tirIA(ppint_grille_J1,int_tailleGrille);
         testToucheCoule(int_condtir,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
         int_finJ1 = fin(ppint_grille_J1,int_tailleGrille);
@@ -331,8 +332,9 @@ void jeuIANRV(int int_loadGame) {
   batostruc* flotteUtilisee = NULL;
   int int_tailleGrille;
   int int_modePerso = 0;
-  int** ppint_grille_J1;
-  int** ppint_grille_IA;
+  int int_leaveSave = 0;
+  int** ppint_grille_J1 = NULL;
+  int** ppint_grille_IA = NULL;
   int int_joueur = 1;
   int int_condtir = 0;
   int mode= 0;
@@ -342,7 +344,7 @@ void jeuIANRV(int int_loadGame) {
   int int_coord_x;
   int int_coord_y;
   int int_test;
-  char filePath[50] = "";
+  char filePath[100] = "";
   FILE *fichierSav = NULL;
   if (int_loadGame == 0) {
   int_tailleGrille = askGrille();
@@ -368,7 +370,7 @@ void jeuIANRV(int int_loadGame) {
     int_joueur = getIntFromSave(fichierSav);
     fclose(fichierSav);
   }
-  while((int_finJ1!=0) && (int_finIA!=0)) {
+  while((int_finJ1!=0) && (int_finIA!=0) && (int_leaveSave != 1)) {
     if (int_joueur == 1) {
       int_condtir = 0;
       while ((int_condtir != (-int_tailleGrille-3)) && (int_finIA!=0)) {
@@ -381,6 +383,7 @@ void jeuIANRV(int int_loadGame) {
     } else {
       int_condtir =0;
       while ((int_condtir != (-int_tailleGrille-3))&& (int_finJ1!=0)) {
+        printf("L'IA joue !\n");
         if (mode ==0) {
           do {
             int_coord_y = coordIAY(int_tailleGrille);
@@ -388,22 +391,27 @@ void jeuIANRV(int int_loadGame) {
             int_test = valitir(ppint_grille_J1,int_coord_x,int_coord_y);
           } while ((((int_coord_x < 0) || (int_coord_x > int_tailleGrille-1))||((int_coord_y < 0) || (int_coord_y > int_tailleGrille-1))) ||(int_test==1));
           int_condtir = tirIASC(ppint_grille_J1,int_tailleGrille,int_coord_x,int_coord_y);
+          testToucheCoule(int_condtir,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
           int_finJ1 = fin(ppint_grille_J1,int_tailleGrille);
           if (int_condtir != (-int_tailleGrille-3)) {
             mode = 1;
           }
-      }else{
+      }else {
         int_condtir = TirV2(ppint_grille_J1,int_coord_x,int_coord_y,int_tailleGrille);
         int_finJ1 = fin(ppint_grille_J1,int_tailleGrille);
+        testToucheCoule(int_condtir,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
         for (int i = 0; i < int_nombreBateaux; i++) {
             if (flotteUtilisee[i].taille == int_condtir) {
               mode =0;
             }
           }
+        }
       }
     }
-  }
     int_joueur = ((int_joueur)%2)+1;
+    if ((int_finJ1!=0) && (int_finIA!=0)) {
+    int_leaveSave = askSave(filePath,ppint_grille_J1,ppint_grille_IA,int_tailleGrille,flotteUtilisee,int_joueur,int_nombreBateaux);
+    }
 }
   if (fin(ppint_grille_J1,int_tailleGrille) == 0) {
     afficheVictoire();

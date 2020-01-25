@@ -22,6 +22,7 @@ int demandeValeur(int int_valeur) {
       fprintf(stderr, "Entrée incorrecte\n"); // verification entrée
       exit(ERREUR_SAISIE);
     }
+    fflush(stdin);
   return (int_valeur);
 }
 

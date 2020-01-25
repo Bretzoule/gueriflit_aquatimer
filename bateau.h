@@ -1,3 +1,5 @@
+#ifndef BATEAU_H
+#define BATEAU_H
 /*! \file bateau.h
  *  \author LEFLOCH Thomas <leflochtho@eisti.eu>
  *  \version 0.1
@@ -9,9 +11,6 @@
  */
 
 // Inclusion des entêtes de librairies
-#ifndef BATEAU_H
-#define BATEAU_H
-
 #include <stdlib.h>
 #include <stdio.h>
 #include "affichage.h"

@@ -16,7 +16,7 @@ void supprSave(char* filePath) {
   char command[53] = "rm ";
   if (strlen(filePath) != 0)
   {
-    strcat(command,filePath);
+    strcat(command,filePath); // permet de supprimer le fichier de save
     system(command);
   }
 }
@@ -41,31 +41,31 @@ int saveGameToFile(int **GrilleJ1, int **GrilleJ2, int int_tailleGrille, batostr
       exit(ERREUR_ALLOC);
   }
   strcat(fileName,strDate);
-  fichierSav = fopen(fileName,"w+");
+  fichierSav = fopen(fileName,"w+"); // ouverture fichier
   if (fichierSav == NULL)
   {
     printf("Création du fichier !\n");
-    fichierSav = fopen(fileName,"w+");
+    fichierSav = fopen(fileName,"w+"); // creation fichier
     if (fichierSav == NULL) {
       printf("Erreur d'ouverture \n");
       exit(ERREUR_OUVERTURE);
     }
   }
   printf("Sauvegarde en cours ! \n");
-  fprintf(fichierSav, "%d\n", int_tailleGrille);
-  fprintf(fichierSav, "%d\n", int_nbBateaux);
+  fprintf(fichierSav, "%d\n", int_tailleGrille); // écriture taille de la grille
+  fprintf(fichierSav, "%d\n", int_nbBateaux); // écriture taille flotte
   for (int_k = 0; int_k < int_nbBateaux; int_k++)
   {
-    fprintf(fichierSav, "#%s;", flotte[int_k].nom);
-    fprintf(fichierSav, "%d;", flotte[int_k].taille);
-    fprintf(fichierSav, "%d;", flotte[int_k].statut);
+    fprintf(fichierSav, "#%s;", flotte[int_k].nom); // nom bateau
+    fprintf(fichierSav, "%d;", flotte[int_k].taille); // taille bateau
+    fprintf(fichierSav, "%d;", flotte[int_k].statut); // statut bateau
   }
   fprintf(fichierSav, "%s", "\n");
   for (int_i = 0; int_i < int_tailleGrille; int_i++)
   {
     for (int_j = 0; int_j < int_tailleGrille; int_j++)
     {
-      fprintf(fichierSav, "%d", GrilleJ1[int_i][int_j]+1);
+      fprintf(fichierSav, "%d", GrilleJ1[int_i][int_j]+1); // ajoute la coordonnée de la grille +1 (pour ne pas store des -1 et avoir 2 chars)
     }
     fprintf(fichierSav, "%s", "\n");
   }
@@ -73,12 +73,12 @@ int saveGameToFile(int **GrilleJ1, int **GrilleJ2, int int_tailleGrille, batostr
   {
     for (int_j = 0; int_j < int_tailleGrille; int_j++)
     {
-      fprintf(fichierSav, "%d", GrilleJ2[int_i][int_j]+1);
+      fprintf(fichierSav, "%d", GrilleJ2[int_i][int_j]+1); // ajoute la coordonnée de la grille +1 (pour ne pas store des -1 et avoir 2 chars)
     }
     fprintf(fichierSav, "%s", "\n");
   }
   fprintf(fichierSav, "%d\n", int_joueur);
-  fclose(fichierSav);
+  fclose(fichierSav); // ferme le fichier
   printf("Partie sauvegardée sous : %s - Merci d'avoir joué! \n",fileName);
   return (int_retour);
   free(fileName);
@@ -222,12 +222,12 @@ void getTabFromSave(FILE* fichierSav,int** GrilleJ1, int** GrilleJ2, int int_tai
   while (int_i < int_tailleGrille) {
     if(fgets(buf, sizeof(buf), fichierSav) != NULL)
     {
-      buf[strlen(buf) - 1] = '\0'; // eat the newline fgets() stores
+      buf[strlen(buf) - 1] = '\0'; // récupère le \0 que fgets stocke
       printf("buf : %s\n", buf);
       for (int_k = 0; int_k < int_tailleGrille; int_k++)
       {
-        sprintf(strtmp,"%c",buf[int_k]);
-        GrilleJ1[int_i][int_k] = atoi(strtmp)-1;
+        sprintf(strtmp,"%c",buf[int_k]); // convertit l'élement de la string dans un string séparé
+        GrilleJ1[int_i][int_k] = atoi(strtmp)-1;  // converti la stirng en int
       }
       int_i++;
     }
@@ -236,12 +236,12 @@ void getTabFromSave(FILE* fichierSav,int** GrilleJ1, int** GrilleJ2, int int_tai
   while (int_i < int_tailleGrille) {
     if(fgets(buf, sizeof(buf), fichierSav) != NULL)
     {
-      buf[strlen(buf) - 1] = '\0'; // eat the newline fgets() stores
+      buf[strlen(buf) - 1] = '\0'; // récupère le \0 que fgets stocke
       printf("buf : %s\n", buf);
       for (int_k = 0; int_k < int_tailleGrille; int_k++)
       {
-        sprintf(strtmp,"%c",buf[int_k]);
-        GrilleJ2[int_i][int_k] = atoi(strtmp)-1;
+        sprintf(strtmp,"%c",buf[int_k]); // convertit l'élement de la string dans un string séparé
+        GrilleJ2[int_i][int_k] = atoi(strtmp)-1; // converti la stirng en int
       }
       int_i++;
     }

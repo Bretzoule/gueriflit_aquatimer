@@ -222,7 +222,7 @@ int ajouteBateau(int **Grille, int int_tailleBateau, int int_tailleGrille)
 
 int demandeNombreBateau(int int_tailleGrille) {
   int int_nbBateau = 0;
-  int int_nbMaxBateaux = round((int_tailleGrille*int_tailleGrille)/10);
+  int int_nbMaxBateaux = round((int_tailleGrille*int_tailleGrille)/10); // permet de calculer une approx du nombre de bateaux max pour une grille de taille X
   printf("Le nombre maximal de bateaux pour une grille de taille \"%d\" est : %d \n", int_tailleGrille, int_nbMaxBateaux);
   int_nbBateau = demandeValeur(int_nbBateau);
   while ((int_nbBateau > int_nbMaxBateaux) && (int_nbBateau < 0)) {

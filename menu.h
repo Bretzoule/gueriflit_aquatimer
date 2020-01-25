@@ -1,6 +1,16 @@
 #ifndef MENU_H
 #define MENU_H
+/*! \file menu.h
+ *  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+ *  \version 0.1
+ *  \date Sat Jan 25 18:46:13 2020
+ *
+ *  \brief Ensemble des déclarations associées à menu.c
+ *
+ *
+ */
 
+// Inclusion des entêtes de librairies
 #include <stdlib.h>
 #include <stdio.h>
 #define ERREURALLOCATION -1
@@ -27,7 +37,18 @@ int choixmenu(void);
 void menu(void);
 
 /*!
-  \fn int askLoad()
+  \fn void afficheMenu(void)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Sat Jan 25 17:57:38 2020
+  \brief permet d'afficher le menu
+  \remarks
+*/
+
+void afficheMenu(void);
+
+/*!
+  \fn int askLoad(void)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Tue Jan 21 14:26:53 2020
@@ -35,7 +56,6 @@ void menu(void);
   \return int int_load : 1 si l'utilisateur veut charger, 0 sinon
   \remarks
 */
-
-int askLoad();
+int askLoad(void);
 
 #endif

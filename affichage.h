@@ -1,5 +1,21 @@
 #ifndef AFFICHE_H
 #define AFFICHE_H
+/*! \file affichage.h
+ *  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+ *  \version 0.1
+ *  \date Sat Jan 25 18:51:29 2020
+ *
+ *  \brief Ensemble des fonctions associées à affichage.c
+ *
+ *
+ */
+
+// Inclusion des entêtes de librairies
+#include <stdlib.h>
+#include <stdio.h>
+#define EXIT_SUCCESS 0
+#define ERREUR_SAISIE -1
+
 
 #include <stdlib.h>
 #include <stdio.h>

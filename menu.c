@@ -17,7 +17,6 @@
 #include "jeu.h"
 
 
-
 int choixmenu(void){ // permet de savoir qu'elle est le nombre pour le menu
   int int_retour;
   int int_choix;
@@ -29,17 +28,8 @@ int choixmenu(void){ // permet de savoir qu'elle est le nombre pour le menu
      }
      return (int_choix);
 }
-/*!
-  \fn int askLoad()
-  \author LEFLOCH Thomas <leflochtho@eisti.eu>
-  \version 0.1
-  \date Tue Jan 21 14:26:53 2020
-  \brief permet de demander si l'utilisateur veut charger une partie
-  \return int int_load : 1 si l'utilisateur veut charger, 0 sinon
-  \remarks
-*/
 
-int askLoad() {
+int askLoad(void) {
   int int_load;
   do
   {
@@ -49,16 +39,7 @@ int askLoad() {
   return (int_load);
 }
 
-/*!
-  \fn void afficheMenu()
-  \author LEFLOCH Thomas <leflochtho@eisti.eu>
-  \version 0.1
-  \date Sat Jan 25 17:57:38 2020
-  \brief permet d'afficher le menu
-  \remarks
-*/
-
-void afficheMenu() {
+void afficheMenu(void) {
   printf("\n");
   printf("██╗     ███████╗     ██████╗ ██╗   ██╗███████╗██████╗ ██╗███████╗██╗     ██╗████████╗\n");
   printf("██║     ██╔════╝    ██╔════╝ ██║   ██║██╔════╝██╔══██╗██║██╔════╝██║     ██║╚══██╔══╝\n");

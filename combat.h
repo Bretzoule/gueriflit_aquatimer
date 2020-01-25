@@ -1,6 +1,16 @@
 #ifndef COMBAT_H
 #define COMBAT_H
+/*! \file combat.h
+ *  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+ *  \version 0.1
+ *  \date Sat Jan 25 18:50:17 2020
+ *
+ *  \brief Ensemble des définitions associées à combat.c
+ *
+ *
+ */
 
+// Inclusion des entêtes de librairies
 #include <stdlib.h>
 #include <stdio.h>
 #define ERREURALLOCATION -1

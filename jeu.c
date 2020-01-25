@@ -359,12 +359,11 @@ void jeuIANRV(int int_loadGame) {
     fichierSav = openFile(filePath);
     int_tailleGrille = getIntFromSave(fichierSav);
     int_nombreBateaux = getIntFromSave(fichierSav);
-    printf("int_taillegrille = %d et int_nbBateau = %d \n",int_tailleGrille, int_nombreBateaux);
-/*    getFlotteFromSave(fichierSav,int_nbBateaux);
     init(&ppint_grille_IA, int_tailleGrille);
     init(&ppint_grille_J1, int_tailleGrille);
-    getTabFromSave(ppint_grille_J1,ppint_grille_IA,int_tailleGrille);
-    int_player = getIntFromSave(fichierSav);*/
+    flotteUtilisee = getFlotteFromSave(fichierSav,int_nombreBateaux,flotteUtilisee);
+    getTabFromSave(fichierSav,ppint_grille_J1,ppint_grille_IA,int_tailleGrille);
+    int_joueur = getIntFromSave(fichierSav);
     fclose(fichierSav);
   }
   while((int_finJ1!=0) && (int_finIA!=0)) {
@@ -375,7 +374,7 @@ void jeuIANRV(int int_loadGame) {
         int_condtir = joueJoueur(ppint_grille_IA,ppint_grille_J1,int_nombreBateaux,int_tailleGrille,flotteUtilisee,int_joueur);
         int_finIA = fin(ppint_grille_IA,int_tailleGrille);
         sleep(5);
-        //system("clear");
+        system("clear");
       }
     } else {
       int_condtir =0;
@@ -393,7 +392,6 @@ void jeuIANRV(int int_loadGame) {
           if (int_condtir != (-int_tailleGrille-3)) {
             mode = 1;
           }
-          printf("%d\n",int_condtir );
       }else{
         int_condtir = TirV2(ppint_grille_J1,int_coord_x,int_coord_y,int_tailleGrille);
         int_finJ1 = fin(ppint_grille_J1,int_tailleGrille);

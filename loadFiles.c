@@ -115,11 +115,15 @@ int validationFichier(char* filePath) {
   for (int_i = 0; int_i < 4; int_i++)
   {
     if (str_tmp[int_i] != filePath[((strlen(filePath)-4)+int_i)]) { // vérifie que l'extension est la bonne
-        printf("Fichier invalide ! \n");
+
         int_retour = 0;
     }
   }
-  printf("Fichier valide, ouverture ! \n");
+  if (int_retour == 0) {
+    printf("Fichier invalide ! \n");
+  } else {
+    printf("Fichier valide, ouverture ! \n");
+  }
   return (int_retour);
 }
 

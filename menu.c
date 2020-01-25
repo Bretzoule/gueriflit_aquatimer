@@ -49,10 +49,17 @@ int askLoad() {
   return (int_load);
 }
 
+/*!
+  \fn void afficheMenu()
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Sat Jan 25 17:57:38 2020
+  \brief permet d'afficher le menu
+  \remarks
+*/
 
-void menu(void){
-  int int_load;
-  int int_menu; // menu avec indication sur le terminal de ce qu'il faut faire
+void afficheMenu() {
+  printf("\n");
   printf("██╗     ███████╗     ██████╗ ██╗   ██╗███████╗██████╗ ██╗███████╗██╗     ██╗████████╗\n");
   printf("██║     ██╔════╝    ██╔════╝ ██║   ██║██╔════╝██╔══██╗██║██╔════╝██║     ██║╚══██╔══╝\n");
   printf("██║     █████╗      ██║  ███╗██║   ██║█████╗  ██████╔╝██║█████╗  ██║     ██║   ██\n");
@@ -77,8 +84,17 @@ void menu(void){
   printf("\n");
   printf(" 3 : Bataille Navale contre une IA plus intelligente !\n");
   printf("\n");
+  printf(" 4 : Quitter le jeu ! \n");
+  printf("\n");
 printf("**********************************************************************\n");
   printf("\n");
+}
+
+
+void menu(void){
+  int int_load;
+  int int_menu; // menu avec indication sur le terminal de ce qu'il faut faire
+  afficheMenu();
   int_menu = choixmenu();
   switch (int_menu){ // chaque choix se fait dans ce switch
   case 1 :

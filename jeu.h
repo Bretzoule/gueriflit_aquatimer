@@ -119,7 +119,7 @@ void initTabIA(int** ppint_grille,int int_tailleGrille, batostruc* flotteUtilise
 int joueJoueur(int** GrilleAttaque, int** GrilleDefense,int int_nombreBateaux,int int_tailleGrille,batostruc* flotteUtilisee,int int_joueur);
 
 /*!
-  \fn void jeuSplitScreen(void)
+  \fn jeuIabateau(int int_loadGame);
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
   \version 0.1
   \date Mon Jan 13 16:23:34 2020
@@ -128,7 +128,17 @@ int joueJoueur(int** GrilleAttaque, int** GrilleDefense,int int_nombreBateaux,in
   \remarks
 */
 void jeuIabateau(int int_loadGame);
+/*!
+  \fn jeuIANRV(int int_loadGame);
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Mon Jan 13 16:23:34 2020
+  \brief permet d'initialiser le jeu en mode joueur vs IA plus intelligente
+  \param int int_loadGame : 1 si l'on commence une nouvelle partie, 0 si on en charge une
+  \remarks
+*/
 
+void jeuIANRV(int int_loadGame);
 /*!
   \fn void afficheVictoire(void)
   \author LEFLOCH Thomas <leflochtho@eisti.eu>
@@ -137,7 +147,7 @@ void jeuIabateau(int int_loadGame);
   \brief permet d'afficher le trophée
   \remarks
 */
-void jeuIANRV(int int_loadGame);
+
 void afficheVictoire(void);
 
 #endif

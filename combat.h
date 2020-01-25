@@ -96,6 +96,32 @@ int rapporttir(int** ppint_grille, int int_coord_x, int int_coord_y,int int_tail
 \date 11/01/2020
 */
 int tirIA(int** ppint_grille,int int_tailleGrille);
+
+/*!
+\fn int tirIASC(int** ppint_grille,int int_tailleGrille,int int_coord_x,int int_coord_y)
+\brief Assure la fonction de tir du programme pour l'IA sans les coordonnées intégrerer
+\author Hugo POINTEREAU <pointereau@eisti.eu>
+\param int** ppint_grille : grille en entrée
+\param int int_tailleGrille : taille de la grille en entrée
+\param int int_coord_x : coordonnée en x
+\param int int_coord_y : coordonnée en y
+\return int int_retour : 1 si tout s'est bien passé, 0 si une erreur s'est produite / que le tir à échoué
+\version 0.1
+\date 11/01/2020
+*/
 int tirIASC(int** ppint_grille,int int_tailleGrille,int int_coord_x,int int_coord_y);
+
+/*!
+\fn int TirV2(int** ppint_grille, int int_coord_x, int int_coord_y,int int_tailleGrille)
+\brief Assure la fonction de tir du programme pour l'IA
+\author Hugo POINTEREAU <pointereau@eisti.eu>
+\param int** ppint_grille : grille en entrée
+\param int int_tailleGrille : taille de la grille en entrée
+\param int int_coord_x : coordonnée en x
+\param int int_coord_y : coordonnée en y
+\return int int_retour : 1 si tout s'est bien passé, 0 si une erreur s'est produite / que le tir à échoué
+\version 0.1
+\date 11/01/2020
+*/
 int TirV2(int** ppint_grille, int int_coord_x, int int_coord_y,int int_tailleGrille);
 #endif

@@ -22,6 +22,18 @@
 #define ERREUR_ALLOC -1
 
 /*!
+  \fn void supprSave(char* filePath)
+  \author LEFLOCH Thomas <leflochtho@eisti.eu>
+  \version 0.1
+  \date Sat Jan 25 15:50:04 2020
+  \param char* filePath : chemin du fichier à supprimer
+  \brief permet de supprimer le fichier de sauvegarde si nécessaire
+  \remarks
+*/
+
+void supprSave(char* filePath);
+
+/*!
   \fn int saveGameToFile(int** Grille, int int_tailleGrille, batostruc* flotte, int int_joueur, int int_nbBateaux)
   \author LEFLOCH Thomas <leflochtho@eisti.eu> & DRAESCHER Lucas <draescherl@eisti.eu>
   \version 0.1

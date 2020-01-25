@@ -208,9 +208,11 @@ void jeuSplitScreen(int int_loadGame) {
   if (fin(ppint_grille_J1,int_tailleGrille) == 0) {
     afficheVictoire();
     printf("            LE JOUEUR 2 REMPORTE LA PARTIE           \n");
+    supprSave(filePath);
   } else {
     afficheVictoire();
     printf("            LE JOUEUR 1 REMPORTE LA PARTIE           \n");
+    supprSave(filePath);
   }
   }
   freeGrille(&ppint_grille_J1,int_tailleGrille);
@@ -237,7 +239,7 @@ void afficheVictoire() {
     printf("\033[1;33m                '::. .'  		\033[0m \n");
     printf("\033[1;33m                  ) (    		\033[0m \n");
     printf("\033[1;33m                _.' '._  		\033[0m \n");
-    printf("\033[1;33m                 \"\"\"\"\"\"\"`      	\033[0m \n");
+    printf("\033[1;33m               \"\"\"\"\"\"\"`      	\033[0m \n");
 }
 
 /*!
@@ -312,9 +314,11 @@ void jeuIabateau(int int_loadGame) {
   if (fin(ppint_grille_J1,int_tailleGrille) == 0) {
     afficheVictoire();
     printf("            L'IA REMPORTE LA PARTIE           \n");
+    supprSave(filePath);
   } else {
     afficheVictoire();
     printf("            LE JOUEUR 1 REMPORTE LA PARTIE           \n");
+    supprSave(filePath);
   }
   }
   freeGrille(&ppint_grille_J1,int_tailleGrille);
@@ -335,8 +339,6 @@ void jeuIANRV(int int_loadGame) {
   int int_nombreBateaux = 10;
   int int_finJ1 = 1;
   int int_finIA = 1;
-  int int_X;
-  int int_Y;
   int int_coord_x;
   int int_coord_y;
   int int_test;
@@ -384,8 +386,6 @@ void jeuIANRV(int int_loadGame) {
             int_coord_y = coordIAY(int_tailleGrille);
             int_coord_x = coordIAX(int_tailleGrille);
             int_test = valitir(ppint_grille_J1,int_coord_x,int_coord_y);
-            int_X = int_coord_x;
-            int_Y = int_coord_y;
           } while ((((int_coord_x < 0) || (int_coord_x > int_tailleGrille-1))||((int_coord_y < 0) || (int_coord_y > int_tailleGrille-1))) ||(int_test==1));
           int_condtir = tirIASC(ppint_grille_J1,int_tailleGrille,int_coord_x,int_coord_y);
           int_finJ1 = fin(ppint_grille_J1,int_tailleGrille);
@@ -408,9 +408,11 @@ void jeuIANRV(int int_loadGame) {
   if (fin(ppint_grille_J1,int_tailleGrille) == 0) {
     afficheVictoire();
     printf("            L'IA REMPORTE LA PARTIE           \n");
+    supprSave(filePath);
   } else {
     afficheVictoire();
     printf("            LE JOUEUR 1 REMPORTE LA PARTIE           \n");
+    supprSave(filePath);
   }
   freeGrille(&ppint_grille_J1,int_tailleGrille);
   freeGrille(&ppint_grille_IA,int_tailleGrille);

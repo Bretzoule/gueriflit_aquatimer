@@ -12,6 +12,15 @@
 #define bufSize 1024
 #define DATE_LENGTH 80
 
+void supprSave(char* filePath) {
+  char command[53] = "rm ";
+  if (strlen(filePath) != 0)
+  {
+    strcat(command,filePath);
+    system(command);
+  }
+}
+
 int saveGameToFile(int **GrilleJ1, int **GrilleJ2, int int_tailleGrille, batostruc *flotte, int int_joueur, int int_nbBateaux)
 {
   int int_retour = 1;
@@ -26,7 +35,7 @@ int saveGameToFile(int **GrilleJ1, int **GrilleJ2, int int_tailleGrille, batostr
   time(&rawtime);
   timeinfo = localtime(&rawtime);
   strcpy(fileName,"./saves/GAMESAVE-");
-  strftime(strDate, DATE_LENGTH,"%d\\%m\\%Y-%H:%M:%S.sav",timeinfo);
+  strftime(strDate, DATE_LENGTH,"%d_%m_%Y-%H:%M:%S.sav",timeinfo);
   if (fileName == NULL) {
     fprintf(stderr, "Erreur de reallocation : %d \n",errno); // verification entrée
       exit(ERREUR_ALLOC);
@@ -75,20 +84,6 @@ int saveGameToFile(int **GrilleJ1, int **GrilleJ2, int int_tailleGrille, batostr
   free(fileName);
 }
 
-/*!
-  \fn int askSave(int** Grille, int int_tailleGrille, batostruc* flotte, int int_joueur, int int_nbBateaux)
-  \author LEFLOCH Thomas <leflochtho@eisti.eu> & DRAESCHER Lucas <draescherl@eisti.eu>
-  \version 0.1
-  \date Tue Jan 21 14:31:52 2020
-  \brief permet de sauvegarder la partie à un état donné, à l'aide du numéro de joueur, la taille de la grille, le nombre de bateaux, la flotte ainsi que la grille
-  \param int** Grille : grille de jeu
-  \param int int_tailleGrille : taille de la grille en entrée
-  \param batostruc* flotte : flotte utilisée
-  \param int int_joueur : numéro du joueur
-  \param int int_nbBateaux : nombre de bateaux
-  \return int int_retour : Retourne 1 si la sauvegarde à été effectuée
-  \remarks
-*/
 int askSave(char* filePath, int **GrilleJ1, int **GrilleJ2, int int_tailleGrille, batostruc *flotte, int int_joueur, int int_nbBateaux)
 {
   int int_valueAsk = 0;
@@ -112,22 +107,11 @@ int askSave(char* filePath, int **GrilleJ1, int **GrilleJ2, int int_tailleGrille
   return int_retour;
 }
 
-/*!
-  \fn validationFichier(char* filePath[50])
-  \author LEFLOCH Thomas <leflochtho@eisti.eu>
-  \version 0.1
-  \date Thu Jan 23 13:46:07 2020
-  \brief permet de vérifier que le fichier possède bien l'extension .sav (qu'il est valide)
-  \param char* filePath[50] : chemin d'accès au fichier
-  \remarks
-*/
-
 int validationFichier(char* filePath) {
   int int_i;
   int int_retour = 1;
   char* str_tmp = malloc(sizeof(char)*4);
   strcpy(str_tmp,".sav");
-  printf("%s strtmp lol \n", str_tmp);
   for (int_i = 0; int_i < 4; int_i++)
   {
     if (str_tmp[int_i] != filePath[((strlen(filePath)-4)+int_i)]) { // vérifie que l'extension est la bonne
@@ -187,7 +171,6 @@ batostruc* getFlotteFromSave(FILE* fichierSav, int int_nombreBateaux, batostruc*
   if(fgets(buf, sizeof(buf), fichierSav) != NULL)
   {
     buf[strlen(buf) - 1] = '\0'; // eat the newline fgets() stores
-    printf("buf : %s\n", buf);
     while (int_dieseCounter != int_nombreBateaux) {
       while(int_i < strlen(buf))
       {
@@ -223,21 +206,9 @@ batostruc* getFlotteFromSave(FILE* fichierSav, int int_nombreBateaux, batostruc*
       }
     }
   }
-  //printf("flotte : %s : %d : %d \n",flotteUtilisee[int_dieseCounter-1].nom,flotteUtilisee[int_dieseCounter-1].taille,flotteUtilisee[int_dieseCounter-1].statut);
   return (flotteUtilisee);
 }
 
-/*!
-  \fn void getTabFromSave(int** GrilleJ1, int** GrilleJ2, int int_tailleGrille)
-  \author LEFLOCH Thomas <leflochtho@eisti.eu>
-  \version 0.1
-  \date Fri Jan 24 14:46:42 2020
-  \brief permet de récupérer la grille depuis la sauvegarde
-  \param int** GrilleJ1 : grille du joueur 1
-  \param int** GrilleJ2 : grille de joueur 2 (ou de l'IA)
-  \param int int_tailleGrille : taille de la grille en entrée
-  \remarks
-*/
 void getTabFromSave(FILE* fichierSav,int** GrilleJ1, int** GrilleJ2, int int_tailleGrille) {
   char buf[bufSize];
   int int_i = 0;
@@ -252,7 +223,6 @@ void getTabFromSave(FILE* fichierSav,int** GrilleJ1, int** GrilleJ2, int int_tai
       for (int_k = 0; int_k < int_tailleGrille; int_k++)
       {
         sprintf(strtmp,"%c",buf[int_k]);
-        printf("%s \n",strtmp);
         GrilleJ1[int_i][int_k] = atoi(strtmp)-1;
       }
       int_i++;
@@ -267,7 +237,6 @@ void getTabFromSave(FILE* fichierSav,int** GrilleJ1, int** GrilleJ2, int int_tai
       for (int_k = 0; int_k < int_tailleGrille; int_k++)
       {
         sprintf(strtmp,"%c",buf[int_k]);
-        printf("%s \n", strtmp);
         GrilleJ2[int_i][int_k] = atoi(strtmp)-1;
       }
       int_i++;

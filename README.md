@@ -10,10 +10,6 @@ Nettoyer les .o : make clean
 
 Générer le Doxygen : make doxy
 
-## Documentation Doxygen
-
-La documentation Doxygen contient le détail de l'intégralité des éléments du programme.
-
 ## Execution
 
 Pour exécuter le jeu il vous suffit d'entrer la commande :

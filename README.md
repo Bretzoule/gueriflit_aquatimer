@@ -1,6 +1,6 @@
 # Guériflit Aquatimer
 
-Projet d'informatique en langage C consistant à coder le jeu "Bataille Navale" que nous nommons "Guériflit Aquatimer"
+Projet d'informatique en langage C consistant à coder le jeu "Bataille Navale" que nous nommons "Guériflit Aquatimer", il s'agit du projet du S3 de Prépa Intégrée
 
 ## Compilation
 
